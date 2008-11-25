@@ -1,0 +1,50 @@
+    <div class="spacer">&nbsp;</div>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th class="<%= sort_td_class_helper 'full_name' %>"><%= sort_link_helper "Name", "full_name" %></th>
+                <th class="<%= sort_td_class_helper 'mpd_contacts.created_at' %>"><%= sort_link_helper "Date Added", "mpd_contacts.created_at" %></th>
+                <th class="<%= sort_td_class_helper 'letter_sent' %>"><%= sort_link_helper "Letter Sent", "letter_sent" %></th>
+                <th class="<%= sort_td_class_helper 'call_made' %>"><%= sort_link_helper "Call Made", "call_made" %></th>
+                <th class="<%= sort_td_class_helper 'gift_amount' %>"><%= sort_link_helper "Gift Amount", "gift_amount" %></th>
+                <th class="<%= sort_td_class_helper 'thankyou_sent' %>"><%= sort_link_helper "Thanked", "thankyou_sent" %></th>
+                <th class="<%= sort_td_class_helper 'mpd_priorities.priority' %>"><%= sort_link_helper "Priority", "mpd_priorities.priority" %></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if @mpd_contacts.size > 0 %>
+            <% @mpd_contacts.each do |mpd_contact| %>
+            <tr class="<%= cycle("even", "odd") %>">
+                <td class="<%= sort_td_class_helper 'full_name' -%>"><%= link_to(mpd_contact.full_name, {:params => params.merge({:controller => "contacts", :action => "edit", :id => mpd_contact})}) %></td>
+                <td class="<%= sort_td_class_helper 'mpd_contacts.created_at' -%>"><%= mpd_contact.created_at.strftime("%m/%d/%Y") %></td>
+                <td class="<%= sort_td_class_helper 'letter_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.letter_sent == true %></td>
+                <td class="<%= sort_td_class_helper 'call_made' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.call_made == true %></td>
+                <td class="<%= sort_td_class_helper 'gift_amount' -%>" style="text-align: right;"><%= number_to_currency(number_with_delimiter(mpd_contact.gift_amount)) %>&nbsp;</td>
+                <td class="<%= sort_td_class_helper 'thankyou_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.thankyou_sent == true %></td>
+                <td class="<%= sort_td_class_helper 'mpd_priorities.priority' -%>"><div id="priorities-block-<%= mpd_contact.id %>">
+                    <%= render :partial => "mpd_priority/mpd_priority", :locals => { :mpd_contact => mpd_contact } %>
+                </div></td>
+            </tr>
+            <% end %>
+            <% else %>
+            <tr>
+                <td colspan="7" class="blank_row">There are no contacts to view.  <%= link_to "Start namestorming", :controller => "namestorm" %></td>
+            </tr>
+            <% end %>
+
+        </tbody>
+    </table>
+    
+     <div class="pagination" style="overflow: auto;">
+    	<div  style="float: left;">
+    		Displaying <%= @pages.current.first_item %>
+    		- <%= @pages.current.last_item %>
+       		of <%= @pages.item_count %>
+       	</div>
+    
+       <div style="text-align: right;">
+            <%= link_to_remote(h('< Previous'), {:url => {:action => 'index', :page => @pages.current.previous }, :update => 'contacts_list' }) + ' | ' if @pages.current.previous %>
+            <%= pagination_links_remote @pages %>
+            <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'index', :page => @pages.current.next }, :update => 'contacts_list' }) if @pages.current.next %>
+       </div>
+    </div>

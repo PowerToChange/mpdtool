@@ -1,0 +1,476 @@
+--- 
+ruth_martinez: 
+  call_made: "1"
+  city: ruth city
+  updated_at: 2007-02-27 18:02:06
+  zip: 12345
+  notes: 
+  id: "20"
+  mpd_priority_id: 
+  thankyou_sent: "1"
+  letter_sent: "1"
+  address_1: ruth martinez address 1
+  gift_amount: 250
+  phone: 5555551234
+  address_2: 
+  full_name: Ruth Martinez
+  created_at: 2007-02-27 18:02:06
+  email_address: ruth.martinez@example.com
+  state: MO
+  mpd_user_id: "4"
+susan_wilson: 
+  call_made: "1"
+  city: susan city
+  updated_at: 2007-02-27 18:01:30
+  zip: 12345
+  notes: 
+  id: "9"
+  mpd_priority_id: 
+  thankyou_sent: "1"
+  letter_sent: "1"
+  address_1: susan wilson address 1
+  gift_amount: 250
+  phone: 5555551234
+  address_2: 
+  full_name: Susan Wilson
+  created_at: 2007-02-27 18:01:30
+  email_address: susan.wilson@example.com
+  state: MO
+  mpd_user_id: "4"
+sharon_robinson: 
+  call_made: "1"
+  city: sharon city
+  updated_at: 2007-02-27 18:02:09
+  zip: 12345
+  notes: 
+  id: "21"
+  mpd_priority_id: 
+  thankyou_sent: "1"
+  letter_sent: "1"
+  address_1: sharon robinson address 1
+  gift_amount: 250
+  phone: 5555551234
+  address_2: 
+  full_name: Sharon Robinson
+  created_at: 2007-02-27 18:02:09
+  email_address: sharon.robinson@example.com
+  state: MO
+  mpd_user_id: "4"
+margaret_moore: 
+  call_made: "1"
+  city: margaret city
+  updated_at: 2007-02-27 18:01:35
+  zip: 12345
+  notes: 
+  id: "10"
+  mpd_priority_id: 
+  thankyou_sent: "1"
+  letter_sent: "1"
+  address_1: margaret address 1
+  gift_amount: 250
+  phone: 5555551234
+  address_2: 
+  full_name: Margaret Moore
+  created_at: 2007-02-27 18:01:35
+  email_address: margaret.moore@example.com
+  state: MO
+  mpd_user_id: "4"
+michelle_clark: 
+  call_made: "1"
+  city: michelle city
+  updated_at: 2007-02-27 18:02:12
+  zip: 12345
+  notes: 
+  id: "22"
+  mpd_priority_id: 
+  thankyou_sent: "1"
+  letter_sent: "1"
+  address_1: michelle address 1
+  gift_amount: 250
+  phone: 5555551234
+  address_2: 
+  full_name: Michelle Clark
+  created_at: 2007-02-27 18:02:12
+  email_address: michelle.clark@example.com
+  state: MO
+  mpd_user_id: "4"
+dorothy_taylor: 
+  call_made: "1"
+  city: dorothy city
+  updated_at: 2007-02-27 18:01:39
+  zip: 12345
+  notes: 
+  id: "11"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: dorothy address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Dorothy Taylor
+  created_at: 2007-02-27 18:01:39
+  email_address: dorothy.taylor@example.com
+  state: MO
+  mpd_user_id: "4"
+laura_rodriguez: 
+  call_made: "1"
+  city: laura city
+  updated_at: 2007-02-27 18:02:17
+  zip: 12345
+  notes: 
+  id: "23"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: laura address 1 
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Laura Rodriguez
+  created_at: 2007-02-27 18:02:17
+  email_address: laura.rodriguez@example.com
+  state: MO
+  mpd_user_id: "4"
+lisa_anderson: 
+  call_made: "1"
+  city: lisa city
+  updated_at: 2007-02-27 18:01:41
+  zip: 12345
+  notes: 
+  id: "12"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: lisa address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Lisa Anderson
+  created_at: 2007-02-27 18:01:41
+  email_address: lisa@example.com
+  state: MO
+  mpd_user_id: "4"
+sherry_leonard: 
+  call_made: "1"
+  city: sherry city
+  updated_at: 2007-02-27 18:01:01
+  zip: 12345
+  notes: 
+  id: "1"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: sherry address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Sherry Leonard
+  created_at: 2007-02-27 18:01:01
+  email_address: sherry@example.com
+  state: MO
+  mpd_user_id: "4"
+sarah_lewis: 
+  call_made: "1"
+  city: sarah city
+  updated_at: 2007-02-27 18:02:39
+  zip: 12345
+  notes: 
+  id: "24"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: sarah address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Sarah Lewis
+  created_at: 2007-02-27 18:02:39
+  email_address: sarah@example.com
+  state: MO
+  mpd_user_id: "4"
+nancy_thomas: 
+  call_made: "0"
+  city: nancy city
+  updated_at: 2007-02-27 18:01:45
+  zip: 12345
+  notes: 
+  id: "13"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: nancy address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Nancy Thomas
+  created_at: 2007-02-27 18:01:45
+  email_address: nancy@example.com
+  state: MO
+  mpd_user_id: "4"
+mary_smith: 
+  call_made: "0"
+  city: mary city
+  updated_at: 2007-02-27 18:01:06
+  zip: 12345
+  notes: 
+  id: "2"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: mary address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Mary Smith
+  created_at: 2007-02-27 18:01:06
+  email_address: mary@example.com
+  state: MO
+  mpd_user_id: "4"
+kimberly_lee: 
+  call_made: "0"
+  city: kimberly city
+  updated_at: 2007-02-27 18:02:44
+  zip: 12345
+  notes: 
+  id: "25"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: kimberly address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Kimberly Lee
+  created_at: 2007-02-27 18:02:44
+  email_address: kimberly@example.com
+  state: MO
+  mpd_user_id: "4"
+karen_jackson: 
+  call_made: "0"
+  city: karen city
+  updated_at: 2007-02-27 18:01:48
+  zip: 12345
+  notes: 
+  id: "14"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: karen address 1
+  gift_amount: 
+  phone: 5555551234
+  address_2: 
+  full_name: Karen Jackson
+  created_at: 2007-02-27 18:01:48
+  email_address: k@k.com
+  state: MO
+  mpd_user_id: "4"
+patricia_johnson: 
+  call_made: "0"
+  city: patricia city
+  updated_at: 2007-02-27 18:01:09
+  zip: 12345
+  notes: 
+  id: "3"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "1"
+  address_1: patricia address 1
+  gift_amount: 
+  phone: 5555551324
+  address_2: 
+  full_name: Patricia Johnson
+  created_at: 2007-02-27 18:01:09
+  email_address: pat@example.com
+  state: MO
+  mpd_user_id: "4"
+betty_white: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:50
+  zip: 
+  notes: 
+  id: "15"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Betty White
+  created_at: 2007-02-27 18:01:50
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+linda_williams: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:14
+  zip: 
+  notes: 
+  id: "4"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Linda Williams
+  created_at: 2007-02-27 18:01:14
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+helen_harris: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:53
+  zip: 
+  notes: 
+  id: "16"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Helen Harris
+  created_at: 2007-02-27 18:01:53
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+barbara_jones: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:18
+  zip: 
+  notes: 
+  id: "5"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Barbara Jones
+  created_at: 2007-02-27 18:01:18
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+sandra_martin: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:56
+  zip: 
+  notes: 
+  id: "17"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Sandra Martin
+  created_at: 2007-02-27 18:01:56
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+elizabeth_brown: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:21
+  zip: 
+  notes: 
+  id: "6"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Elizabeth Brown
+  created_at: 2007-02-27 18:01:21
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+donna_thompson: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:59
+  zip: 
+  notes: 
+  id: "18"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Donna Thompson
+  created_at: 2007-02-27 18:01:59
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+jennifer_davis: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:24
+  zip: 
+  notes: 
+  id: "7"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Jennifer Davis
+  created_at: 2007-02-27 18:01:24
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+carol_garcia: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:02:03
+  zip: 
+  notes: 
+  id: "19"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Carol Garcia
+  created_at: 2007-02-27 18:02:03
+  email_address: 
+  state: 
+  mpd_user_id: "4"
+maria_miller: 
+  call_made: "0"
+  city: 
+  updated_at: 2007-02-27 18:01:27
+  zip: 
+  notes: 
+  id: "8"
+  mpd_priority_id: 
+  thankyou_sent: "0"
+  letter_sent: "0"
+  address_1: 
+  gift_amount: 
+  phone: 
+  address_2: 
+  full_name: Maria Miller
+  created_at: 2007-02-27 18:01:27
+  email_address: 
+  state: 
+  mpd_user_id: "4"

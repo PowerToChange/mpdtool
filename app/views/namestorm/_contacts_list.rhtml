@@ -1,0 +1,14 @@
+            <% require 'enumerator' 
+               col = 1 
+               Enumerable::Enumerator.new(@contacts).each_slice(@chunk_size) { |slice|  %>
+                 <ul id="contacts_set_<%=col%>"
+                    ><% for contact in slice %><li><%= contact.full_name %></li
+                 ><% end %></ul>
+            <%   col += 1 
+               } %>
+        
+           <%= render :partial => "shared/remote_paginator", :locals => { :paginator => @pages, :replace => 'contact_list-columnified'} %>
+           <div class="clear">&nbsp;</div>
+         </div>
+
+        

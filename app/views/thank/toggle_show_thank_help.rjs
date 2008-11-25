@@ -1,0 +1,2 @@
+page.toggle 'thank-help-collapsed'
+page.toggle 'thank-help-expanded'

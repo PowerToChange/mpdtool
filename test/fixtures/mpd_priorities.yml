@@ -1,0 +1,71 @@
+--- 
+ruth_martinez_priority: 
+  id: 1
+  priority: 1
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 20
+  mpd_user_id: 4
+susan_wilson_priority: 
+  id: 2
+  priority: 2
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 9
+  mpd_user_id: 4
+sharon_robinson_priority: 
+  id: 3
+  priority: 3
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 21
+  mpd_user_id: 4
+margaret_moore_priority: 
+  id: 4
+  priority: 2
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 10
+  mpd_user_id: 4
+michelle_clark_priority: 
+  id: 5
+  priority: 1
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 22
+  mpd_user_id: 4
+dorothy_taylor_priority: 
+  id: 6
+  priority: 2
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 11
+  mpd_user_id: 4
+laura_rodriguez_priority: 
+  id: 7
+  priority: 3
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 23
+  mpd_user_id: 4
+lisa_anderson_priority: 
+  id: 8
+  priority: 2
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 12
+  mpd_user_id: 4
+sherry_leonard_priority: 
+  id: 9
+  priority: 1
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 1
+  mpd_user_id: 4
+sarah_lewis_priority: 
+  id: 10
+  priority: 2
+  created_at: 2007-02-16 01:48:51
+  rateable_type: MpdContact
+  rateable_id: 24
+  mpd_user_id: 4

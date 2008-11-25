@@ -1,0 +1,48 @@
+<div id="content">
+
+<div class="section">
+    <p>Before writing your letter, we need to gather some important information.</p>
+</div>
+
+<h3><span>Calculator</span></h3>
+
+<%- form_tag :action => 'calculate_support_total', :id => @user do -%>
+<fieldset class="columns calculator">
+    <p><label for="">Project Cost</label>
+        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_mpd_user.project_cost, 0)) %>" /></p>
+        
+<div id="calculator_fields">
+ <% for @mpd_expense in @user.mpd_expenses %>
+   <p style="clear: left;"><label for=""><%= @mpd_expense.mpd_expense_type.name %></label>
+        $ <%= text_field "mpd_expense[]", "amount", :value => number_with_delimiter(number_with_precision(@mpd_expense.amount, 0)), :class => "text" %>
+        <%= observe_field "mpd_expense_#{@mpd_expense.id}_amount", :function => "doCalc();" %></p>
+ <% end %>
+</div>
+        
+<hr style="clear: left;" />
+
+    <p class="total"><b>Your Support Total</b> <span id="support_total"><%= number_to_currency(@user.support_total, :precision => 0) %></span></p>
+
+    <p class="buttons"><%= image_submit_tag "button_sm_next.gif" %></p>
+</fieldset>
+<%- end -%>
+
+</div>
+
+<!--
+<div id="sidebar">
+    <h3>Some ideas</h3>
+    
+    <div id="sidebar-content">
+        <h4>What kinds of things?</h4>
+        
+        <p>Some students... Quisque sed arcu ut diam congue hendrerit.  Fusce eleifend.  In hac habitasse platea dictumst.  Maecenas portitor ornare neque.  Integer at ligula pulvina dui bibendum laoreet.  Mauris accumsan hendrerit neque.</p>
+
+        <h4>Transportation</h4>
+        <p>Lorem ipsum...</p>
+        
+        <h4>Food</h4>
+        <p>Lorem ipsum...</p>
+    </div>
+</div>
+-->

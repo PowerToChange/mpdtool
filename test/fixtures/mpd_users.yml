@@ -1,0 +1,62 @@
+--- 
+lance: 
+  show_welcome: "1"
+  last_login: 
+  ssm_id: "1"
+  mpd_letter_id: 1
+  type: 
+  id: "4"
+  mpd_role_id: 
+  show_follow_up_help: "1"
+  created_at: 2007-02-16 01:48:51
+  show_calculator: "0"
+  show_thank_help: "1"
+demo1: 
+  show_welcome: 0
+  last_login: 
+  ssm_id: "2"
+  mpd_letter_id: 2
+  type: 
+  id: "5"
+  mpd_role_id: 
+  show_follow_up_help: "1"
+  created_at: 2007-02-16 02:07:21
+  show_calculator: "1"
+  show_thank_help: "1"
+demo2: 
+  show_welcome: "1"
+  last_login: 
+  ssm_id: "3"
+  mpd_letter_id: 3
+  type: 
+  id: "6"
+  mpd_role_id: 
+  show_follow_up_help: "1"
+  created_at: 2007-02-16 02:07:21
+  show_calculator: "1"
+  show_thank_help: "1"
+demo3: 
+  show_welcome: "1"
+  last_login: 
+  ssm_id: "4"
+  mpd_letter_id: 4
+  type: 
+  id: "7"
+  mpd_role_id: 
+  show_follow_up_help: "1"
+  created_at: 2007-02-16 02:07:23
+  show_calculator: "1"
+  show_thank_help: "1"
+demo4: 
+  show_welcome: "1"
+  last_login: 
+  ssm_id: "5"
+  mpd_letter_id: 
+  type: 
+  id: "8"
+  mpd_role_id: 
+  show_follow_up_help: "1"
+  created_at: 2007-02-16 02:07:25
+  show_calculator: "0"
+  show_thank_help: "1"
+  

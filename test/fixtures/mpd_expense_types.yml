@@ -1,0 +1,14 @@
+--- 
+insurance: 
+  name: Insurance
+  default_amount: "0"
+  id: "2"
+transportation: 
+  name: Transporation
+  default_amount: "0"
+  id: "1"
+food: 
+  name: Food
+  default_amount: "0"
+  id: "3"
+  

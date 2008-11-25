@@ -1,0 +1,15 @@
+--- 
+single_picture_template: 
+  pdf_preview_filename: letter_template_1.pdf
+  name: Single Picture Template
+  id: "1"
+  description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris pellentesque lacus in urna.
+  thumbnail_filename: letter_template_1.jpg
+  number_of_images: "1"
+multiple_picture_template: 
+  pdf_preview_filename: letter_template_2.pdf
+  name: Multiple Picture Template
+  id: "2"
+  description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris pellentesque lacus in urna.
+  thumbnail_filename: letter_template_2.jpg
+  number_of_images: "2"

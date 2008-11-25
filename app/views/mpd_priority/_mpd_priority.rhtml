@@ -1,0 +1,21 @@
+<ul class='priorities'>
+    <li class='current-rating' style='width:<%= (mpd_contact.priority * 17).to_i -%>px;'>
+          Currently <%= number_with_precision(mpd_contact.priority, 1) %>/5 Stars.
+        </li>
+    <li>
+        <%= link_to_remote( "1", {:url => { :controller => "mpd_priority", 
+            :action => "rate", :id => mpd_contact.id, :priority => 1}},
+            :class => 'priority-low', :name => '1 star out of 5') %>
+    </li>
+    <li>
+        <%= link_to_remote( "2", {:url => { :controller => "mpd_priority", 
+            :action => "rate", :id => mpd_contact.id, :priority => 2}},
+            :class => 'priority-med', :name => '2 stars out of 5') %>    
+    </li>
+    <li>
+        <%= link_to_remote( "3", {:url => { :controller => "mpd_priority", 
+            :action => "rate", :id => mpd_contact.id, :priority => 3}},
+            :class => 'priority-top', :name => '3 stars out of 5') %>
+    </li>
+
+</ul>

@@ -1,0 +1,21 @@
+<fieldset class="columns">
+    <legend>Contact Information</legend>
+    
+    <div class="field"><label for="mpd_contact_full_name">Full Name</label>
+        <%= text_field "mpd_contact", "full_name", :class => "text" %></div>
+    <div class="field "><label for="mpd_contact_salutation">Salutation</label>
+        <%= text_field "mpd_contact", "salutation", :size => 20, :class => "text" %>
+        <span class="helpText">Full Name will be printed on the address of the envelope.</span></div>
+    <div class="field"><label for="mpd_contact_address_1">Address</label>
+        <%= text_field "mpd_contact", "address_1", :class => "text" %></div>
+    <div class="field"><label>&nbsp;</label>
+        <%= text_field "mpd_contact", "address_2", :class => "text" %></div>
+    <div class="field"><label for="mpd_contact_city">City, State, Zip</label>
+        <%= text_field "mpd_contact", "city", :class => "text", :style => "width: 201px;" %>
+        <%= text_field "mpd_contact", "state", :class => "text", :style => "width: 25px;" %>
+        <%= text_field "mpd_contact", "zip", :class => "text" , :style => "width: 75px;" %></div>
+    <div class="field"><label for="mpd_contact_email_address">Email Address</label>
+        <%= text_field "mpd_contact", "email_address", :class => "text" %></div>
+    <div class="field"><label for="mpd_contact_phone">Phone Number</label>
+        <%= text_field "mpd_contact", "phone", :class => "text", :value => number_to_phone(@mpd_contact.phone, :area_code => true), :style => "width: 100px;" %></div>
+</fieldset>

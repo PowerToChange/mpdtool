@@ -1,0 +1,131 @@
+<div id="content">
+    <% objects_to_show_errors_for = [] %>
+    <% objects_to_show_errors_for << :mpd_letter%>
+    <% for @mpd_letter_image in @mpd_letter_images %>
+        <% objects_to_show_errors_for << :mpd_letter_image %>
+    <% end %>
+    <%= error_messages_for_multiple_objects( objects_to_show_errors_for ) %>
+    
+    <h3>Writing the Letter</h3>
+    
+    <p>Your support letter is the first impression people have of your summer project.  You want it to be a good first impression.  The first goal of any support letter is to get it read.  If the letter looks interesting, inviting and easy to read, then people are more likely to read it.  The second goal of the letter is to bring people up to date on your life and the opportunity you have to do a summer project.  The third goal is to communicate your financial need and to ask people to invest in the Kingdom by giving to your summer project.</p>
+
+    <p>Below is a process to help you write your letter.  Just follow the instructions.  Also, you can click on the sample letter for more help as to what to say and how to say it.</p>
+
+    <h3><span>Write</span></h3>
+    
+    <%- form_tag( {:action => 'update_letter'}, :multipart => true, :id => @letter  ) do -%>
+    <%= hidden_field 'mpd_letter', 'id' %>
+    <fieldset>
+        <legend>Letter Body</legend>
+        <p><label for="mpd_letter_date">Give your letter a specific date</label>
+            <%= date_select 'mpd_letter', 'date' %></p>
+        
+        <p><label for="mpd_letter_salutation">Personalize your greeting
+            <span id="help-salutation" class="instructional" style="display: none;">[ The tag [[SALUTATION]] or [[FULL_NAME]] will be replaced with 
+                your contact's name when your letters are printed. <a href="#" onclick="Element.toggle('help-salutation');Element.toggle('help-salutation-more');return false;">hide this text</a> ]</span>
+            <span id="help-salutation-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-salutation');Element.toggle('help-salutation-more');return false;">?</a> ]</span></label>
+            <%= text_field 'mpd_letter', 'salutation', :class => "text",
+                                                       :maxlength => "250",
+                                                       :tabindex => 1 %></p>
+                                                       
+        <p><label for="mpd_letter_update_section">Bring your reader up to date
+            <span id="help-update" class="instructional" style="display: none;">[ Let the
+                reader know what you've been up to. <a href="#" onclick="Element.toggle('help-update');Element.toggle('help-update-more');return false;">hide this text</a> ]</span>
+            <span id="help-update-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-update');Element.toggle('help-update-more');return false;">?</a> ]</span></label>
+            <%= text_area 'mpd_letter', 'update_section', :class => "text", 
+                                                          :onkeypress => "countChars(this.id,'char-count-update', #{@max_field_length});",
+                                                          :tabindex => 2 %><br/>
+            <span class="helpText"><span id="char-count-update"><%= !@mpd_letter.update_section.nil? ? @max_field_length - @mpd_letter.update_section.length : @max_field_length %></span> characters remaining</span></p>
+
+        <p><label for="mpd_letter_educate_section">Educate your reader
+            <span id="help-educate" class="instructional" style="display: none;">[ Share how you became involved in Campus Crusade for Christ and
+                how the Lord has given you a desire to reach people for Christ.  Explain how you
+                hope the Lord will use you in your future ministry. <a href="#" onclick="Element.toggle('help-educate');Element.toggle('help-educate-more');return false;">hide this text</a> ]</span>
+            <span id="help-educate-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-educate');Element.toggle('help-educate-more');return false;">?</a> ]</span></label>
+            <%= text_area 'mpd_letter', 'educate_section', :class => "text", 
+                                                          :onkeypress => "countChars(this.id,'char-count-educate', #{@max_field_length});",
+                                                          :tabindex => 3 %><br/>
+            <span class="helpText"><span id="char-count-educate"><%= !@mpd_letter.educate_section.nil? ? @max_field_length - @mpd_letter.educate_section.length : @max_field_length %></span> characters remaining</span></p>
+        
+        <p><label for="mpd_letter_needs_section">Explain your need
+            <span id="help-needs" class="instructional" style="display: none;">[ The purpose of your letter is to give your reader 
+                an opportunity to help.  Make sure you explain exactly what you need. <a href="#" onclick="Element.toggle('help-needs');Element.toggle('help-needs-more');return false;">hide this text</a> ]</span>
+            <span id="help-needs-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-needs');Element.toggle('help-needs-more');return false;">?</a> ]</span></label>
+            <%= text_area 'mpd_letter', 'needs_section', :class => "text", 
+                                                          :onkeypress => "countChars(this.id,'char-count-needs', #{@max_field_length});",
+                                                          :tabindex => 4 %><br/>
+            <span class="helpText"><span id="char-count-needs"><%= !@mpd_letter.needs_section.nil? ? @max_field_length - @mpd_letter.needs_section.length : @max_field_length %></span> characters remaining</span></p>
+            
+        <p><label for="mpd_letter_involve_section">Involve your reader
+            <span id="help-involve" class="instructional" style="display: none;">[ Ask him for specific action based on the needs you
+                have shared.  This can include challenging him to help cover part or all of the
+                cost of your summer project, which includes training materials, lodging, meals, and
+                transportation.  State the deadline by which you need the money. <a href="#" onclick="Element.toggle('help-involve');Element.toggle('help-involve-more');return false;">hide this text</a> ]</span>
+            <span id="help-involve-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-involve');Element.toggle('help-involve-more');return false;">?</a> ]</span></label>
+            <%= text_area 'mpd_letter', 'involve_section', :class => "text", 
+                                                          :onkeypress => "countChars(this.id,'char-count-involve', #{@max_field_length});",
+                                                          :tabindex => 5 %><br/>
+            <span class="helpText"><span id="char-count-involve"><%= !@mpd_letter.involve_section.nil? ? @max_field_length - @mpd_letter.involve_section.length : @max_field_length %></span> characters remaining</span></p>
+        
+        <p><label for="mpd_letter_acknowledge_section">Acknowledge your reader
+            <span id="help-acknowledge" class="instructional" style="display: none;">[ Share an emphasis on thanks, appreciation, gratitude,
+                partnership, and commitment.  This ties your opening acknowledgement to your request. <a href="#" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">hide this text</a> ]</span>
+            <span id="help-acknowledge-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">?</a> ]</span></label>
+            <%= text_area 'mpd_letter', 'acknowledge_section', :class => "text", 
+                                                          :onkeypress => "countChars(this.id,'char-count-acknowledge', #{@max_field_length});",
+                                                          :tabindex => 6 %><br/>
+            <span class="helpText"><span id="char-count-acknowledge"><%= !@mpd_letter.acknowledge_section.nil? ? @max_field_length - @mpd_letter.acknowledge_section.length : @max_field_length %></span> characters remaining</span></p>
+        
+        <p><label for="mpd_letter_closing">Close the letter</label>
+            <%= text_field 'mpd_letter', 'closing', :class => "text",
+                                                    :maxlength => "250",
+                                                    :tabindex => 7 %></p>
+
+    </fieldset>
+    
+    <fieldset>
+        <legend>Letter Images</legend>    
+        <p><i>Images are optional.  .jpg and .png files only, please.</i></p>
+        <% count = 0 %>                                                
+        <% for @mpd_letter_image in @mpd_letter_images %>
+            <div style="clear: left">
+                <% if !@mpd_letter_image.image.nil? and FileTest.exists?("#{RAILS_ROOT}/public" + url_for_file_column(@mpd_letter_image, "image", "thumb")) %>
+                    <div style="float: left;">
+                        <%= image_tag url_for_file_column(@mpd_letter_image, "image", "thumb"), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc;" %>
+                    </div>
+                <% end %>
+                <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
+                <%= file_column_field "mpd_letter_image[]", "image", :class => "upload" %><br/>
+                <span class="instructional" style="display: block; margin-top: 3px;">
+                    <b>Current Image:</b> <% if !@mpd_letter_image.image.nil? 
+                                                  @mpd_letter_image.image.gsub(/^.*(\\|\/)/, '') 
+                                              else %>
+                                                  <i>No Image</i>
+                                              <% end %></span></p>
+            </div>
+        <% end %>
+            
+        <p class="buttons"><%= image_submit_tag "button_sm_next.gif", :tabindex => 7 %></p>
+    </fieldset>
+    <%- end -%>
+</div>
+
+<div id="sidebar">
+    <h3>A few hints</h3>
+    
+    <h4>Things to be sure you do</h4>
+
+    <ul>
+        <li>Be sure to have an appropriate amount of white space in your letter.  Too many words can be overwhelming.</li>
+        <li>Be direct in inviting people to join with you by giving a gift.  This is a great opportunity for them to be involved in the Great Commission.  You don't need to be apologetic in challenging people to give to Kingdom work.</li>
+        <li>Ask for a specific amount or specific range.  People need to know what kind of gifts you are looking for.  They want to meet your expectations.</li>
+        <li>Include a time frame in which to take action.  (i.e.- when you will be calling back for a decision.)</li>
+    </ul>
+    
+    <h4>See an example</h4>
+    
+    <p>Click the image to see a sample letter</p>
+    
+    <p style="text-align: center;"><a href="/uploads/<%= @letter_template.pdf_preview_filename %>" title="See an example" target="_blank"><%= image_tag("/uploads/" + @letter_template.thumbnail_filename) %></a></p>
+</div>

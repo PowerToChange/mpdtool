@@ -1,0 +1,1 @@
+page.replace_html "priorities-block-#{@mpd_contact.id}", :partial => 'mpd_priority/mpd_priority', :locals => { :mpd_contact => @mpd_contact } 

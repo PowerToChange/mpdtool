@@ -1,0 +1,15 @@
+<div id="content">
+    <h3>Select a template</h3>
+    <% for template in @letter_templates %>
+    <div class="template">
+        <h4><%= template.name %></h4>
+        <p class="thumbnail"><%= link_to( image_tag("../uploads/" + template.thumbnail_filename),
+                                       {:action => "select_template",
+                                       :id => template},
+                                       {:title => "Select this template",
+                                       :class => "preview_link"} ) %></p>
+        <p class="caption"><%= template.description %></p>
+        <p class="select"><a href="/uploads/<%= template.pdf_preview_filename %>" title="Preview this template" target="_blank">Preview the template</a></p>
+    </div>
+    <% end %>
+</div>

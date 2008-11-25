@@ -1,0 +1,60 @@
+<div id="content">
+    <% if @mpd_contacts.size <= 0 %>
+    <div class="notice">
+        <p><b>You have not added any contacts yet</b>.  After you begin collecting names, this page will
+            serve as your "Ministry Dashboard" and will allow you to track your overall progress
+            towards your goal.  <%= link_to "Start namestorming", :controller => "namestorm" %></p>
+            
+        <p>As your work your way through the process of raising support, the
+            links below will become increasingly helpful.  Feel free to walk through
+            the process ahead of time to learn what lies ahead.</p>
+    </div>
+    <% end %>
+
+    <h3><%= link_to "Collect Names", :controller => "namestorm" %></a></h3>
+    <p>We call this process "Namestorming" as you try to think of as many people as possible to contact about your summer project.</p>
+    
+    <h3><%= link_to "Write your letter", :controller => "write" %></h3>
+    <p>Your support letter will be the primary way you communicate to potential ministry partners about your summer project and financial need.</p>
+
+    <h3><%= link_to "Collect addresses and send letter", :controller => "addresses" %></h3>
+    <p>Once you have namestormed and written your letter you will mail merge, print your letter and envelopes and send.</p>
+
+    <h3><%= link_to "Call back for decisions", :controller => "call" %></h3>
+    <p>Calling back potential partners is a critical part of the process.</p>
+
+    <h3><%= link_to "Record your gifts and send Thank-you notes", :controller => "thank" %></h3>
+    <p>To complete the process you must record their gift and send a thank-you.  Do not be guilty of ingratitude.  "Thank before you bank".</p>
+
+</div>
+
+<div id="sidebar">
+    <h3>Progress Details</h3>
+    
+    <dl class="meta">
+        <dt>Total contacts</dt>
+        <dd><%= current_mpd_user.mpd_contacts.count %></dd>
+        <dt>Letters sent</dt>
+        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and letter_sent = true", current_mpd_user.id]).size %></dd>
+        <dt>Calls made</dt>
+        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and call_made = true", current_mpd_user.id]).size %></dd>
+        <dt>Gifts Received</dt>
+        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and gift_amount > 0", current_mpd_user.id]).size %></dd>
+        <dt>Thank yous sent</dt>
+        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and thankyou_sent = true", current_mpd_user.id]).size %></dd>
+    </dl>
+</div>
+
+<div class="clear">&nbsp;</div>
+
+<h3 style="margin-top: 25px;" >View Ministry Partners: All <%= image_tag("loading_dots.gif",
+              :align => 'absmiddle',
+              :border=> 0,
+              :id => "spinner",
+              :style=>"display: none;" ) %></h3>
+              
+<p class="instructional">Click on a contact's name to view or edit their details</p>              
+         
+<div id="contacts_list" class="contact_list wide">
+    <%= render :partial => "shared/full_contacts_list"%>
+</div>

@@ -1,0 +1,34 @@
+    <div class="spacer">&nbsp;</div>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th class="<%= sort_td_class_helper 'full_name' %>"><%= sort_link_helper "Name", "full_name" %></th>
+                <th class="<%= sort_td_class_helper 'address_1' %>"><%= sort_link_helper "Address", "address_1" %></th>
+                <th class="<%= sort_td_class_helper 'phone' %>"><%= sort_link_helper "Phone Number", "phone" %></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @mpd_contacts.each do |mpd_contact| %>
+            <tr class="<%= cycle("even", "odd") %>">
+                <td class="<%= sort_td_class_helper 'full_name' -%>" valign="top"><%= link_to(mpd_contact.full_name, {:params => params.merge({:controller => "contacts", :action => "edit", :id => mpd_contact})}) %></td>
+                <td class="<%= sort_td_class_helper 'address_1' -%>" valign="top"><%= mpd_contact.display_address(true) %></td>
+                <td class="<%= sort_td_class_helper 'phone' -%>" valign="top"><%= number_to_phone(mpd_contact.phone, :area_code => true) %></td>
+            </tr>
+            <% end %>
+
+        </tbody>
+    </table>
+    
+     <div class="pagination" style="overflow: auto;">
+    	<div  style="float: left;">
+    		Displaying <%= @pages.current.first_item %>
+    		- <%= @pages.current.last_item %>
+       		of <%= @pages.item_count %>
+       	</div>
+    
+       <div style="text-align: right;">
+            <%= link_to_remote(h('< Previous'), {:url => {:action => 'index', :page => @pages.current.previous }, :update => 'contacts_list' }) + ' | ' if @pages.current.previous %>
+            <%= pagination_links_remote @pages %>
+            <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'index', :page => @pages.current.next }, :update => 'contacts_list' }) if @pages.current.next %>
+       </div>
+     </div>
