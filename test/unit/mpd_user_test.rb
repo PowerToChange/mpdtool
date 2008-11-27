@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MpdUserTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :simplesecuritymanager_user, :ministry_person, :sp_applications, :sp_projects
+  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
 
-  def test_no_ssm_id
+  def test_no_user_id
     mpd_user = MpdUser.new
     assert !mpd_user.valid?
-    assert mpd_user.errors.invalid?(:ssm_id)
+    assert mpd_user.errors.invalid?(:user_id)
   end
   
   def test_contacts_to_call
@@ -20,7 +20,7 @@ class MpdUserTest < Test::Unit::TestCase
   end
   
   def test_create_expenses_for_user
-    mpd_user = MpdUser.create!(:ssm_id => 400)
+    mpd_user = MpdUser.create!(:user_id => 400)
     assert_equal 3, mpd_user.mpd_expenses.size
   end
   

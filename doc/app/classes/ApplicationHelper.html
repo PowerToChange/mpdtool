@@ -352,7 +352,7 @@ Finds current user to be used throughout application
 <pre>
     <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 8</span>
  8:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_mpd_user</span>
- 9:     <span class="ruby-constant">MpdUser</span>.<span class="ruby-identifier">find_by_ssm_id</span>(<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:user</span>])
+ 9:     <span class="ruby-constant">MpdUser</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:user</span>])
 10:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

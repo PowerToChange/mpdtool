@@ -17,6 +17,7 @@
 </head>
 
 <body class="<%= controller.controller_name %>">
+  <%= connexion_bar %>
 <div id="wrapper" class="<%= @col_layout %>">
     <div id="header">
         <div id="header-inner">
@@ -40,7 +41,7 @@
             <p>Your project date: <span class="date"><%= current_mpd_user.project_start_date.to_date.to_s(:long) if (!current_mpd_user.project_start_date.nil?)  %></span></p>
                         
             <h3>Your Ministry Goal <span style="font-size: .8em;">[ <%= link_to "Edit", {:controller => "write", :action => "calculate_support_total"} %> ]</span></h3>
-            <div id="progressBar-ministryGoal" class="progressBar" style="background-position: -<%= calc_goal_progress_offset %>px 0;"><%= number_with_precision(calc_goal_progress_percentage * 100,0) %>%</div>
+            <div id="progressBar-ministryGoal" class="progressBar" style="background-position: -<%= calc_goal_progress_offset %>px 0;"><%= number_with_precision(calc_goal_progress_percentage * 100, :precision => 0) %>%</div>
             <p>You have received <span class="received"><%= number_to_currency(number_with_delimiter(calc_support_received.to_i || 0), :precision => 0) %></span> of 
                 <span class="goal"><%= number_to_currency(number_with_delimiter(current_mpd_user.support_total.to_i || 0), :precision => 0) %></span></p>
         </div>

@@ -1,0 +1,13 @@
+log/*.log
+log/*.pid
+tmp/**/*
+config/database.yml
+config/mappings.yml
+doc/api
+doc/app
+coverage
+config/deploy.rb
+db/*.sqlite3
+config/initializers/hoptoad.rb
+config/initializers/email.rb
+test/mappings.yml

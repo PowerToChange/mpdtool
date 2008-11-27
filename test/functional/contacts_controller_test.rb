@@ -5,7 +5,7 @@ require 'contacts_controller'
 class ContactsController; def rescue_action(e) raise e end; end
 
 class ContactsControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_letters, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :simplesecuritymanager_user, :ministry_person, :sp_applications, :sp_projects
+  fixtures :mpd_users, :mpd_letters, :mpd_contacts, :mpd_expense_types, :mpd_expenses, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
 
   def setup
     @controller = ContactsController.new
@@ -14,13 +14,13 @@ class ContactsControllerTest < Test::Unit::TestCase
   end
 
   def test_edit
-    @request.session[:user_id] = simplesecuritymanager_user(:lance).userID
+    @request.session[:user_id] = 1
     get :edit, :id => mpd_users(:lance).mpd_contacts[0].id
     assert_response :success
   end
   
   def test_update
-    @request.session[:user_id] = simplesecuritymanager_user(:lance).userID
+    @request.session[:user_id] = 1
     mpd_contact = mpd_users(:lance).mpd_contacts[0]
     post :update, {:mpd_contact => {:full_name => mpd_contact.full_name,
                                     :gift_amount => '1,200'}, :id => mpd_contact.id}
@@ -28,7 +28,7 @@ class ContactsControllerTest < Test::Unit::TestCase
   end
   
   def test_update_invalid_contact
-    @request.session[:user_id] = simplesecuritymanager_user(:lance).userID
+    @request.session[:user_id] = 1
     mpd_contact = mpd_users(:lance).mpd_contacts[0]
     post :update, {:mpd_contact => {:full_name => "",
                                     :gift_amount => '1,200'}, :id => mpd_contact.id}

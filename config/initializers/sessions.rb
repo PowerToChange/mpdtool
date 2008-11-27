@@ -1,0 +1,1 @@
+CGI::Session::ActiveRecordStore::Session.table_name = 'mpd_sessions'

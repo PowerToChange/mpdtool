@@ -1,13 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  include CommonEngine
   
   DEFAULT_SORT = "full_name"
-  
-  # Finds current user to be used throughout application
-  # def current_mpd_user
-  #   MpdUser.find_by_ssm_id(session[:user_id])
-  # end
     
   # Performs calculation to determine offset for time remaining progress bar  
   def calc_time_remaining_bar_offset
@@ -18,7 +12,8 @@ module ApplicationHelper
       start_date = current_mpd_user.app_accepted_date
       project_date = current_mpd_user.project_start_date
       todays_date = Time.now
-      
+      start_date ||= Time.now
+      project_date ||= Time.now
       time_left = project_date - todays_date
       total_diff = project_date - start_date
       

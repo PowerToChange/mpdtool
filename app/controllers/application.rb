@@ -3,10 +3,10 @@
 require 'acts_as_rateable'
 class ApplicationController < ActionController::Base
   filter_parameter_logging *FILTER_KEYS
-  skip_before_filter CAS::Filter
   ActiveRecord::Base.send(:include, Acts::Rateable)
-  include CommonEngine
-  include ExceptionNotifiable #Automatically generates emails of errors
+  include HoptoadNotifier::Catcher
+  before_filter CASClient::Frameworks::Rails::GatewayFilter unless Rails.env.test?
+  
   helper_method :current_mpd_user
 
   DEFAULT_SORT = "full_name"
@@ -14,18 +14,25 @@ class ApplicationController < ActionController::Base
   before_filter :check_authentication, :except => [:no_access, :login, :gcx_login, :forgot_password, :send_password_email, :logout, :change_password]
   before_filter :check_authorization, :except => [:no_access, :login, :gcx_login, :forgot_password, :send_password_email, :logout, :change_password]
   
+  protected 
+  
   def check_authentication
     unless session[:user_id]
-      if session[:casfilterreceipt]
-        @user ||= User.find_by_globallyUniqueID(session[:casfilterreceipt].attributes[:ssoGuid])
-        session[:user_id] = @user.userID if @user
-      end
+      get_user_from_cas
       unless session[:user_id]
         flash[:notice] = "Please log in"
         redirect_to :controller => "login", :action => "login"
         return false
       end
     end
+  end
+  
+  def get_user_from_cas
+    if session[:cas_extra_attributes]
+      @user ||= User.find(:first, :conditions => {_(:guid, :user) => session[:cas_extra_attributes]['ssoGuid']})
+      session[:user_id] = @user.id if @user
+    end
+    return @user
   end
   
   def check_authorization
@@ -39,7 +46,7 @@ class ApplicationController < ActionController::Base
   # Return current user for use in controllers
   def current_mpd_user
     if (!@mpd_user)
-      @mpd_user = MpdUser.find_by_ssm_id(session[:user_id])
+      @mpd_user = MpdUser.find_by_user_id(session[:user_id])
     end
     return @mpd_user
   end
@@ -103,5 +110,9 @@ class ApplicationController < ActionController::Base
     pdf.set_option :right, '2cm'
     pdf << data
     pdf.generate
+  end
+  
+  def _(column, table)
+    ActiveRecord::Base._(column, table)
   end
 end

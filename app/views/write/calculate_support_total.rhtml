@@ -9,12 +9,12 @@
 <%- form_tag :action => 'calculate_support_total', :id => @user do -%>
 <fieldset class="columns calculator">
     <p><label for="">Project Cost</label>
-        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_mpd_user.project_cost, 0)) %>" /></p>
+        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_mpd_user.project_cost, :precision =>  0)) %>" /></p>
         
 <div id="calculator_fields">
  <% for @mpd_expense in @user.mpd_expenses %>
    <p style="clear: left;"><label for=""><%= @mpd_expense.mpd_expense_type.name %></label>
-        $ <%= text_field "mpd_expense[]", "amount", :value => number_with_delimiter(number_with_precision(@mpd_expense.amount, 0)), :class => "text" %>
+        $ <%= text_field "mpd_expense[]", "amount", :value => number_with_delimiter(number_with_precision(@mpd_expense.amount, :precision =>  0)), :class => "text" %>
         <%= observe_field "mpd_expense_#{@mpd_expense.id}_amount", :function => "doCalc();" %></p>
  <% end %>
 </div>

@@ -1,6 +1,6 @@
 <ul class='priorities'>
     <li class='current-rating' style='width:<%= (mpd_contact.priority * 17).to_i -%>px;'>
-          Currently <%= number_with_precision(mpd_contact.priority, 1) %>/5 Stars.
+          Currently <%= number_with_precision(mpd_contact.priority, :precision =>  1) %>/5 Stars.
         </li>
     <li>
         <%= link_to_remote( "1", {:url => { :controller => "mpd_priority", 

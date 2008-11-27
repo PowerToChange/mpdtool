@@ -179,7 +179,7 @@ Return current user for use in controllers
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/application.rb, line 21</span>
 21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_mpd_user</span>
-22:     <span class="ruby-constant">MpdUser</span>.<span class="ruby-identifier">find_by_ssm_id</span>(<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:user</span>])
+22:     <span class="ruby-constant">MpdUser</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:user</span>])
 23:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

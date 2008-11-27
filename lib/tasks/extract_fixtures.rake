@@ -70,7 +70,7 @@ task :extract_fixtures => :environment do
                  "ministry_newaddress",
                  "ministry_noncccmin",
                  "ministry_note",
-                 "ministry_person_aug1",
+                 "person_aug1",
                  "ministry_regionalstat",
                  "ministry_regionalteam",
                  "ministry_staff",

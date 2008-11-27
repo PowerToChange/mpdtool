@@ -1,26 +1,37 @@
+require 'mechanize'
 class LoginController < ApplicationController
-  before_filter CAS::Filter, :only => :gcx_login
   layout "login"
 
   def login
     @forgot_password_link = get_forgot_password_link
-    
-    if request.post? and !params[:user][:username].empty?
+    if request.post? and !params[:username].empty?
       #Authenticate User to generic SSM User
-      user = User.authenticate(params[:user][:username], params[:user][:plain_password])
-      if user
-        #Authenticate User to MPD Tool
-        if (!MpdUser.find_by_ssm_id(user.id).nil?)
-          session[:user_id] = user.id
-          redirect_to :controller => "dashboard",
-                      :action => "index"
-        else
-          flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
+      user = User.authenticate(params[:username], params[:password])
+      unless user
+        # Try CAS
+        form_params = {:username => params[:username], :password => params[:password], :service => url_for('/') }
+        cas_url = 'https://signin.mygcx.org/cas/login'
+        agent = WWW::Mechanize.new
+        page = agent.post(cas_url, form_params)
+        result_query = page.uri.query
+        unless result_query && result_query.include?('BadPassword')
+          redirect_to(cas_url + '?service=' + url_for(:action => :login) + '&username=' + params[:username] + '&password=' + params[:password])
         end
-      else
-        flash[:error] = "Your username or password was invalid"
-      end      
+      end
+      flash[:error] = "Your username or password was invalid" unless user
+    else
+      user = get_user_from_cas
     end
+    if user
+      #Authenticate User to MPD Tool
+      if (MpdUser.has_access(user))
+        session[:user_id] = user.id
+        redirect_to :controller => "dashboard",
+                    :action => "index"
+      else
+        flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
+      end
+    end      
   end
   
   def gcx_login

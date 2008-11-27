@@ -11,7 +11,7 @@
     <div class="field"><label for="mpd_contact_notes">Notes</label>
         <%= text_area "mpd_contact", "notes", :class => "text" %></div>
     <div class="field"><label for="mpd_contact_gift_amount">Gift Given</label>
-        $ <%= text_field "mpd_contact", "gift_amount", :class => "text", :class => "text", :value => number_with_delimiter(number_with_precision(@mpd_contact.gift_amount,0)), :style => "width: 50px;" %></div>
+        $ <%= text_field "mpd_contact", "gift_amount", :class => "text", :class => "text", :value => number_with_delimiter(number_with_precision(@mpd_contact.gift_amount, :precision => 0)), :style => "width: 50px;" %></div>
     <div class="field"><%= check_box "mpd_contact", "call_made", :class => "checkbox" %> <label for="mpd_contact_call_made" class="for_checkbox">A follow up call has been made</label></div>
     <div class="field"><%= check_box "mpd_contact", "thankyou_sent", :class => "checkbox" %> <label for="mpd_contact_thankyou_sent" class="for_checkbox">A thank you note has been made</label></div>
 
