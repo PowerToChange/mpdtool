@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081126205214) do
+ActiveRecord::Schema.define(:version => 20081201212733) do
 
   create_table "accountadmin_accessgroup", :primary_key => "accessgroup_id", :force => true do |t|
     t.integer "accesscategory_id",               :default => 0,  :null => false
@@ -27,9 +27,6 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
     t.integer "viewer_isActive",                :default => 0,  :null => false
     t.date    "viewer_lastLogin",                               :null => false
   end
-
-  add_index "accountadmin_viewer", ["accountgroup_id"], :name => "ciministry.accountadmin_viewer_accountgroup_id_index"
-  add_index "accountadmin_viewer", ["viewer_userID"], :name => "ciministry.accountadmin_viewer_viewer_userID_index"
 
   create_table "accountadmin_vieweraccessgroup", :primary_key => "vieweraccessgroup_id", :force => true do |t|
     t.integer "viewer_id",      :default => 0, :null => false
@@ -79,9 +76,6 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
     t.integer "assignmentstatus_id", :default => 0, :null => false
   end
 
-  add_index "cim_hrdb_assignment", ["campus_id"], :name => "ciministry.cim_hrdb_assignment_campus_id_index"
-  add_index "cim_hrdb_assignment", ["person_id"], :name => "ciministry.cim_hrdb_assignment_person_id_index"
-
   create_table "cim_hrdb_campus", :primary_key => "campus_id", :force => true do |t|
     t.string  "campus_desc",          :limit => 128, :default => "", :null => false
     t.string  "campus_shortDesc",     :limit => 50,  :default => "", :null => false
@@ -91,9 +85,6 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
     t.string  "campus_facebookgroup", :limit => 128,                 :null => false
     t.string  "campus_gcxnamespace",  :limit => 128,                 :null => false
   end
-
-  add_index "cim_hrdb_campus", ["accountgroup_id"], :name => "ciministry.cim_hrdb_campus_accountgroup_id_index"
-  add_index "cim_hrdb_campus", ["region_id"], :name => "ciministry.cim_hrdb_campus_region_id_index"
 
   create_table "cim_hrdb_emerg", :primary_key => "emerg_id", :force => true do |t|
     t.integer "person_id",                          :default => 0,  :null => false
@@ -348,6 +339,23 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
   add_index "forms", ["event_group_id"], :name => "index_forms_on_event_group_id"
   add_index "forms", ["questionnaire_id"], :name => "forms_questionnaire_id_index"
 
+  create_table "location_groups", :force => true do |t|
+    t.string  "name"
+    t.string  "type"
+    t.integer "parent_id"
+    t.string  "alias_type"
+    t.integer "alias_id"
+    t.integer "ministry_id"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string  "name"
+    t.integer "parent_id"
+    t.string  "type"
+    t.string  "alias_type"
+    t.integer "alias_id"
+  end
+
   create_table "manual_donations", :force => true do |t|
     t.string   "motivation_code"
     t.datetime "created_at"
@@ -359,10 +367,27 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
 
   add_index "manual_donations", ["motivation_code"], :name => "manual_donations_motivation_code_index"
 
+  create_table "ministries", :force => true do |t|
+    t.string  "name"
+    t.integer "parent_id"
+    t.integer "children_count"
+  end
+
+  create_table "mpd_contact_actions", :force => true do |t|
+    t.integer  "mpd_contact_id"
+    t.integer  "project_id"
+    t.float    "gift_amount"
+    t.boolean  "letter_sent",    :default => false
+    t.boolean  "call_made",      :default => false
+    t.boolean  "thankyou_sent",  :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "mpd_contacts", :force => true do |t|
     t.integer  "mpd_user_id"
     t.integer  "mpd_priority_id"
-    t.string   "full_name",                     :default => "",    :null => false
+    t.string   "full_name",                     :default => "", :null => false
     t.string   "address_1"
     t.string   "address_2"
     t.string   "city"
@@ -370,11 +395,7 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
     t.string   "zip",             :limit => 10
     t.string   "phone",           :limit => 15
     t.string   "email_address"
-    t.float    "gift_amount"
     t.text     "notes"
-    t.boolean  "letter_sent",                   :default => false
-    t.boolean  "call_made",                     :default => false
-    t.boolean  "thankyou_sent",                 :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "salutation"
@@ -497,6 +518,11 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
 
   add_index "optin_cost_items", ["cost_item_id"], :name => "optin_cost_items_cost_item_id_index"
   add_index "optin_cost_items", ["profile_id"], :name => "optin_cost_items_profile_id_index"
+
+  create_table "permissions", :force => true do |t|
+    t.string  "name"
+    t.integer "parent_id"
+  end
 
   create_table "plugin_schema_info", :id => false, :force => true do |t|
     t.string  "plugin_name"
@@ -630,6 +656,7 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
     t.date    "end"
     t.integer "event_group_id"
     t.string  "cost_center"
+    t.integer "student_cost"
   end
 
   add_index "projects", ["event_group_id"], :name => "index_projects_on_event_group_id"
@@ -710,11 +737,11 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
   end
 
   create_table "site_multilingual_label", :primary_key => "label_id", :force => true do |t|
-    t.integer   "page_id",                     :default => 0,  :null => false
-    t.string    "label_key",     :limit => 50, :default => "", :null => false
-    t.text      "label_label",                                 :null => false
-    t.timestamp "label_moddate",                               :null => false
-    t.integer   "language_id",                 :default => 0,  :null => false
+    t.integer  "page_id",                     :default => 0,  :null => false
+    t.string   "label_key",     :limit => 50, :default => "", :null => false
+    t.text     "label_label",                                 :null => false
+    t.datetime "label_moddate",                               :null => false
+    t.integer  "language_id",                 :default => 0,  :null => false
   end
 
   add_index "site_multilingual_label", ["label_key"], :name => "ciministry.site_multilingual_label_label_key_index"
@@ -772,5 +799,13 @@ ActiveRecord::Schema.define(:version => 20081126205214) do
   add_index "travel_segments", ["event_group_id"], :name => "index_travel_segments_on_event_group_id"
   add_index "travel_segments", ["flight_no"], :name => "travel_segments_flight_no_index"
   add_index "travel_segments", ["year"], :name => "travel_segments_year_index"
+
+  create_table "viewer_assignments", :force => true do |t|
+    t.integer "location_id"
+    t.integer "ministry_id"
+    t.integer "permission_id"
+    t.string  "custom"
+    t.integer "viewer_id"
+  end
 
 end

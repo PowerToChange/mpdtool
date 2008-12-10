@@ -3,10 +3,10 @@ class MpdContact < ActiveRecord::Base
   
   belongs_to :mpd_user
   belongs_to :mpd_priority
+  has_many :mpd_contact_actions
   
   validates_presence_of :full_name
   validates_presence_of :salutation, :on => :update, :message => "can't be blank"
-  validates_numericality_of :gift_amount, :if => Proc.new { |c| !c.gift_amount.blank? }
   validates_format_of :phone, :with => /^(\(?[0-9]{3}[\)-\.]?\ ?)?[0-9]{3}[-\.]?[0-9]{4}$/,
                               :if => Proc.new { |c| !c.phone.blank? }
   validates_format_of :email_address, :with => /^[a-z0-9!$'*+\-_]+(\.[a-z0-9!$'*+\-_]+)*@([a-z0-9]+(-+[a-z0-9]+)*\.)+([a-z]{2}|aero|arpa|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|travel)$/,
@@ -31,18 +31,40 @@ class MpdContact < ActiveRecord::Base
     return ret_val
   end
   
-  def make_call!
-    self.update_attribute(:call_made, true)
+  def make_call!(event_id)
+    action(event_id).update_attribute(:call_made, true)
   end
   
   def salutation
     self[:salutation] || self.full_name
   end
+  
+  def gift_amount(event_id)
+    action(event_id).gift_amount || 0
+  end
+  
+  def letter_sent(event_id)
+    action(event_id).letter_sent?
+  end
+  
+  def call_made(event_id)
+    action(event_id).call_made?
+  end
+  
+  def thankyou_sent(event_id)
+    action(event_id).thankyou_sent?
+  end
+  
+  def action(event_id)
+    @actions ||= {}
+    unless @actions[event_id]
+      @actions[event_id] = mpd_contact_actions.find_by_event_id(event_id)
+      @actions[event_id] ||= mpd_contact_actions.create(:event_id => event_id)
+    end
+    @actions[event_id]
+  end
 
   protected
-  def validate
-    errors.add(:gift_amount, "should be at least 1") if !gift_amount.nil? && !gift_amount.blank? && gift_amount < 1
-  end
   
   def set_salutation
     self.salutation = self.full_name

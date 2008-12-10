@@ -22,16 +22,16 @@ class ContactsControllerTest < Test::Unit::TestCase
   def test_update
     @request.session[:user_id] = 1
     mpd_contact = mpd_users(:lance).mpd_contacts[0]
-    post :update, {:mpd_contact => {:full_name => mpd_contact.full_name,
-                                    :gift_amount => '1,200'}, :id => mpd_contact.id}
+    post :update, {:mpd_contact => {:full_name => mpd_contact.full_name},
+                   :mpd_contact_action => {:gift_amount => '1,200'}, :id => mpd_contact.id}
     assert_response :redirect
   end
   
   def test_update_invalid_contact
     @request.session[:user_id] = 1
     mpd_contact = mpd_users(:lance).mpd_contacts[0]
-    post :update, {:mpd_contact => {:full_name => "",
-                                    :gift_amount => '1,200'}, :id => mpd_contact.id}
+    post :update, {:mpd_contact => {:full_name => ""},
+                   :mpd_contact_action => {:gift_amount => '1,200'}, :id => mpd_contact.id}
     assert_template "edit" 
   end
 end

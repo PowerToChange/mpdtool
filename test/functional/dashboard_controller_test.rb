@@ -20,15 +20,21 @@ class DashboardControllerTest < Test::Unit::TestCase
   end
   
   def test_show_welcome
-    @request.session[:user_id] = 1
+    @request.session[:user_id] = 3
     get :index
     assert_redirected_to :action => "welcome"
   end
   
-  def test_show_index
+  def test_show_index_no_project
     @request.session[:user_id] = 2
     get :index
     assert_response :success
+  end
+  
+  def test_show_index_with_project
+    @request.session[:user_id] = 1
+    get :index
+    assert_response :success, @response.body
   end
   
   def test_sort

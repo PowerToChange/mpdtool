@@ -3,7 +3,7 @@ class MpdLetterImage < ActiveRecord::Base
   file_column :image, :magick => {:versions => {:thumb  => {:crop => '1:1', :size => "50x50!"},
                                                 :print => {:geometry => "400>"}}
   	                	          }
-  validates_file_format_of :image, :in => ["image/jpeg", "image/png"]
+  validates_file_format_of :image, :in => ["png", "jpg", 'JPG', 'PNG']
   
   def image_name
     str = self.image.split("/")

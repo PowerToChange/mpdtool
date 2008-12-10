@@ -1,6 +1,6 @@
 --- 
 lance: 
-  show_welcome: "1"
+  show_welcome: "0"
   last_login: 
   user_id: "1"
   mpd_letter_id: 1

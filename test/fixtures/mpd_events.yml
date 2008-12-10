@@ -1,0 +1,10 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  start_date: 2007-06-01 00:00:00
+  mpd_user_id: 4
+  cost: 2000
+#
+# two:
+#   column: value

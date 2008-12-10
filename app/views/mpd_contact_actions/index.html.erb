@@ -1,0 +1,18 @@
+<h1>Listing mpd_contact_actions</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for mpd_contact_action in @mpd_contact_actions %>
+  <tr>
+    <td><%= link_to 'Show', mpd_contact_action %></td>
+    <td><%= link_to 'Edit', edit_mpd_contact_action_path(mpd_contact_action) %></td>
+    <td><%= link_to 'Destroy', mpd_contact_action, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New mpd_contact_action', new_mpd_contact_action_path %>

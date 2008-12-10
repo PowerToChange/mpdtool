@@ -7,21 +7,21 @@
 
 <body>
 <% @mpd_contacts.each do |mpd_contact| %>
-    <% if !mpd_contact.address_1.nil? and !mpd_contact.address_1.blank?%>
 		<% if !@letter.date.blank?%>
         	<p align="right"><%= @letter.date.to_s(:long) %></p>
 		<% end %>
 		
-        <p><%= mpd_contact.full_name %><br/>
-        <%= mpd_contact.address_1 %><br/>
-        <% if !mpd_contact.address_2.nil? and !mpd_contact.address_2.blank? %>
-            <%= mpd_contact.address_2 %><br/>
+        <% if params[:include_address] && !mpd_contact.address_1.blank?%>
+          <p><%= mpd_contact.full_name %><br/>
+          <%= mpd_contact.address_1 %><br/>
+          <% if !mpd_contact.address_2.nil? and !mpd_contact.address_2.blank? %>
+              <%= mpd_contact.address_2 %><br/>
+          <% end %>
+          <%= mpd_contact.city %>, <%= mpd_contact.state %> <%= mpd_contact.zip %></p>
         <% end %>
-        <%= mpd_contact.city %>, <%= mpd_contact.state %> <%= mpd_contact.zip %></p>
-        
         <% if !@letter.salutation.nil? and !@letter.salutation.blank? -%>
             <p><%= @letter.salutation.gsub("[[FULL_NAME]]",mpd_contact.full_name).gsub("[[SALUTATION]]",mpd_contact.salutation) %></p>
-        <% end -%>
+        <% end -%> 
         
         <p><% if !@letter.mpd_letter_images[0].nil? and !@letter.mpd_letter_images[0].image.nil? and !@letter.mpd_letter_images[0].image.blank? %>
 				<img src="<%=  url_for_file_column(@letter.mpd_letter_images[0], 'image', 'print') %>" align="right" width="200" hspace="10" />
@@ -54,7 +54,6 @@
         <p><%= @letter.closing %></p>
     
         <!-- NEW PAGE -->
-    <% end %>
 <% end %>
 
 </body>

@@ -90,8 +90,8 @@
       <a href="#M000003">create_expenses_for_user</a>&nbsp;&nbsp;
       <a href="#M000001">mpd_contacts_to_call</a>&nbsp;&nbsp;
       <a href="#M000002">mpd_contacts_to_thank</a>&nbsp;&nbsp;
-      <a href="#M000006">project_cost</a>&nbsp;&nbsp;
-      <a href="#M000005">project_start_date</a>&nbsp;&nbsp;
+      <a href="#M000006">event_cost</a>&nbsp;&nbsp;
+      <a href="#M000005">event_start_date</a>&nbsp;&nbsp;
       <a href="#M000004">support_total</a>&nbsp;&nbsp;
       </div>
     </div>
@@ -220,7 +220,7 @@
 
         <div class="method-heading">
           <a href="#M000006" class="method-signature">
-          <span class="method-name">project_cost</span><span class="method-args">()</span>
+          <span class="method-name">event_cost</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -230,7 +230,7 @@
           <div class="method-source-code" id="M000006-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/mpd_user.rb, line 44</span>
-44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_cost</span>
+44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">event_cost</span>
 45:     <span class="ruby-identifier">get_project</span>.<span class="ruby-identifier">student_cost</span>
 46:   <span class="ruby-keyword kw">end</span>
 </pre>
@@ -243,7 +243,7 @@
 
         <div class="method-heading">
           <a href="#M000005" class="method-signature">
-          <span class="method-name">project_start_date</span><span class="method-args">()</span>
+          <span class="method-name">event_start_date</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -253,7 +253,7 @@
           <div class="method-source-code" id="M000005-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/mpd_user.rb, line 40</span>
-40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_start_date</span>
+40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">event_start_date</span>
 41:     <span class="ruby-identifier">get_project</span>.<span class="ruby-identifier">start_date</span>
 42:   <span class="ruby-keyword kw">end</span>
 </pre>
@@ -277,7 +277,7 @@
 <pre>
     <span class="ruby-comment cmt"># File app/models/mpd_user.rb, line 36</span>
 36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">support_total</span>
-37:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_cost</span> <span class="ruby-operator">+</span> <span class="ruby-constant">MpdExpense</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-identifier">:amount</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;mpd_user_id = #{self.id}&quot;</span>)
+37:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">event_cost</span> <span class="ruby-operator">+</span> <span class="ruby-constant">MpdExpense</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-identifier">:amount</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;mpd_user_id = #{self.id}&quot;</span>)
 38:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

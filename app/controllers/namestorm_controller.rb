@@ -1,5 +1,4 @@
 class NamestormController < ApplicationController
-  skip_before_filter CAS::Filter
   layout "main"
   
   # Redirects upon entrance to controller
@@ -73,5 +72,7 @@ class NamestormController < ApplicationController
   def add_contact(name)
     mp = MpdContact.create(:full_name => name.strip,
                            :mpd_user_id => current_mpd_user.id)
+    contact_actions = mp.mpd_contact_actions.create(:event_id => current_event.id)
+    mp
   end
 end

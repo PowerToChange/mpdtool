@@ -24,13 +24,13 @@ class LoginController < ApplicationController
     end
     if user
       #Authenticate User to MPD Tool
-      if (MpdUser.has_access(user))
+      # if (MpdUser.has_access(user))
         session[:user_id] = user.id
         redirect_to :controller => "dashboard",
                     :action => "index"
-      else
-        flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
-      end
+      # else
+        # flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
+      # end
     end      
   end
   

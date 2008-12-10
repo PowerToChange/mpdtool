@@ -1,0 +1,46 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+ruth_martinez:
+  id: 1
+  mpd_contact_id: 20
+  event_id: 1
+  call_made: "1"
+  thankyou_sent: "1"
+  letter_sent: "1"
+  gift_amount: 250
+  
+susan_wilson:
+  id: 2
+  mpd_contact_id: 9
+  event_id: 1
+  call_made: "1"
+  thankyou_sent: "1"
+  letter_sent: "1"
+  gift_amount: 250
+  
+sharon_robinson:
+  id: 3
+  mpd_contact_id: 9
+  event_id: 1
+  call_made: "1"
+  thankyou_sent: "1"
+  letter_sent: "1"
+  gift_amount: 250
+  
+michelle_clark:
+  id: 4
+  mpd_contact_id: 21
+  event_id: 1
+  call_made: "1"
+  thankyou_sent: "1"
+  letter_sent: "1"
+  gift_amount: 250
+  
+margaret_moore:
+  id: 5
+  mpd_contact_id: 10
+  event_id: 1
+  call_made: "0"
+  thankyou_sent: "0"
+  letter_sent: "0"
+  gift_amount: 

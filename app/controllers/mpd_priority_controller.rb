@@ -1,5 +1,4 @@
 class MpdPriorityController < ApplicationController
-  skip_before_filter CAS::Filter
 
   def rate
     @mpd_contact = MpdContact.find(params[:id])

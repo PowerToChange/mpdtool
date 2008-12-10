@@ -17,10 +17,10 @@
             <tr class="<%= cycle("even", "odd") %>">
                 <td class="<%= sort_td_class_helper 'full_name' -%>"><%= link_to(mpd_contact.full_name, {:params => params.merge({:controller => "contacts", :action => "edit", :id => mpd_contact})}) %></td>
                 <td class="<%= sort_td_class_helper 'mpd_contacts.created_at' -%>"><%= mpd_contact.created_at.strftime("%m/%d/%Y") %></td>
-                <td class="<%= sort_td_class_helper 'letter_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.letter_sent == true %></td>
-                <td class="<%= sort_td_class_helper 'call_made' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.call_made == true %></td>
-                <td class="<%= sort_td_class_helper 'gift_amount' -%>" style="text-align: right;"><%= number_to_currency(number_with_delimiter(mpd_contact.gift_amount)) %>&nbsp;</td>
-                <td class="<%= sort_td_class_helper 'thankyou_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.thankyou_sent == true %></td>
+                <td class="<%= sort_td_class_helper 'letter_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.letter_sent(current_event.id) %></td>
+                <td class="<%= sort_td_class_helper 'call_made' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.call_made(current_event.id) %></td>
+                <td class="<%= sort_td_class_helper 'gift_amount' -%>" style="text-align: right;"><%= number_to_currency(number_with_delimiter(mpd_contact.gift_amount(current_event.id))) %>&nbsp;</td>
+                <td class="<%= sort_td_class_helper 'thankyou_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.thankyou_sent(current_event.id) %></td>
                 <td class="<%= sort_td_class_helper 'mpd_priorities.priority' -%>"><div id="priorities-block-<%= mpd_contact.id %>">
                     <%= render :partial => "mpd_priority/mpd_priority", :locals => { :mpd_contact => mpd_contact } %>
                 </div></td>

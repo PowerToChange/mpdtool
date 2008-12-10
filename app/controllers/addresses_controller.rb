@@ -4,7 +4,6 @@ require "htmldoc"
 #require 'session'
 
 class AddressesController < ApplicationController
-  skip_before_filter CAS::Filter
   include ActionView::Helpers::NumberHelper
 
   layout "main", :except => ["export_as_csv", "print_letter", "letter_pdf"]
@@ -15,7 +14,7 @@ class AddressesController < ApplicationController
     @col_layout = "two_col"
     items_per_page = 15
     
-    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions, :per_page => items_per_page  
+    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions, :joins => :mpd_contact_actions, :per_page => items_per_page  
 
     if request.xml_http_request?
       render :partial => "shared/mini_contacts_list", :layout => false
@@ -46,9 +45,10 @@ class AddressesController < ApplicationController
     @mpd_contacts = current_mpd_user.mpd_contacts
     # @mpd_contacts = [current_mpd_user.mpd_contacts.first]
     @letter = current_mpd_user.mpd_letter
-    
     if @letter
-      @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.address_1.to_s.blank?}
+      if params[:print_all] == 'false'
+        @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.address_1.to_s.blank?}
+      end
       unless @mpd_contacts.empty?
         letter = render_to_string(:action => "letter_pdf")
         path = File.join(RAILS_ROOT, "public", "pdfs", current_mpd_user.id.to_s)
@@ -66,7 +66,6 @@ class AddressesController < ApplicationController
         pdf.set_option :path, "\".;#{File.join(RAILS_ROOT, "public")}\""
         
         # pdf.header ".t."
-        
         pdf << letter
           
         pdf.footer "..."
@@ -81,8 +80,8 @@ class AddressesController < ApplicationController
           raise pdf.inspect
         end
         # Mark contacts as letter having been sent
-        contact_ids = @mpd_contacts.collect(&:id)
-        MpdContact.update_all("letter_sent = 1", "id IN (#{contact_ids.join(',')})")
+        action_ids = @mpd_contacts.collect {|contact| contact.action(current_event.id)}.collect(&:id)
+        MpdContactAction.update_all("letter_sent = 1", "id IN (#{action_ids.join(',')})")
       else
         flash[:error] = "You don't have any contacts with valid addresses to send letters to."
         redirect_to(:action => :index)

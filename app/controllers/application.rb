@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include HoptoadNotifier::Catcher
   before_filter CASClient::Frameworks::Rails::GatewayFilter unless Rails.env.test?
   
-  helper_method :current_mpd_user
+  helper_method :current_mpd_user, :current_user, :current_person, :current_event
 
   DEFAULT_SORT = "full_name"
 
@@ -15,6 +15,44 @@ class ApplicationController < ActionController::Base
   before_filter :check_authorization, :except => [:no_access, :login, :gcx_login, :forgot_password, :send_password_email, :logout, :change_password]
   
   protected 
+  
+  def current_event
+    @current_event = MpdEvent.find(session[:event_id]) if session[:event_id]
+    # If they have a current summer project app, see if we've already created an event for it
+    if !@current_event && current_person.current_application && current_person.current_application.project
+      event = MpdEvent.find_by_project_id(current_person.current_application.project.id)
+      unless event
+        # Create an event and set it to active
+        @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
+                                                            :name => current_person.current_application.project.name,
+                                                            :start_date => current_person.current_application.project.start_date,
+                                                            :cost => current_person.current_application.project.student_cost)
+      end
+    end
+    unless @current_event
+      # See if they have a last event stored
+      @current_event = MpdEvent.find(current_mpd_user.current_event_id) if current_mpd_user.current_event_id
+      # If we still don't have an event, we need to create a default one.
+      @current_event = current_mpd_user.mpd_events.create(:name => 'Unnamed Event',
+                                         :start_date => Date.today)
+    end
+    current_mpd_user.update_attribute(:current_event_id, @current_event.id) unless current_mpd_user.current_event_id == @current_event
+    session[:event_id] = @current_event.id
+    @current_event 
+  end
+  
+  def current_person
+    @current_person ||= current_user.person
+  end
+  
+  def current_user
+    @current_user ||= User.find(session[:user_id])
+  end
+  
+  # Return current user for use in controllers
+  def current_mpd_user
+    @mpd_user ||= MpdUser.find_by_user_id(session[:user_id])
+  end
   
   def check_authentication
     unless session[:user_id]
@@ -43,14 +81,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # Return current user for use in controllers
-  def current_mpd_user
-    if (!@mpd_user)
-      @mpd_user = MpdUser.find_by_user_id(session[:user_id])
-    end
-    return @mpd_user
-  end
-
   # Paginate a collection of prefetched data
   def paginate_collection(collection, options = {})
     default_options = {:per_page => 10, :page => 1}
@@ -63,14 +93,14 @@ class ApplicationController < ActionController::Base
     return [pages, slice]
   end
   
-  def process_sort(sort, default_sort=DEFAULT_SORT)
+  def process_sort(sort, default_sort = DEFAULT_SORT)
     ret_val = case sort
            when "full_name_reverse" then "full_name DESC"
            when "mpd_contacts.created_at_reverse" then "mpd_contacts.created_at DESC"
-           when "letter_sent_reverse" then "letter_sent DESC"
-           when "call_made_reverse" then "call_made DESC"
-           when "gift_amount_reverse" then "gift_amount DESC"
-           when "thankyou_sent_reverse" then "thankyou_sent DESC"
+           when "letter_sent_reverse" then "mpd_contact_actions.letter_sent DESC"
+           when "call_made_reverse" then "mpd_contact_actions.call_made DESC"
+           when "gift_amount_reverse" then "mpd_contact_actions.gift_amount DESC"
+           when "thankyou_sent_reverse" then "mpd_contact_actions.thankyou_sent DESC"
            when "mpd_priorities.priority_reverse" then "mpd_priorities.priority DESC"
            when "address_1_reverse" then "address_1 DESC"
            when "phone_reverse" then "phone DESC"
@@ -82,9 +112,9 @@ class ApplicationController < ActionController::Base
   
   def process_conditions(conditions = nil)
     if conditions.nil?
-      ret_val = ["mpd_contacts.mpd_user_id = ?", current_mpd_user.id]
+      ret_val = ["mpd_contacts.mpd_user_id = ? AND mpd_contact_actions.event_id = ?", current_mpd_user.id, current_event.id]
     else
-      ret_val = [conditions + " and mpd_contacts.mpd_user_id = ?", current_mpd_user.id]
+      ret_val = [conditions + " and mpd_contacts.mpd_user_id = ? AND mpd_contact_actions.event_id = ?", current_mpd_user.id, current_event.id]
     end
     return ret_val
   end
@@ -93,7 +123,7 @@ class ApplicationController < ActionController::Base
     if session[:return_to].nil?
       redirect_to default
     else
-      redirect_to_url session[:return_to]
+      redirect_to session[:return_to]
       session[:return_to] = nil
     end
   end

@@ -8,9 +8,9 @@ module ApplicationHelper
     bar_width = 230
     percentage = 0
     
-    if (!current_mpd_user.project_start_date.nil?)
+    if (!current_mpd_user.event_start_date.nil?)
       start_date = current_mpd_user.app_accepted_date
-      project_date = current_mpd_user.project_start_date
+      project_date = current_mpd_user.event_start_date
       todays_date = Time.now
       start_date ||= Time.now
       project_date ||= Time.now
@@ -25,13 +25,14 @@ module ApplicationHelper
   
   # Calculates gifts given to user
   def calc_support_received
-    MpdContact.sum(:gift_amount, :conditions => ["mpd_user_id = ?", current_mpd_user.id])
+    MpdContactAction.sum(:gift_amount, :conditions => ["mpd_user_id = ? AND event_id = ?", current_mpd_user.id, current_event.id], :joins => :mpd_contact)
   end
   
   # Calculates percentage of goal has been received by user
   def calc_goal_progress_percentage
-    if !current_mpd_user.support_total.nil? and current_mpd_user.support_total > 0
-      percentage = calc_support_received.to_f / current_mpd_user.support_total.to_f
+    total = current_mpd_user.support_total(current_event.id)
+    if !total.nil? and total > 0
+      percentage = calc_support_received.to_f / total.to_f
     else 
       percentage = 0
     end

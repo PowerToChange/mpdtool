@@ -128,4 +128,5 @@
     <p>Click the image to see a sample letter</p>
     
     <p style="text-align: center;"><a href="/uploads/<%= @letter_template.pdf_preview_filename %>" title="See an example" target="_blank"><%= image_tag("/uploads/" + @letter_template.thumbnail_filename) %></a></p>
+    <p><%= link_to("Click here to change your template", select_template_write_path) %></p>
 </div>

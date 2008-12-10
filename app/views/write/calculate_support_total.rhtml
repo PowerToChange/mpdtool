@@ -9,7 +9,7 @@
 <%- form_tag :action => 'calculate_support_total', :id => @user do -%>
 <fieldset class="columns calculator">
     <p><label for="">Project Cost</label>
-        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_mpd_user.project_cost, :precision =>  0)) %>" /></p>
+        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_mpd_user.event_cost, :precision =>  0)) %>" /></p>
         
 <div id="calculator_fields">
  <% for @mpd_expense in @user.mpd_expenses %>

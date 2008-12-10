@@ -10,9 +10,10 @@
         </thead>
         <tbody>
                 <% @mpd_contacts.each do |mpd_contact|
-                     @mpd_contact = mpd_contact %>
+                     @mpd_contact = mpd_contact 
+                     fields_for mpd_contact.action(current_event.id) do |af| %>
                 <tr class="<%= cycle("even", "odd") %>">
-                    <td valign="top" class="nopad"><span id="cb_<%= @mpd_contact.id %>"><%= check_box "mpd_contact", "call_made", 
+                    <td valign="top" class="nopad"><span id="cb_<%= @mpd_contact.id %>"><%= af.check_box "call_made", 
                                       { :onclick => remote_function( :loading => "Element.replace('cb_#{@mpd_contact.id}','<img src=\"/images/loading_dots.gif\" />')",
                                                                      :url => {:params => params.merge({:id => @mpd_contact, :action => 'complete'})},
                                                                      :update => 'contacts_list' ) }, 
@@ -22,7 +23,8 @@
                     <td class="<%= sort_td_class_helper 'address_1' -%>" valign="top"><%= mpd_contact.display_address(true) %></td>
                     <td class="<%= sort_td_class_helper 'phone' -%>" valign="top"><%= number_to_phone(mpd_contact.phone, :area_code => true) %></td>
                 </tr>
-                <% end %>
+                <%  end
+                  end %>
         </tbody>
     </table>
 

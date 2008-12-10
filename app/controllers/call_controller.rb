@@ -1,5 +1,4 @@
 class CallController < ApplicationController
-  skip_before_filter CAS::Filter
   layout "main"
   
   def index
@@ -7,7 +6,8 @@ class CallController < ApplicationController
     @col_layout = "two_col"
     items_per_page = 15
 
-    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :per_page => items_per_page  
+    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :joins => :mpd_contact_actions,
+                                     :per_page => items_per_page  
 
     if request.xml_http_request?
       render :partial => "mpd_contact_to_call", :layout => false
@@ -19,10 +19,11 @@ class CallController < ApplicationController
 
     if request.post?
       @mpd_contact = MpdContact.find(params[:id])
-      @mpd_contact.make_call!
+      @mpd_contact.make_call!(current_event.id)
     end
     
-    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :per_page => items_per_page  
+    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :joins => :mpd_contact_actions,
+                                     :per_page => items_per_page  
 
     if request.xml_http_request?
       render :partial => "mpd_contact_to_call", :layout => false

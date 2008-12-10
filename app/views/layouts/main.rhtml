@@ -34,17 +34,32 @@
                 <li id="thank_link" <%= "class='active'" if controller.controller_name == 'thank' %>><%= link_to '<span>5</span> Thank', :controller => "thank"%></li>
             </ul>
         </div>
-        
+        <%- if current_event -%>
         <div id="progressBars">
             <h3>Time Remaining</h3>
-            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_mpd_user.project_start_date) if (!current_mpd_user.project_start_date.nil?)  %></div>
-            <p>Your project date: <span class="date"><%= current_mpd_user.project_start_date.to_date.to_s(:long) if (!current_mpd_user.project_start_date.nil?)  %></span></p>
+            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_mpd_user.event_start_date) if (!current_mpd_user.event_start_date.nil?)  %></div>
+            <div id="current_event">
+              <p class="left"><strong><%= current_event.name %></strong> <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %></p>
+              <p class="left">
+                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_person.sp_projects.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active project', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
+                <%- end -%>
+              </p>
+            </div>
+            <%- if current_person.sp_projects.length > 1 -%>
+            <p style="display:none" id="project_dropdown"><span>
+              <%= select_tag(:event_id, options_for_select(current_mpd_user.mpd_events.collect {|p| [p.name, p.id]}, current_event.id)) %>
+              <%#= link_to_function('cancel', "Element.show('current_event');Element.hide('project_dropdown')") %>
+            </span></p>
+            <%= observe_field(:event_id, :url => {:controller => :dashboard, :action => :change_event},
+                              :with => 'event_id') %>
+            <%- end -%>
                         
             <h3>Your Ministry Goal <span style="font-size: .8em;">[ <%= link_to "Edit", {:controller => "write", :action => "calculate_support_total"} %> ]</span></h3>
             <div id="progressBar-ministryGoal" class="progressBar" style="background-position: -<%= calc_goal_progress_offset %>px 0;"><%= number_with_precision(calc_goal_progress_percentage * 100, :precision => 0) %>%</div>
-            <p>You have received <span class="received"><%= number_to_currency(number_with_delimiter(calc_support_received.to_i || 0), :precision => 0) %></span> of 
+            <p class="right">You have received <span class="received"><%= number_to_currency(number_with_delimiter(calc_support_received.to_i || 0), :precision => 0) %></span> of 
                 <span class="goal"><%= number_to_currency(number_with_delimiter(current_mpd_user.support_total.to_i || 0), :precision => 0) %></span></p>
         </div>
+        <%- end -%>
     </div>
 
     <div id="main">

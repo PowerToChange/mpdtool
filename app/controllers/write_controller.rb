@@ -1,11 +1,10 @@
 class WriteController < ApplicationController
-  skip_before_filter CAS::Filter
   layout 'main'
 
   MAX_FIELD_LENGTH = 1000
 
   def index
-    if current_mpd_user.show_calculator
+    if current_mpd_user.show_calculator && MpdExpenseType.count > 0
       redirect_to(:action => 'calculate_support_total')
     elsif current_mpd_user.mpd_letter.nil?
       redirect_to(:action => 'select_template')
@@ -17,7 +16,8 @@ class WriteController < ApplicationController
   
   # Select template for letter
   def select_template
-    @title = "Step 2.2: Select a Letter Template"
+    step = MpdExpenseType.count > 0 ? '2.2' : '2.1'
+    @title = "Step #{step}: Select a Letter Template"
     @letter_templates = MpdLetterTemplate.find(:all)
     @col_layout = "two_col"
     
@@ -37,7 +37,8 @@ class WriteController < ApplicationController
   
   # Main form for writing letter
   def letter
-    @title = "Step 2.3: Write Your Letter "
+    step = MpdExpenseType.count > 0 ? '2.3' : '2.2'
+    @title = "Step #{step}: Write Your Letter "
     @col_layout = "two_col"
 
     @max_field_length = MAX_FIELD_LENGTH    

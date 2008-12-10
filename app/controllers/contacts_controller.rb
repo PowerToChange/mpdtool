@@ -1,5 +1,4 @@
 class ContactsController < ApplicationController
-  skip_before_filter CAS::Filter
   layout "main"
 
   PAGE_TITLE = "Edit Contact"
@@ -12,6 +11,10 @@ class ContactsController < ApplicationController
     session[:return_to] = request.env["HTTP_REFERER"] 
 
     @mpd_contact = MpdContact.find(params[:id])
+    # If for some reason this contact doesn't have their action fields, create them
+    if @mpd_contact.mpd_contact_actions.empty? || !@mpd_contact.action(current_event.id)
+      @mpd_contact.mpd_contact_actions.create(:event_id => current_event.id)
+    end
   end
   
   def update
@@ -22,7 +25,7 @@ class ContactsController < ApplicationController
     
     if(!params[:mpd_contact].blank?)
       if (!params[:mpd_contact][:gift_amount].blank?)
-        params[:mpd_contact][:gift_amount] = params[:mpd_contact][:gift_amount].gsub(',','')
+        params[:mpd_contact][:gift_amount] = params[:mpd_contact][:gift_amount].gsub(',','').gsub('$','')
       end
     end
     

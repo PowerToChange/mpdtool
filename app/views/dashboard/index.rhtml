@@ -35,13 +35,13 @@
         <dt>Total contacts</dt>
         <dd><%= current_mpd_user.mpd_contacts.count %></dd>
         <dt>Letters sent</dt>
-        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and letter_sent = true", current_mpd_user.id]).size %></dd>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and letter_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Calls made</dt>
-        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and call_made = true", current_mpd_user.id]).size %></dd>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and call_made = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Gifts Received</dt>
-        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and gift_amount > 0", current_mpd_user.id]).size %></dd>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and gift_amount > 0", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Thank yous sent</dt>
-        <dd><%= MpdContact.find(:all, :conditions => ["mpd_user_id = ? and thankyou_sent = true", current_mpd_user.id]).size %></dd>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and thankyou_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
     </dl>
 </div>
 

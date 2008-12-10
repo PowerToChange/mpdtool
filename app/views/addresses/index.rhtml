@@ -26,11 +26,14 @@
         <p style="text-align: right;"><%= link_to "Export to CSV", :action => "export_as_csv" %></p>
 
         <h4>Print Your Letters</h4>
-        
+        <%- form_tag('/addresses/print_letter', :id => 'print_letter_form') do -%>
+        <%= hidden_field_tag('print_all', true) %>
         <p>Export your letters as a PDF file to be printed and mailed.</p>
+        <p style="text-align: right;"><%= check_box_tag('include_address') %> Include address on letter</p>
         
-        <p style="text-align: right;"><%= link_to "Print your letter", :action => "print_letter" %></p>
-
+        <p style="text-align: right;"><%= link_to_function("Print all letters", "$('print_letter_form').submit()") %><br/>
+        <p style="text-align: right;"><%= link_to_function("Print letters for people with addresses", "$('print_all').value = false;$('print_letter_form').submit()") %></p>
+        <%- end -%>
         <h4>Print Your Labels</h4>
         
         <p>We've done the hard work for you! Simply click "Create address labels" below,

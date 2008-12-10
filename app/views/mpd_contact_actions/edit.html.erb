@@ -1,0 +1,12 @@
+<h1>Editing mpd_contact_action</h1>
+
+<% form_for(@mpd_contact_action) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @mpd_contact_action %> |
+<%= link_to 'Back', mpd_contact_actions_path %>

@@ -22,7 +22,7 @@ class LoginControllerTest < Test::Unit::TestCase
   # end
 
   def test_failed_login
-    post :login, :user => {:username => "notauser", :plain_password => "WrongPassword"}
+    post :login, :username => "notauser", :password => "WrongPassword"
     assert_equal "Your username or password was invalid", flash[:error]
   end
   
@@ -33,6 +33,6 @@ class LoginControllerTest < Test::Unit::TestCase
   
   def test_forgot_password
     get :forgot_password
-    
+    assert_response :success, @response.body
   end
 end

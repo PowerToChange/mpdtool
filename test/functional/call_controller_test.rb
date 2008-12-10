@@ -5,7 +5,8 @@ require 'call_controller'
 class CallController; def rescue_action(e) raise e end; end
 
 class CallControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
+  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :mpd_contact_actions, :mpd_events,
+            User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
 
   def setup
     @controller = CallController.new
@@ -25,11 +26,12 @@ class CallControllerTest < Test::Unit::TestCase
   end
 
   def test_complete_call
+    @request.session[:event_id] = 1
     @request.session[:user_id] = 1
-    count = mpd_users(:lance).mpd_contacts_to_call.size
-    xhr(:post, :complete, :id => mpd_users(:lance).mpd_contacts_to_call.first.id)
+    count = mpd_users(:lance).mpd_contacts_to_call(1).size
+    xhr(:post, :complete, :id => mpd_users(:lance).mpd_contacts_to_call(1).first.id)
     assert assigns(:mpd_contact)
-    assert_equal count - 1, mpd_users(:lance).mpd_contacts_to_call.size
+    assert_equal count - 1, mpd_users(:lance).mpd_contacts_to_call(1).size
   end
   
   def test_toggle_show_follow_up_help

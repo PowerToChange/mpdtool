@@ -77,8 +77,11 @@ textarea { height: 50px; font-size: 1em; }
 #progressBars { width: 250px; margin-left: 527px; padding: 10px 0; }
 #progressBars h3 { margin: 0 10px 0 10px; font-size: 1em; color: #535300; }
 .progressBar { width: 228px; height: 20px; margin: 0 10px; background: #ececec; border: solid 1px #808080; color: #999; text-align: center; font-weight: bold; }
-#progressBars p { margin: 0 10px; padding: 0; font-size: .85em; text-align: right; }
-#progressBars p span { font-weight: bold; }
+#progressBars p { margin: 0 5px; padding: 0; font-size: .85em; }
+#progressBars p span { font-weight: bold; line-height:.9em;  }
+		.left {text-align: left;}
+		.right {text-align: right;}
+		#progressBars	p.left {padding-left: 10px; }
     #progressBar-timeRemaining { color: #98440b; background-image: url(../images/bg_progress_time.gif); background-position: 230px 0; background-repeat: no-repeat; }
     #progressBar-ministryGoal { color: #525200; background-image: url(../images/bg_progress_goal.gif); background-position: -230px 0; background-repeat: no-repeat; }
 
