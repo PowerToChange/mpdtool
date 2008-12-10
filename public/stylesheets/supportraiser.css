@@ -1,5 +1,6 @@
 body { font-family: arial, helvetica, sans-serif; font-size: .75em; line-height: 1.5em; background: #cacaa6 url(../images/bg_body.gif) 0 0 repeat-x; color: #333; margin: 0; padding: 0; text-align: center; }
 
+
 /* GENERIC HTML ELEMENTS */
 html, form, fieldset, ul, table { margin: 0; padding: 0; }
 
@@ -51,7 +52,7 @@ textarea { height: 50px; font-size: 1em; }
 
 /* STRUCTURAL ELEMENTS */
 #wrapper { width: 760px; margin: 0 auto; text-align: left; }
-#header { position: relative; z-index: 10; width: 782px; height: 141px; margin: 0 0 0 -22px; padding: 0 0 0 -22px; z-index: 20; background: url(../images/bg_header.gif) top right no-repeat; }
+#header { position: relative; z-index: 10; width: 782px; height: 170px; margin: 0 0 0 -22px; padding: 0 0 0 -22px; z-index: 20; background: url(../images/bg_header.gif) top right no-repeat; }
 #main { margin: 0; padding: 24px 15px; border-right: solid 5px #e0e0cc; border-left: solid 5px #e0e0cc; background: #fff; }
     .two_col #content { float: left; width: 475px; margin: 0; padding: 0; }
     .section, #content { margin-bottom: 35px; clear: left; }
@@ -74,7 +75,7 @@ textarea { height: 50px; font-size: 1em; }
 #nav-wizard li a span { display: block; line-height: 1em; color: #fff;  }
 
 /* PROGRESS BARS */
-#progressBars { width: 250px; margin-left: 527px; padding: 10px 0; }
+#progressBars { width: 250px; margin-left: 520px; padding: 10px 0; }
 #progressBars h3 { margin: 0 10px 0 10px; font-size: 1em; color: #535300; }
 .progressBar { width: 228px; height: 20px; margin: 0 10px; background: #ececec; border: solid 1px #808080; color: #999; text-align: center; font-weight: bold; }
 #progressBars p { margin: 0 5px; padding: 0; font-size: .85em; }
@@ -84,6 +85,10 @@ textarea { height: 50px; font-size: 1em; }
 		#progressBars	p.left {padding-left: 10px; }
     #progressBar-timeRemaining { color: #98440b; background-image: url(../images/bg_progress_time.gif); background-position: 230px 0; background-repeat: no-repeat; }
     #progressBar-ministryGoal { color: #525200; background-image: url(../images/bg_progress_goal.gif); background-position: -230px 0; background-repeat: no-repeat; }
+#current_event span.date {margin:5px 0 5px 0; display:inline-block;}
+#progressBars span.goal {padding-right:5px; font-size:1.1em;}
+#progressBars span.received {font-size:1.1em;}
+
 
 /* SIDEBAR */
 #sidebar { padding: 0 0 10px; margin-top: 0; width: 225px; float: right; background: #f0f0e6 url(../images/bg_sidebar.gif) bottom left no-repeat; font-size: .9em; line-height: 1.4em; }
