@@ -15,3 +15,7 @@ vendor/plugins/mpd_canada
 public/files/
 public/pdfs/
 public/stylesheets/scaffold.css
+vendor/plugins/acts_as_state_machine/
+vendor/plugins/enforce_schema_rules/
+vendor/plugins/engines
+vendor/plugins/common_engine
