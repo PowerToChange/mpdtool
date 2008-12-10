@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
         @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
                                                             :name => current_person.current_application.project.name,
                                                             :start_date => current_person.current_application.project.start_date,
-                                                            :cost => current_person.current_application.project.student_cost)
+                                                            :cost => current_person.current_application.project_cost)
       end
     end
     unless @current_event
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_user_from_cas
-    if session[:cas_extra_attributes]
+    if session[:cas_user] && session[:cas_extra_attributes]
       @user ||= User.find(:first, :conditions => {_(:guid, :user) => session[:cas_extra_attributes]['ssoGuid']})
       session[:user_id] = @user.id if @user
     end

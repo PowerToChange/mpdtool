@@ -41,8 +41,9 @@ class MpdUser < ActiveRecord::Base
     unless @total_expenses
       event = get_event(event_id)
       @total_expenses = event.mpd_expenses.sum(:amount).to_i
-      event_cost.to_i + @total_expenses
+      @total_expenses += event_cost(event_id).to_i
     end
+    @total_expenses
   end
   
   def event_start_date(event_id = nil)

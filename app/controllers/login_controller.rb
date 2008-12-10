@@ -50,8 +50,10 @@ class LoginController < ApplicationController
   
   def logout
     session[:user_id] = nil
+    session[:event_id] = nil
+    session[:cas_user] = nil
     flash[:notice] = "You have been logged out of the system"
-    redirect_to :action => "login"
+    CASClient::Frameworks::Rails::Filter.logout(self, login_url)
   end
   
   private 

@@ -29,7 +29,8 @@ class ContactsController < ApplicationController
       end
     end
     
-    if @mpd_contact.update_attributes(params[:mpd_contact])
+    if @mpd_contact.update_attributes(params[:mpd_contact]) && 
+       @mpd_contact.action(current_event.id).update_attributes(params[:mpd_contact_action])
       flash[:success] = "<span>" + @mpd_contact.full_name + "</span> was updated successfully."
 
       redirect_back_or_default :controller => "dashboard",
