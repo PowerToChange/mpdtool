@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   end
   
   def get_user_from_cas
-    if session[:cas_extra_attributes]
+    if session[:cas_user] && session[:cas_extra_attributes]
       @user ||= User.find(:first, :conditions => {_(:guid, :user) => session[:cas_extra_attributes]['ssoGuid']})
       session[:user_id] = @user.id if @user
     end
