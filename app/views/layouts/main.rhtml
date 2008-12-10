@@ -57,7 +57,7 @@
             <h3>Your Ministry Goal <span style="font-size: .8em;"><%= link_to("[ Edit ]", {:controller => "write", :action => "calculate_support_total"}) if MpdExpense.count > 0 %></span></h3>
             <div id="progressBar-ministryGoal" class="progressBar" style="background-position: -<%= calc_goal_progress_offset %>px 0;"><%= number_with_precision(calc_goal_progress_percentage * 100, :precision => 0) %>%</div>
             <p class="right">You have received <span class="received"><%= number_to_currency(number_with_delimiter(calc_support_received.to_i || 0), :precision => 0) %></span> of 
-                <span class="goal"><%= number_to_currency(number_with_delimiter(current_mpd_user.support_total.to_i || 0), :precision => 0) %></span></p>
+                <span class="goal"><%= number_to_currency(number_with_delimiter(current_mpd_user.support_total(current_event.id).to_i || 0), :precision => 0) %></span></p>
         </div>
         <%- end -%>
     </div>
