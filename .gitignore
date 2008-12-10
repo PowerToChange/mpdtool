@@ -11,7 +11,7 @@ db/*.sqlite3
 config/initializers/hoptoad.rb
 config/initializers/email.rb
 test/mappings.yml
-vendor/plugins/mpd_canada
+vendor/plugins/mpdtool_canada/
 public/files/
 public/pdfs/
 public/stylesheets/scaffold.css
