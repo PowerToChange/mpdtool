@@ -8,9 +8,9 @@ module ApplicationHelper
     bar_width = 230
     percentage = 0
     
-    if (!current_mpd_user.event_start_date.nil?)
+    if (!current_event.start_date.nil?)
       start_date = current_mpd_user.app_accepted_date
-      project_date = current_mpd_user.event_start_date
+      project_date = current_event.start_date.to_time
       todays_date = Time.now
       start_date ||= Time.now
       project_date ||= Time.now

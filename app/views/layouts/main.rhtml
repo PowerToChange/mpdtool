@@ -37,7 +37,7 @@
         <%- if current_event -%>
         <div id="progressBars">
             <h3>Time Remaining</h3>
-            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_mpd_user.event_start_date) if (!current_mpd_user.event_start_date.nil?)  %></div>
+            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_event.start_date) if (!current_mpd_user.event_start_date.nil?)  %></div>
             <div id="current_event">
               <p class="left"><strong><%= current_event.name %></strong> <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %></p>
               <p class="left">
