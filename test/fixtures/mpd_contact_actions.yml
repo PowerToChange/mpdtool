@@ -20,7 +20,7 @@ susan_wilson:
   
 sharon_robinson:
   id: 3
-  mpd_contact_id: 9
+  mpd_contact_id: 21
   event_id: 1
   call_made: "1"
   thankyou_sent: "1"
@@ -29,7 +29,7 @@ sharon_robinson:
   
 michelle_clark:
   id: 4
-  mpd_contact_id: 21
+  mpd_contact_id: 22
   event_id: 1
   call_made: "1"
   thankyou_sent: "1"

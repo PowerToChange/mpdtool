@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
   
   # Return current user for use in controllers
   def current_mpd_user
-    @mpd_user ||= MpdUser.find_by_user_id(session[:user_id])
+    @mpd_user ||= MpdUser.find(:first, :conditions => {_(:user_id, :mpd_user) => session[:user_id]})
   end
   
   def check_authentication

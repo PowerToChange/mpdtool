@@ -8,6 +8,6 @@ CASClient::Frameworks::Rails::Filter.configure(
   :extra_attributes_session_key => :cas_extra_attributes,
   :proxy_retrieval_url => "https://www.globalshortfilmnetwork.com/cas_proxy_callback/retrieve_pgt",
   :proxy_callback_url => "https://www.globalshortfilmnetwork.com/cas_proxy_callback/receive_pgt",
-  # :authenticate_on_every_request => true,
+  :authenticate_on_every_request => false,
   :logger => cas_logger
 )

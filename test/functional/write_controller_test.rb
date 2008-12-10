@@ -6,7 +6,7 @@ class WriteController; def rescue_action(e) raise e end; end
 
 class WriteControllerTest < Test::Unit::TestCase
   fixtures :mpd_users, :mpd_letters, :mpd_letter_templates, :mpd_letter_images, :mpd_contacts, :mpd_expense_types, :mpd_expenses,
-            User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name, :cim_hrdb_access
+            User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name#, :cim_hrdb_access
 
   def setup
     @controller = WriteController.new
