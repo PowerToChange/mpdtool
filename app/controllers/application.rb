@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_person
+  raise current_user.inspect unless current_user.person
     @current_person ||= current_user.person
   end
   
