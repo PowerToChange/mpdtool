@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     # If they have a current summer project app, see if we've already created an event for it
     if !@current_event && current_person.current_application && current_person.current_application.project
       @current_event = current_mpd_user.mpd_events.find_by_project_id(current_person.current_application.project.id)
+      # if the current event is also a project, check for an update to the event cost
+      if @current_event && @current_event.cost != current_person.current_application.project_cost
+        @current_event.update_attribute(:cost, current_person.current_application.project_cost)
+      end
       unless @current_event
         # Create an event and set it to active
         @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
@@ -44,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_person
-  raise current_user.inspect unless current_user.person
+    raise current_user.inspect unless current_user.person
     @current_person ||= current_user.person
   end
   
