@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     end
     unless @current_event
       # See if they have a last event stored
-      @current_event = MpdEvent.find(current_mpd_user.current_event_id) if current_mpd_user.current_event_id
+      @current_event = MpdEvent.find_by_id(current_mpd_user.current_event_id) if current_mpd_user.current_event_id
       # Get the first event on their list
       @current_event = current_mpd_user.mpd_events.first
       # If we still don't have an event, we need to create a default one.

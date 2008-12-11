@@ -17,7 +17,7 @@
 </head>
 
 <body class="<%= controller.controller_name %>">
-  <%= connexion_bar(:logout => link_to('LOGOUT','/login/logout'), :css => '/stylesheets/connexion.css') %>
+  <%= connexion_bar(:logout => link_to('| LOGOUT |','/login/logout'), :css => '/stylesheets/connexion.css') %>
 <div id="wrapper" class="<%= @col_layout %>">
     <div id="header">
         <div id="header-inner">
@@ -41,7 +41,7 @@
             <div id="current_event">
               <p class="left"><strong><%= current_event.name %></strong> <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %></p>
               <p class="left">
-                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_mpd_user.mpd_events.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active project', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
+                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_mpd_user.mpd_events.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active event', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
                 <%- end -%>
               </p>
             </div>
