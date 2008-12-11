@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
       @current_event ||= current_mpd_user.mpd_events.create(:name => 'Unnamed Event',
                                          :start_date => Date.today)
     end
-    current_mpd_user.update_attribute(:current_event_id, @current_event.id) unless current_mpd_user.current_event_id == @current_event
+    current_mpd_user.update_attribute(:current_event_id, @current_event.id) unless current_mpd_user.current_event_id == @current_event.id
     session[:event_id] = @current_event.id
     @current_event 
   end
