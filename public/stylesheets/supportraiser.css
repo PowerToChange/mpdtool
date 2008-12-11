@@ -1,6 +1,6 @@
-body { font-family: arial, helvetica, sans-serif; font-size: .75em; line-height: 1.5em; background: #cacaa6 url(../images/bg_body.gif) 0 0 repeat-x; color: #333; margin: 0; padding: 0; text-align: center; }
+body { font-family: arial, helvetica, sans-serif; font-size: .75em; line-height: 1.5em; background: #cacaa6 url(/images/bg_body.gif) 0 0 repeat-x; color: #333; margin: 0; padding: 0; text-align: center; }
 
-
+td.label {text-align: left;}
 /* GENERIC HTML ELEMENTS */
 html, form, fieldset, ul, table { margin: 0; padding: 0; }
 
