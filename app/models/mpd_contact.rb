@@ -13,7 +13,9 @@ class MpdContact < ActiveRecord::Base
                                       :if => Proc.new { |c| !c.email_address.blank? }
   validates_format_of :zip, :with => /^[0-9]{5}([\s-]{1}[0-9]{4})?$/,
                             :if => Proc.new { |c| !c.zip.blank? }  
-  before_create :set_salutation                                    
+  before_create :set_salutation           
+  
+  after_create :create_contact_actions                       
 
   def display_address(lb = false)
     ret_val = ""
@@ -69,4 +71,10 @@ class MpdContact < ActiveRecord::Base
   def set_salutation
     self.salutation = self.full_name
   end
+  
+  def create_contact_actions
+    mpd_user.mpd_events.each do |event|
+      MpdContactAction.create(:contact_id => self.id, :event_id => event.id) unless self.action(event.id)
+    end
+  end  
 end

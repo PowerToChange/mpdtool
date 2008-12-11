@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     @current_event = MpdEvent.find(session[:event_id]) if session[:event_id]
     # If they have a current summer project app, see if we've already created an event for it
     if !@current_event && current_person.current_application && current_person.current_application.project
-      @current_event = MpdEvent.find_by_project_id(current_person.current_application.project.id)
+      @current_event = current_mpd_user.mpd_events.find_by_project_id(current_person.current_application.project.id)
       unless @current_event
         # Create an event and set it to active
         @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
