@@ -45,7 +45,7 @@
                 <%- end -%>
               </p>
             </div>
-            <%- if current_person.sp_projects.length > 1 -%>
+            <%- if current_mpd_user.mpd_events.length > 1 -%>
             <p style="display:none" id="project_dropdown"><span>
               <%= select_tag(:event_id, options_for_select(current_mpd_user.mpd_events.collect {|p| [p.name, p.id]}, current_event.id)) %>
               <%#= link_to_function('cancel', "Element.show('current_event');Element.hide('project_dropdown')") %>
