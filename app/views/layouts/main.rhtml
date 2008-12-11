@@ -41,7 +41,7 @@
             <div id="current_event">
               <p class="left"><strong><%= current_event.name %></strong> <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %></p>
               <p class="left">
-                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_person.sp_projects.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active project', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
+                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_mpd_user.mpd_events.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active project', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
                 <%- end -%>
               </p>
             </div>
