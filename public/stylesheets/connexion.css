@@ -122,4 +122,4 @@ div.dynarch-popup-menu.cnxbar tr.deactivated td.label { color: #BBB;}
 
 
 .explicit-action {cursor:pointer;}
-.CNXBARsmallText.has-submenu, .separator, td.icon {display:none;}
+.CNXBARsmallText.has-submenu, .separator {display:none;}
