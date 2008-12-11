@@ -32,8 +32,10 @@ class ApplicationController < ActionController::Base
     unless @current_event
       # See if they have a last event stored
       @current_event = MpdEvent.find(current_mpd_user.current_event_id) if current_mpd_user.current_event_id
+      # Get the first event on their list
+      @current_event = current_mpd_user.mpd_events.first
       # If we still don't have an event, we need to create a default one.
-      @current_event = current_mpd_user.mpd_events.create(:name => 'Unnamed Event',
+      @current_event ||= current_mpd_user.mpd_events.create(:name => 'Unnamed Event',
                                          :start_date => Date.today)
     end
     current_mpd_user.update_attribute(:current_event_id, @current_event.id) unless current_mpd_user.current_event_id == @current_event
