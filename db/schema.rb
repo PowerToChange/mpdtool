@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081205215020) do
+ActiveRecord::Schema.define(:version => 20081217201612) do
 
   create_table "mpd_contact_actions", :force => true do |t|
     t.integer  "mpd_contact_id"
