@@ -17,7 +17,7 @@
 </head>
 
 <body class="<%= controller.controller_name %>">
-  <%= connexion_bar(:logout => link_to('LOGOUT','/login/logout')) %>
+  <%= connexion_bar(:logout => link_to('LOGOUT','/login/logout'), :css => '/stylesheets/connexion.css') %>
 <div id="wrapper" class="<%= @col_layout %>">
     <div id="header">
         <div id="header-inner">
