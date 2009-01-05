@@ -1,6 +1,5 @@
 class MpdLetterImage < ActiveRecord::Base
-  has_attachment :processor => 'ImageScience',
-                 :storage => :file_system,
+  has_attachment :storage => :file_system,
                  :thumbnails => { :thumb => '50x50!', :print => '400>' }
 
   belongs_to :mpd_letter

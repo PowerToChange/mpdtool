@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(:version => 20090105185440) do
     t.datetime "updated_at"
   end
 
-  add_index "mpd_contact_actions", ["mpd_contact_id", "event_id"], :name => "index_mpd_contact_actions_on_mpd_contact_id_and_event_id", :unique => true
-
   create_table "mpd_contacts", :force => true do |t|
     t.integer  "mpd_user_id"
     t.integer  "mpd_priority_id"
@@ -148,6 +146,6 @@ ActiveRecord::Schema.define(:version => 20090105185440) do
 
   add_index "mpd_users", ["mpd_letter_id"], :name => "mpd_users_mpd_letter_id_index"
   add_index "mpd_users", ["mpd_role_id"], :name => "mpd_users_mpd_role_id_index"
-  add_index "mpd_users", ["user_id"], :name => "mpd_users_user_id_index"
+  add_index "mpd_users", ["user_id"], :name => "mpd_users_ssm_id_index"
 
 end

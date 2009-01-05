@@ -19,3 +19,4 @@ vendor/plugins/acts_as_state_machine/
 vendor/plugins/enforce_schema_rules/
 vendor/plugins/engines
 vendor/plugins/common_engine
+public/mpd_letter_images
