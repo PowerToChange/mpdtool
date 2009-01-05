@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081217201612) do
+ActiveRecord::Schema.define(:version => 20090105185440) do
 
   create_table "mpd_contact_actions", :force => true do |t|
     t.integer  "mpd_contact_id"
@@ -70,8 +70,15 @@ ActiveRecord::Schema.define(:version => 20081217201612) do
   add_index "mpd_expenses", ["mpd_user_id"], :name => "mpd_expenses_mpd_user_id_index"
 
   create_table "mpd_letter_images", :force => true do |t|
-    t.integer "mpd_letter_id", :null => false
+    t.integer "mpd_letter_id"
     t.string  "image"
+    t.integer "parent_id"
+    t.string  "content_type"
+    t.string  "filename"
+    t.string  "thumbnail"
+    t.integer "size"
+    t.integer "width"
+    t.integer "height"
   end
 
   create_table "mpd_letter_templates", :force => true do |t|

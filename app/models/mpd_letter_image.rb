@@ -1,4 +1,8 @@
 class MpdLetterImage < ActiveRecord::Base
+  has_attachment :processor => 'ImageScience',
+                 :storage => :file_system,
+                 :thumbnails => { :thumb => '50x50!', :print => '400>' }
+
   belongs_to :mpd_letter
   file_column :image, :magick => {:versions => {:thumb  => {:crop => '1:1', :size => "50x50!"},
                                                 :print => {:geometry => "400>"}}
