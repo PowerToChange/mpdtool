@@ -39,7 +39,7 @@
                 <%= @letter.needs_section %>
             <% end -%></p>
             
-        <p><% if !@letter.mpd_letter_images[1].nil? && and !@letter.mpd_letter_images[1].public_filename.blank? %>
+        <p><% if !@letter.mpd_letter_images[1].nil? and !@letter.mpd_letter_images[1].public_filename.blank? %>
                <img src="<%= @letter.mpd_letter_images[1].public_filename(:print) %>" align="left" width="200" hspace="10" />
            <% end %>
          
