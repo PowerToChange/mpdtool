@@ -23,8 +23,8 @@
             <p><%= @letter.salutation.gsub("[[FULL_NAME]]",mpd_contact.full_name).gsub("[[SALUTATION]]",mpd_contact.salutation) %></p>
         <% end -%> 
         
-        <p><% if !@letter.mpd_letter_images[0].nil? and !@letter.mpd_letter_images[0].image.nil? and !@letter.mpd_letter_images[0].image.blank? %>
-				<img src="<%=  url_for_file_column(@letter.mpd_letter_images[0], 'image', 'print') %>" align="right" width="200" hspace="10" />
+        <p><% if !@letter.mpd_letter_images[0].nil? && !@letter.mpd_letter_images[0].public_filename.blank? %>
+				<img src="<%=  @letter.mpd_letter_images[0].public_filename(:print) %>" align="right" width="200" hspace="10" />
             <% end %>
             
             <% if !@letter.update_section.nil? and !@letter.update_section.blank? -%>
@@ -39,8 +39,8 @@
                 <%= @letter.needs_section %>
             <% end -%></p>
             
-        <p><% if !@letter.mpd_letter_images[1].nil? and !@letter.mpd_letter_images[1].image.nil? and !@letter.mpd_letter_images[1].image.blank? %>
-               <img src="<%= url_for_file_column(@letter.mpd_letter_images[1], 'image', 'print') %>" align="left" width="200" hspace="10" />
+        <p><% if !@letter.mpd_letter_images[1].nil? && and !@letter.mpd_letter_images[1].public_filename.blank? %>
+               <img src="<%= @letter.mpd_letter_images[1].public_filename(:print) %>" align="left" width="200" hspace="10" />
            <% end %>
          
             <% if !@letter.involve_section.nil? and !@letter.involve_section.blank? -%>
