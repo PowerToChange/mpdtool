@@ -91,7 +91,7 @@
         <% for @mpd_letter_image in @mpd_letter_images %>
             <div style="clear: left">
                 <div style="float: left;">
-                    <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc;") %>
+                    <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc;") if @mpd_letter_image.public_filename%>
                 </div>
                 <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
                 <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload" %><br/>
