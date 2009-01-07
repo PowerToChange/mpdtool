@@ -96,7 +96,7 @@
                 <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
                 <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload" %><br/>
                 <span class="instructional" style="display: block; margin-top: 3px;">
-                    <b>Current Image:</b> <%= @mpd_letter_image.public_filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
+                    <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
                 </span></p>
             </div>
         <% end %>
