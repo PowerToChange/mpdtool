@@ -54,6 +54,43 @@
         :over_x_years        => {:one => 'over 1 year', :other => 'over {{count}} years'}
       }
     },
-    :welcome_letter => 'Canada sucks'
+    :welcome_letter => %|
+    <p>Congratulations!</p>
+
+    <p>Dear Project Participant,</p>
+
+    <p>You are embarking on an incredible adventure! You have accepted the challenge of helping reach the world for Christ by deciding to join other students on a Campus for Christ Summer Project. This could very well be one of the most exciting summers of your life!</p>
+
+    <p>My name is Dorrie Block and I serve as the National Campus Director of Global Impact. Church history is filled with accounts of students taking the Gospel to domestic and foreign fields. You are now taking up the baton to run with passion in making a difference in our world by being Christ's ambassador. The Lord will bless you through your summer project experience and you will be a blessing to others.</p>
+
+    <p>I know it was that way for me when I participated on my first summer mission project Rocky Mountain Project in Calgary, Alberta. This project was my first opportunity to trust God to provide the necessary funding for my participation. Seeing God provide then became the foundation for trusting him for many years as it relates to the financial provision for the ministry to which I've been called.</p>
+
+    <p>As "Christ's ambassador" (2 Corinthians 5:20) you are in a unique position to invite others to partner financially in His cause. As you offer individuals the chance to underwrite your Summer Project expenses, you will be giving them the unparalleled opportunity of investing in eternity (Matthew 6:19-21).</p>
+
+    <p>King David gave Israel such an opportunity when he challenged the people to underwrite the cost of building a temple for the Lord.</p>
+
+    <p>Because David knew that all the world's wealth ultimately belonged to God, he boldly challenged others to channel their resources toward building a physical testimony to the Lord, a temple. As you raise funds for your Summer Project, you will be allowing God to channel the resources of His people toward building a human testimony, a witness for Christ.</p>
+
+    <table style="margin: 5px 0 15px 0; width: 100%; border-top: solid 1px #f0f0e6; border-bottom: solid 1px #f0f0e6; padding: 5px 0;">
+    <tr>
+    <td style="width: 25%; text-align: center;">1. NAMESTORM</td>
+    <td style="width: 25%; text-align: center;">2. WRITE</td>
+    <td style="width: 25%; text-align: center;">3. CALL</td>
+    <td style="width: 25%; text-align: center;">4. THANK</td>
+    </tr>
+    </table>
+
+    <p>As you place your trust in God and carefully implement each of these four steps, you will see success!</p>
+
+    <p>I cant even describe how excited I am for you, knowing that your summer will be life-changing. May the Lord bless and keep you as you trust him for things way outside your comfort zone.</p>
+
+    <p>Let His Kingdom come,</p>
+
+    <p>Dorrie Block<br/>
+    National Campus Director of Global Impact<br/>
+    Campus for Christ, Canada<br/>
+    A Division of Power to Change</p>
+|
+
   }
 }
