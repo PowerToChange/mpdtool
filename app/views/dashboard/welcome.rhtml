@@ -1,4 +1,5 @@
 <div id="content">
+<%= t(:welcome_letter, :default => <<-HEREDOC
     <p>Dear Summer Project Student,</p>
 
     <p>You are embarking on an incredible adventure!  You have accepted the 
@@ -61,7 +62,8 @@
     National Director<br/>
     U.S. Campus Ministry<br/>
     Campus Crusade for Christ</p>
-
+HEREDOC
+)%>
         
     <p class="buttons"><%= link_to(image_tag("button_lg_get_started.gif"), :action => "get_started") %>
 </div>
