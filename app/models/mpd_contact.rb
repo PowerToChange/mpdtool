@@ -11,7 +11,7 @@ class MpdContact < ActiveRecord::Base
                               :if => Proc.new { |c| !c.phone.blank? }
   validates_format_of :email_address, :with => /^[a-z0-9!$'*+\-_]+(\.[a-z0-9!$'*+\-_]+)*@([a-z0-9]+(-+[a-z0-9]+)*\.)+([a-z]{2}|aero|arpa|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|travel)$/,
                                       :if => Proc.new { |c| !c.email_address.blank? }
-  validates_format_of :zip, :with => /^[0-9]{5}([\s-]{1}[0-9]{4})?$/,
+  validates_format_of :zip, :with => /^([0-9]{5}([\s-]{1}[0-9]{4})?)|([a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}(\-| |){1}[0-9]{1}[a-zA-Z]{1}[0-9]{1})$/,
                             :if => Proc.new { |c| !c.zip.blank? }  
   before_create :set_salutation
   
