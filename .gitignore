@@ -21,3 +21,4 @@ vendor/plugins/enforce_schema_rules/
 vendor/plugins/engines
 vendor/plugins/common_engine
 public/mpd_letter_images
+vendor/plugins/file_column

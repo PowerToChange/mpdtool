@@ -9,10 +9,10 @@
                 <%= link_to_remote(h('< Previous'), {:url => {:action => 'list', :page => paginator.current.previous }, :update => replace }) + ' | ' if paginator.current.previous %>
                 <%= pagination_links_each(paginator, :window_size => 4) do |n|
                     options = {
-                        :url => {:action => 'list', :params => @params.merge({:page => n })},
+                        :url => {:action => 'list', :params => params.merge({:page => n })},
                         :update => replace
                     }
-                    html_options = {:href => url_for(:action => 'list', :params => @params.merge({:page => n}))}
+                    html_options = {:href => url_for(:action => 'list', :params => params.merge({:page => n}))}
                     link_to_remote(n.to_s, options, html_options)
                     end %>
                 <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'list', :page => paginator.current.next }, :update => replace }) if paginator.current.next %>
