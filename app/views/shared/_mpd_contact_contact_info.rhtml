@@ -10,7 +10,7 @@
         <%= text_field "mpd_contact", "address_1", :class => "text" %></div>
     <div class="field"><label>&nbsp;</label>
         <%= text_field "mpd_contact", "address_2", :class => "text" %></div>
-    <div class="field"><label for="mpd_contact_city">City, State, Zip</label>
+    <div class="field"><label for="mpd_contact_city">City, <%= t(:state, :default => "State") %>, <%= t(:zip, :default => "Zip") %></label>
         <%= text_field "mpd_contact", "city", :class => "text", :style => "width: 201px;" %>
         <%= text_field "mpd_contact", "state", :class => "text", :style => "width: 25px;" %>
         <%= text_field "mpd_contact", "zip", :class => "text" , :style => "width: 75px;" %></div>

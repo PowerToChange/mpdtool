@@ -90,7 +90,11 @@
     National Campus Director of Global Impact<br/>
     Campus for Christ, Canada<br/>
     A Division of Power to Change</p>
-|
+|,
+    :state => "Prov",
+    :zip => "PC"
 
-  }
+  },
+  :full_name => "Full Name",
+  :mpd_contact => "Mpd Contact"
 }
