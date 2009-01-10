@@ -1,0 +1,6 @@
+<div id="content">
+  <h3>Create a new event</h3>
+  <%- form_for @event, :url => events_path do |f| -%>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+  <%- end -%>
+</div>

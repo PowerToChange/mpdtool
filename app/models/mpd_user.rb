@@ -46,8 +46,8 @@ class MpdUser < ActiveRecord::Base
     @total_expenses
   end
   
-  def event_start_date(event_id = nil)
-    get_event(event_id).start_date.to_time if get_event
+  def event_start_date(event_id)
+    get_event(event_id).start_date.to_time if get_event(event_id)
   end
   
   def event_cost(event_id = nil)
@@ -66,7 +66,7 @@ class MpdUser < ActiveRecord::Base
   end
   
   # private
-  def get_event(event_id = nil)
+  def get_event(event_id)
     unless @event
       if event_id
         @event = mpd_events.find(event_id)

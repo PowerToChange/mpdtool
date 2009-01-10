@@ -1,10 +1,7 @@
 <div id="content">
   <h3>Edit an event</h3>
   <%- form_for @event, :url => event_path(@event), :method => :put do |f| -%>
-  <%= error_messages_for(:event) %>
-    <p><%= f.label :name %> <%= f.text_field :name %></p>
-    <p><%= f.label :cost %> <%= f.text_field :cost %></p>
-    <p><%= f.label :start_date %> <%= f.date_select :start_date %></p>
-    <p><%= submit_tag %></p>
+    <%= render :partial => 'form', :locals => {:f => f} %>
   <%- end -%>
+  <%= link_to("Permanently Delete this Event", event_path(current_event), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"!") unless (current_event.project_id || current_mpd_user.mpd_events.length < 2) %>
 </div>

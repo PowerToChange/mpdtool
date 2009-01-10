@@ -1,5 +1,6 @@
 class MpdEvent < ActiveRecord::Base
-  has_many :mpd_expenses
+  has_many :mpd_expenses, :dependent => :destroy
+  has_many :mpd_contact_actions, :dependent => :destroy
   belongs_to :mpd_user
   validates_presence_of :cost, :on => :update, :message => "can't be blank"
   validates_presence_of :start_date, :name

@@ -36,10 +36,18 @@
         </div>
         <%- if current_event -%>
         <div id="progressBars">
-            <h3>Time Remaining</h3>
-            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_event.start_date) if (!current_mpd_user.event_start_date.nil?)  %></div>
+          <%- if Date.today < current_event.start_date -%>
+            <h3>Time Remaining Before Event</h3>
+          <%- else -%>
+            <h3>Time Since Event Started</h3>
+          <%- end -%>
+            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_event.start_date) if (!current_mpd_user.event_start_date(current_event.id).nil?)  %></div>
             <div id="current_event">
-              <p class="left"><strong><%= current_event.name %></strong> <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %></p>
+              <p class="left">
+                <strong><%= current_event.name %></strong> 
+                <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %>
+                <%= link_to("[ New Event ]", new_event_path) %>
+              </p>
               <p class="left">
                  <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_mpd_user.mpd_events.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active event', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
                 <%- end -%>
