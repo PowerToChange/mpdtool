@@ -11,7 +11,7 @@ FILTER_KEYS = %w(password)
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
-if File.exists?(File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot'))
+if File.exists?(File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot.rb'))
   require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
 end
 
