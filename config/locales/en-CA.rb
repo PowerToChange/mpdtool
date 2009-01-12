@@ -92,10 +92,7 @@
     A Division of Power to Change</p>
 |,
     :state => "Prov",
-    :zip => "PC"
-
+    :zip => "PC",
+    :help_email => "For help please contact helpdesk@c4c.ca"
   },
-  :full_name => "Full Name",
-  :mpd_contact => "Mpd Contact",
-  :help_email => "For help please contact helpdesk@c4c.ca"
 }
