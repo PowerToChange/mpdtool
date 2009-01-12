@@ -97,4 +97,5 @@
   },
   :full_name => "Full Name",
   :mpd_contact => "Mpd Contact"
+  :help_email => "For help please contact helpdesk@c4c.ca"
 }
