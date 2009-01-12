@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MpdContactTest < Test::Unit::TestCase
-  fixtures :mpd_contacts
+  fixtures :mpd_contacts, :mpd_users
 
   def test_invalid_with_empty_attributes
     mpd_contact = MpdContact.new
@@ -39,7 +39,7 @@ class MpdContactTest < Test::Unit::TestCase
   end
   
   def test_make_call
-    roger = MpdContact.create(:full_name => "Roger Nord")
+    roger = MpdContact.create(:full_name => "Roger Nord", :mpd_user_id => mpd_users(:lance).id)
     roger.make_call!(1)
     
     assert_equal true, roger.call_made(1)

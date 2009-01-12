@@ -23,14 +23,12 @@ class ContactsController < ApplicationController
 
     @mpd_contact = MpdContact.find(params[:id])
     
-    if(!params[:mpd_contact].blank?)
-      if (!params[:mpd_contact][:gift_amount].blank?)
-        params[:mpd_contact][:gift_amount] = params[:mpd_contact][:gift_amount].gsub(',','').gsub('$','')
-      end
+    if(params[:mpd_contact_action] && params[:mpd_contact_action][:gift_amount])
+      params[:mpd_contact_action][:gift_amount] = params[:mpd_contact_action][:gift_amount].gsub(',','').gsub('$','')
     end
-    
-    if @mpd_contact.update_attributes(params[:mpd_contact]) && 
-       @mpd_contact.action(current_event.id).update_attributes(params[:mpd_contact_action])
+    @mpd_contact_action = @mpd_contact.action(current_event.id)
+
+    if @mpd_contact.update_attributes(params[:mpd_contact]) && @mpd_contact_action.update_attributes(params[:mpd_contact_action])
       flash[:success] = "<span>" + @mpd_contact.full_name + "</span> was updated successfully."
 
       redirect_back_or_default :controller => "dashboard",

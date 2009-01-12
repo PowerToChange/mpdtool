@@ -58,6 +58,7 @@ class MpdContact < ActiveRecord::Base
   end
   
   def action(event_id)
+    raise 'need an event_id' unless event_id
     @actions ||= {}
     unless @actions[event_id]
       @actions[event_id] = mpd_contact_actions.find_by_event_id(event_id)

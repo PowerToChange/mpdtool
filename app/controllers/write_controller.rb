@@ -60,7 +60,13 @@ class WriteController < ApplicationController
       @mpd_letter_images = @mpd_letter.mpd_letter_images
 
       @mpd_letter.attributes = params[:mpd_letter]
-      @mpd_letter.mpd_letter_images.each { |i| i.attributes = params[:mpd_letter_image][i.id.to_s] } if params[:mpd_letter_image]
+      if params[:mpd_letter_image]
+        @mpd_letter.mpd_letter_images.each do |i| 
+          if params[:mpd_letter_image][i.id.to_s] && params[:mpd_letter_image][i.id.to_s][:uploaded_data]
+            i.attributes =  params[:mpd_letter_image][i.id.to_s]
+          end
+        end
+      end
       
       if @mpd_letter.valid? && @mpd_letter.mpd_letter_images.all?(&:valid?)
         @mpd_letter.save!
