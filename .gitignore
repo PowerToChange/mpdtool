@@ -22,3 +22,4 @@ vendor/plugins/engines
 vendor/plugins/common_engine
 public/mpd_letter_images
 vendor/plugins/file_column
+config/amazon_s3.yml
