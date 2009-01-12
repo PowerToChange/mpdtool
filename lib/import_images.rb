@@ -24,7 +24,7 @@ for mpd_letter_image in MpdLetterImage.find(:all)
     image_path = File.join(RAILS_ROOT, 'public', 'files', 'mpd_letter_image', 'image', '0000', sprintf('%04d', mpd_letter_image.id), image_filename)
     # also try the other kind of path without padding
     unless File.exists?(image_path)
-      image_path = File.join(RAILS_ROOT, 'public', 'files', 'mpd_letter_image', 'image', mpd_letter_image.id, image_filename)
+      image_path = File.join(RAILS_ROOT, 'public', 'files', 'mpd_letter_image', 'image', mpd_letter_image.id.to_s, image_filename)
     end
     if File.exists?(image_path)
       # raise image_path

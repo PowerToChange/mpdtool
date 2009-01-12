@@ -17,7 +17,8 @@
     <div class="field"><%= af.check_box "thankyou_sent", :class => "checkbox" %> <label for="mpd_contact_thankyou_sent" class="for_checkbox">A thank you note has been made</label></div>
     <%- end -%>
 
-    <p class="buttons"><%= image_submit_tag "button_sm_save.gif", :name => "commit", :value => "save" %></p>
+    <p class="buttons"><%= link_to('Remove this contact from your list', mpd_contact_action_path(@mpd_contact.action(current_event.id)), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"") %>&nbsp;&nbsp;&nbsp;
+    <%= image_submit_tag "button_sm_save.gif", :name => "commit", :value => "save" %></p>
 </fieldset>
 
 
