@@ -53,7 +53,7 @@ textarea { height: 50px; font-size: 1em; }
 /* STRUCTURAL ELEMENTS */
 #wrapper { width: 760px; margin: 0 auto; text-align: left; }
 #header { position: relative; z-index: 10; width: 782px; height: 170px; margin: 0 0 0 -22px; padding: 0 0 0 -22px; z-index: 20; background: url(../images/bg_header.gif) top right no-repeat; }
-#main { margin: 0; padding: 24px 15px 0px 15px; border-right: solid 5px #e0e0cc; border-left: solid 5px #e0e0cc; background: #fff; }
+#main { margin: 0; padding: 24px 15px; border-right: solid 5px #e0e0cc; border-left: solid 5px #e0e0cc; background: #fff; }
     .two_col #content { float: left; width: 475px; margin: 0; padding: 0; }
     .section, #content { margin-bottom: 35px; clear: left; }
 
