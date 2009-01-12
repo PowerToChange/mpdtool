@@ -25,11 +25,13 @@ class MigrateMpdLetterImageToAttachmentFu < ActiveRecord::Migration
       image_filename = mpd_letter_image[:image]
       unless image_filename.blank?
         image_path = File.join(RAILS_ROOT, 'public', 'files', 'mpd_letter_image', 'image', '0000', sprintf('%04d', mpd_letter_image.id), image_filename)
-        image_file = File.open(image_path, 'r')
+        if File.exists?(image_path)
+          image_file = File.open(image_path, 'r')
 
-        #photo = ProfilePhoto.new(:profile_id => profile.id)
-        mpd_letter_image.set_from_file(image_file)
-        mpd_letter_image.save!
+          #photo = ProfilePhoto.new(:profile_id => profile.id)
+          mpd_letter_image.set_from_file(image_file)
+          mpd_letter_image.save!
+        end
       end
     end
   end
