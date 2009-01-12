@@ -33,7 +33,7 @@ class MpdUserTest < Test::Unit::TestCase
   def test_start_date
     lance = mpd_users(:lance)
     start_date = Time.local(2007,6,1)
-    assert_equal start_date, lance.event_start_date
+    assert_equal start_date, lance.event_start_date(1)
   end
   
   def test_event_cost

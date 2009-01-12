@@ -11,6 +11,7 @@ class ContactsControllerTest < Test::Unit::TestCase
     @controller = ContactsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @request.session[:event_id] = 1
   end
 
   def test_edit
@@ -22,8 +23,9 @@ class ContactsControllerTest < Test::Unit::TestCase
   def test_update
     @request.session[:user_id] = 1
     mpd_contact = mpd_users(:lance).mpd_contacts[0]
-    post :update, {:mpd_contact => {:full_name => mpd_contact.full_name},
-                   :mpd_contact_action => {:gift_amount => '1,200'}, :id => mpd_contact.id}
+    post :update, {:mpd_contact => {:full_name => mpd_contact.full_name}, :id => mpd_contact.id,
+                   :mpd_contact_action => {:gift_amount => '1,200'}}
+    assert_equal([], assigns(:mpd_contact_action).errors.full_messages)
     assert_response :redirect
   end
   

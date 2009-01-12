@@ -28,7 +28,7 @@ class LoginControllerTest < Test::Unit::TestCase
   
   def test_logout
     get :logout
-    assert_redirected_to :action => "login"
+    assert_response :redirect
   end
   
   def test_forgot_password
