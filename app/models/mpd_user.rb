@@ -32,8 +32,6 @@ class MpdUser < ActiveRecord::Base
       end
 
       self.save
-    # else 
-    #   raise self.mpd_expenses.inspect
     end
   end
   
