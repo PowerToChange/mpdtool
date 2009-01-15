@@ -39,7 +39,7 @@
             <span class="helpText"><span id="char-count-update"><%= !@mpd_letter.update_section.nil? ? @max_field_length - @mpd_letter.update_section.length : @max_field_length %></span> characters remaining</span></p>
 
         <p><label for="mpd_letter_educate_section">Educate your reader
-            <span id="help-educate" class="instructional" style="display: none;">[ Share how you became involved in Campus Crusade for Christ and
+            <span id="help-educate" class="instructional" style="display: none;">[ Share how you became involved in <%= t(:ministry, :default => "Campus Crusade for Christ") %> and
                 how the Lord has given you a desire to reach people for Christ.  Explain how you
                 hope the Lord will use you in your future ministry. <a href="#" onclick="Element.toggle('help-educate');Element.toggle('help-educate-more');return false;">hide this text</a> ]</span>
             <span id="help-educate-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-educate');Element.toggle('help-educate-more');return false;">?</a> ]</span></label>
