@@ -68,7 +68,12 @@ class WriteController < ApplicationController
         end
       end
       
-      if @mpd_letter.valid? && @mpd_letter.mpd_letter_images.all?(&:valid?)
+      # Make sure we don't have images with nil filenames
+      @mpd_letter.mpd_letter_images.each do |i| 
+        i.filename ||= ''
+      end
+      
+      if @mpd_letter.valid? #&& @mpd_letter.mpd_letter_images.all?(&:valid?)
         @mpd_letter.save!
         @mpd_letter.mpd_letter_images.each(&:save!)
         flash['notice'] = 'Your letter was saved successfully.'
@@ -102,13 +107,23 @@ class WriteController < ApplicationController
     @user = current_mpd_user
     
     if request.post?
-      @user.mpd_expenses.each { |e| e.amount = params[:mpd_expense][e.id.to_s][:amount].gsub(',','').to_i }
+      expenses = current_event.mpd_expenses
+      expenses.each do |e| 
+        e.amount = params[:mpd_expense][e.id.to_s][:amount].gsub(',','').to_i 
+      end
       @user.show_calculator = false
       
       @user.save!
-      @user.mpd_expenses.each(&:save!)
+      expenses.each(&:save!)
     
       redirect_to :action => "index"
+    else
+      # Make sure all expenses are tied to an event
+      expenses = @user.mpd_expenses.find(:all, :conditions => "mpd_event_id is null")
+      expenses.each do |e|
+        event = e.mpd_user.mpd_events.first
+        e.update_attribute(:mpd_event_id, event.id) if event
+      end
     end
   end
 end
