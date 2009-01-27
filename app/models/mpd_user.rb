@@ -76,7 +76,7 @@ class MpdUser < ActiveRecord::Base
   end
   
   def get_application
-    @app ||= self.user.person.current_application
+    @app ||= self.user.person.current_application if user
   end
   
   # def self.has_access(user)
