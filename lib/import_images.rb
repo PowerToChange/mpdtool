@@ -32,7 +32,7 @@ for mpd_letter_image in MpdLetterImage.find(:all)
 
       #photo = ProfilePhoto.new(:profile_id => profile.id)
       mpd_letter_image.set_from_file(image_file)
-      mpd_letter_image.save!
+      mpd_letter_image.save(false)
     end
   end
 end
