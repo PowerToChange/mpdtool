@@ -54,6 +54,7 @@
         :over_x_years        => {:one => 'over 1 year', :other => 'over {{count}} years'}
       }
     },
+    :ministry => "Campus for Christ",
     :welcome_letter => %|
     <p>Congratulations!</p>
 

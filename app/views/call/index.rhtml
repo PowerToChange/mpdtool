@@ -1,3 +1,4 @@
+
 <div id="content">
 
     <h3>Follow Up</h3>
@@ -21,7 +22,7 @@
         
         <p>Be sure to establish a specific time in the letter to get their decision.</p>
         
-        <p>When you ask for a response, do so direclty.  Then remain quiet until the
+        <p>When you ask for a response, do so directly.  Then remain quiet until the
             person responds, even though this may feel uncomfortable.  Talking more at
             this point will distract the person from making a decision.</p>
         
@@ -37,7 +38,7 @@
             to follow up with a phone call to see if it was lost in the mail.</p>
         
         <p>Your ministry partner's check must be made payable to <span class="callout">
-            Campus Crusade for Christ</span>.</p>
+            <%= t(:ministry, :default => "Campus Crusade for Christ") %></span>.</p>
         
         <p>After getting a person's decision, always ask him or her to refer you to 
             other people who might like to invest in your ministry. [ 
@@ -57,7 +58,6 @@
         
     <p class="instructional">Click on a contact's name to view or edit their 
         details and make notes about your phone calls.</p>              
-    <p class="instructional">After you have talked to a contact, check the box next to their name to remove them from the list.</p>
          
     <div id="contacts_list" class="contact_list">
         <%= render :partial => 'mpd_contact_to_call' %>
@@ -74,7 +74,7 @@
 
         <li>Refer to your letter and explain your summer plans. "As I mentioned in
             my letter, I am planning to go on a summer mission project sponsored
-            by Campus Crusade for Christ."</li>
+            by <%= t(:ministry, :default => "Campus Crusade for Christ") %>."</li>
 
         <li>Share what you hope to see God do as a result of your time this summer.</li>
         
