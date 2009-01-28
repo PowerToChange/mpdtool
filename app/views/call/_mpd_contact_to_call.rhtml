@@ -36,8 +36,8 @@
        	</div>
     
        <div style="text-align: right;">
-            <%= link_to_remote(h('< Previous'), {:url => {:action => 'index', :params => @params.merge({:page => @pages.current.previous})}, :update => 'contacts_list', :before => "Element.show('spinner')", :success => "Element.hide('spinner')" }) + ' | ' if @pages.current.previous %>
+            <%= link_to_remote(h('< Previous'), {:url => {:action => 'index', :params => params.merge({:page => @pages.current.previous})}, :update => 'contacts_list', :before => "Element.show('spinner')", :success => "Element.hide('spinner')" }) + ' | ' if @pages.current.previous %>
             <%= pagination_links_remote @pages %>
-            <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'index', :params => @params.merge({:page => @pages.current.next})}, :update => 'contacts_list', :before => "Element.show('spinner')", :success => "Element.hide('spinner')" }) if @pages.current.next %>
+            <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'index', :params => params.merge({:page => @pages.current.next})}, :update => 'contacts_list', :before => "Element.show('spinner')", :success => "Element.hide('spinner')" }) if @pages.current.next %>
        </div>
      </div>
