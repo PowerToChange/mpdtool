@@ -23,7 +23,7 @@
             <p><%= @letter.salutation.gsub("[[FULL_NAME]]",mpd_contact.full_name).gsub("[[SALUTATION]]",mpd_contact.salutation) %></p>
         <% end -%> 
         
-        <p><% if !@letter.mpd_letter_images[0].nil? && !@letter.mpd_letter_images[0].public_filename.blank? %>
+        <p><% if !@letter.mpd_letter_images[0].nil? && !@letter.mpd_letter_images[0].filename.blank? %>
 				<img src="<%=  @letter.mpd_letter_images[0].public_filename(:print) %>" align="right" width="200" hspace="10" />
             <% end %>
             
