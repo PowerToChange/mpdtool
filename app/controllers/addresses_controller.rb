@@ -30,7 +30,7 @@ class AddressesController < ApplicationController
       
       # Write data rows
       contacts.each do |c|
-        csv << [c.full_name, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount)), c.letter_sent, c.call_made, c.thankyou_sent, c.notes]
+        csv << [c.full_name, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent, c.call_made, c.thankyou_sent, c.notes]
       end
     end
   end
