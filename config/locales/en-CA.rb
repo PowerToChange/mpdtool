@@ -96,6 +96,7 @@
     :zip => "PC",
     :help_email => "For help please contact helpdesk@c4c.ca",
     :cheques_payable_to => "Power to Change Ministries",
-    :check => "cheque"
+    :check => "cheque",
+    :activerecord => { :attributes => { :mpd_contact => { :zip => 'Postal Code' } } }
   },
 }
