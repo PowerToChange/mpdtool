@@ -75,6 +75,10 @@ class ApplicationController < ActionController::Base
   def get_user_from_cas
     if session[:cas_user] && session[:cas_extra_attributes]
       @user ||= User.find(:first, :conditions => {_(:guid, :user) => session[:cas_extra_attributes]['ssoGuid']})
+      # allow User implementations to make a new user at this point
+      if @user.nil? && User.respond_to?(:create_new_user_from_cas)
+        User.create_new_user_from_cas(session[:cas_user], session[:cas_extra_attributes])
+      end
       session[:user_id] = @user.id if @user
     end
     return @user
