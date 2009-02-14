@@ -94,6 +94,8 @@
 |,
     :state => "Prov",
     :zip => "PC",
-    :help_email => "For help please contact helpdesk@c4c.ca"
+    :help_email => "For help please contact helpdesk@c4c.ca",
+    :cheques_payable_to => "Power to Change Ministries",
+    :check => "cheque"
   },
 }
