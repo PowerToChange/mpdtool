@@ -11,3 +11,5 @@ CASClient::Frameworks::Rails::Filter.configure(
   :authenticate_on_every_request => false,
   :logger => cas_logger
 )
+
+CAS_LOGIN_SCREEN = false
