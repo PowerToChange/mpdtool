@@ -3,6 +3,9 @@ class LoginController < ApplicationController
   layout "login"
 
   def login
+    cas_url = 'https://signin.mygcx.org/cas/login'
+    @gcx_service_url = cas_url + '?service=' + url_for(:action => :login)
+
     @forgot_password_link = get_forgot_password_link
     if request.post? and !params[:username].empty?
       #Authenticate User to generic SSM User
@@ -10,7 +13,6 @@ class LoginController < ApplicationController
       unless user
         # Try CAS
         form_params = {:username => params[:username], :password => params[:password], :service => url_for('/') }
-        cas_url = 'https://signin.mygcx.org/cas/login'
         agent = WWW::Mechanize.new
         page = agent.post(cas_url, form_params)
         result_query = page.uri.query

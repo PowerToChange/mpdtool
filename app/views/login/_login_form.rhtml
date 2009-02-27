@@ -1,0 +1,24 @@
+<div id="content">
+<% form_tag do %>
+<fieldset style="width: 300px; margin: 0 auto;">
+	<p><label for="username">Username <span class="instructional">(your email)</span>
+        <span id="help-username" class="instructional" style="display: none;">[ This is the email address you used for your original application. <a href="#" onclick="Element.toggle('help-username');Element.toggle('help-username-more');return false;">hide this text</a> ]</span>
+        <span id="help-username-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-username');Element.toggle('help-username-more');return false;">?</a> ]</span></label>
+	<%= text_field_tag 'username', params[:username], {"size"=>"24", "tabindex"=>"1", "class"=>"text"} %></p>
+	
+	<p><label for="password">Password</label>
+	<%= password_field_tag 'password', '', {"size"=>"24", "tabindex"=>"2", "class"=>"text"} %>	</p>
+
+	<p class="buttons"><%= image_submit_tag "button_sm_login.gif" %><br/>
+      <!-- <a href="<%= @forgot_password_link %>">Forgot your password?</a><br/>
+    <%= link_to "GCX Login", :action => :gcx_login %> -->
+</fieldset>
+<% end %>
+</div>
+
+<script type="text/javascript" lanugage="javascript">
+    addEvent(window, 'load', init);
+    function init() {
+        $('username').focus();
+    }
+</script>
