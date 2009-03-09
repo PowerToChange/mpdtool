@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :events
-  map.resources :write, :collection => {:calculate_support_total => :any, :letter => :any, :select_template => :any}
+  map.resources :write, :collection => {:calculate_support_total => :any, 
+                                        :letter => :any, 
+                                        :select_template => :any,
+                                        :update_letter => :any}
   map.resources :mpd_contact_actions
 
   # The priority is based upon order of creation: first created -> highest priority.
