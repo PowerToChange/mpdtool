@@ -46,13 +46,13 @@
     <%- form_tag do -%>
     <fieldset class="columns">
         <p><label for="parents">Parents</label>
-            <input type="text" id="parents" name="contacts[]" class="text" /></p>
+            <input type="text" id="parents" name="contacts[]" maxlength="250" class="text" /></p>
         <p><label for="siblings">Siblings</label>
-            <input type="text" id="siblings" name="contacts[]" class="text" /></p>
+            <input type="text" id="siblings" name="contacts[]" maxlength="250" class="text" /></p>
         <p><label for="relatives">Relatives</label>
-            <input type="text" id="relatives" name="contacts[]" class="text" /></p>
+            <input type="text" id="relatives" name="contacts[]" maxlength="250" class="text" /></p>
         <p><label for="friends">Friends</label>
-            <input type="text" id="friends" name="contacts[]" class="text" /></p>
+            <input type="text" id="friends" name="contacts[]" maxlength="250" class="text" /></p>
     
         <p class="buttons"><%= image_submit_tag("button_sm_next.gif") %></p>
     </fieldset>
