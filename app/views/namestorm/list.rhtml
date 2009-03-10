@@ -21,7 +21,7 @@
                     :loading => "name_loading()",
                     :complete => "name_added()") do -%>
     <p><label for="contact_full_name">Enter a name</label>
-        <%= text_field_tag( "full_name", "", :id => "contact_full_name", :class=> "text" ) %></p>
+        <%= text_field_tag( "full_name", "", :id => "contact_full_name", :maxlength => "250", :class=> "text" ) %></p>
     <p id="submit-controls"><%= image_submit_tag("button_sm_add_name.gif", { :class => 'image-submit', :id => "form-submit-button"}) %>
         or <%= link_to "Go write your letter", :controller => "write" %></p>
     <p id="busy" style="display: none; padding: 6px 0 6px 15px;"><%= image_tag("loading_squares.gif") %></p>

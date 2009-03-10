@@ -36,7 +36,7 @@
         </div>
         <%- if current_event -%>
         <div id="progressBars">
-          <%- if Date.today < current_event.start_date -%>
+          <%- if Time.now < current_event.start_date -%>
             <h3>Time Remaining Before Event</h3>
           <%- else -%>
             <h3>Time Since Event Started</h3>

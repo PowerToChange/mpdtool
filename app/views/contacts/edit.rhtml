@@ -1,7 +1,7 @@
 <div id="content">
 <%= error_messages_for "mpd_contact" %>
 
-<%- form_tag :action => "update", :id => @mpd_contact do -%>
+<%- form_tag contact_path(@mpd_contact), :method => :put do -%>
 
 <%= render(:partial => "shared/mpd_contact_contact_info", :object => @mpd_contact) %>
 

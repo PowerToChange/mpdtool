@@ -2,9 +2,9 @@
     <legend>Contact Information</legend>
     
     <div class="field"><label for="mpd_contact_full_name">Full Name</label>
-        <%= text_field "mpd_contact", "full_name", :class => "text" %></div>
+        <%= text_field "mpd_contact", "full_name", :maxlength => "250", :class => "text" %></div>
     <div class="field "><label for="mpd_contact_salutation">Salutation</label>
-        <%= text_field "mpd_contact", "salutation", :size => 20, :class => "text" %>
+        <%= text_field "mpd_contact", "salutation", :maxlength => "250", :size => 20, :class => "text" %>
         <span class="helpText">Full Name will be printed on the address of the envelope.</span></div>
     <div class="field"><label for="mpd_contact_address_1">Address</label>
         <%= text_field "mpd_contact", "address_1", :class => "text" %></div>
@@ -13,7 +13,7 @@
     <div class="field"><label for="mpd_contact_city">City, <%= t(:state, :default => "State") %>, <%= t(:zip, :default => "Zip") %></label>
         <%= text_field "mpd_contact", "city", :class => "text", :style => "width: 201px;" %>
         <%= text_field "mpd_contact", "state", :class => "text", :style => "width: 25px;" %>
-        <%= text_field "mpd_contact", "zip", :class => "text" , :style => "width: 75px;" %></div>
+        <%= text_field "mpd_contact", "zip", :maxlength => "10", :class => "text" , :style => "width: 75px;" %></div>
     <div class="field"><label for="mpd_contact_email_address">Email Address</label>
         <%= text_field "mpd_contact", "email_address", :class => "text" %></div>
     <div class="field"><label for="mpd_contact_phone">Phone Number</label>

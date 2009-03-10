@@ -5,7 +5,7 @@ require 'contacts_controller'
 class ContactsController; def rescue_action(e) raise e end; end
 
 class ContactsControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_letters, :mpd_contacts, :mpd_expense_types, :mpd_expenses, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
+  fixtures :mpd_users, :mpd_letters, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :mpd_events, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
 
   def setup
     @controller = ContactsController.new

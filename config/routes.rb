@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
                                         :select_template => :any,
                                         :update_letter => :any}
   map.resources :mpd_contact_actions
+  map.resources :contacts
 
   # The priority is based upon order of creation: first created -> highest priority.
   
