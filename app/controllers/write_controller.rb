@@ -62,20 +62,17 @@ class WriteController < ApplicationController
       @mpd_letter.attributes = params[:mpd_letter]
       if params[:mpd_letter_image]
         @mpd_letter.mpd_letter_images.each do |i| 
-          if params[:mpd_letter_image][i.id.to_s] && params[:mpd_letter_image][i.id.to_s][:uploaded_data]
+          if params[:mpd_letter_image][i.id.to_s] && !params[:mpd_letter_image][i.id.to_s][:uploaded_data].blank?
             i.attributes =  params[:mpd_letter_image][i.id.to_s]
           end
         end
       end
       
-      # Make sure we don't have images with nil filenames
-      @mpd_letter.mpd_letter_images.each do |i| 
-        i.filename ||= ''
-      end
-      
       if @mpd_letter.valid? #&& @mpd_letter.mpd_letter_images.all?(&:valid?)
         @mpd_letter.save!
-        @mpd_letter.mpd_letter_images.each(&:save!)
+        @mpd_letter.mpd_letter_images.each do |image|
+          image.save! if image.filename
+        end
         flash['notice'] = 'Your letter was saved successfully.'
         redirect_to :controller => 'addresses'
       else

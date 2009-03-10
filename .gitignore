@@ -24,4 +24,8 @@ public/mpd_letter_images
 vendor/plugins/file_column
 config/amazon_s3.yml
 config/initializers/ga.rb
+.project
+public/plugin_assets/ccc_connexion_bar/
+public/stylesheets/connexion_default.css
+vendor/plugins/acts_as_versioned/
 
