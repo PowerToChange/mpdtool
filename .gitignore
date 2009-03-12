@@ -28,4 +28,5 @@ config/initializers/ga.rb
 public/plugin_assets/ccc_connexion_bar/
 public/stylesheets/connexion_default.css
 vendor/plugins/acts_as_versioned/
+config/initializers/exception.rb
 
