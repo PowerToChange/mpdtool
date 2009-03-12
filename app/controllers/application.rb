@@ -4,7 +4,7 @@ require 'acts_as_rateable'
 class ApplicationController < ActionController::Base
   filter_parameter_logging *FILTER_KEYS
   ActiveRecord::Base.send(:include, Acts::Rateable)
-  include HoptoadNotifier::Catcher
+#  include HoptoadNotifier::Catcher
   include ExceptionNotifiable #Automatically generates emails of errors
   before_filter CASClient::Frameworks::Rails::GatewayFilter unless Rails.env.test?
   
