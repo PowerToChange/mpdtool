@@ -18,6 +18,14 @@ class MpdLetterImage < ActiveRecord::Base
   
   validates_as_attachment
   
+  def check_valid? #Only check for validation if this record has actually been populated
+    if !filename.blank?
+      valid?
+    else
+      true
+    end
+  end
+  
   def image_name
     str = self.image.split("/")
     str[str.size - 1]

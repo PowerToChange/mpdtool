@@ -1,10 +1,10 @@
 <div id="content">
     <% objects_to_show_errors_for = [] %>
-    <% objects_to_show_errors_for << :mpd_letter%>
-    <% for @mpd_letter_image in @mpd_letter_images %>
-        <% objects_to_show_errors_for << :mpd_letter_image %>
+    <% objects_to_show_errors_for << @mpd_letter%>
+    <% for image in @mpd_letter_images %>
+        <% objects_to_show_errors_for << image %>
     <% end %>
-    <%= error_messages_for_multiple_objects( objects_to_show_errors_for ) %>
+    <%= error_messages_for_multiple_objects( objects_to_show_errors_for, :mpd_letter ) %>
     
     <h3>Writing the Letter</h3>
     

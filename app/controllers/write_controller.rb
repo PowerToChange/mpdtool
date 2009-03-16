@@ -25,7 +25,8 @@ class WriteController < ApplicationController
       template = MpdLetterTemplate.find(params[:id])
       letter = MpdLetter.create(:mpd_letter_template_id => template.id)
       template.number_of_images.times do
-        mpd_letter_image = MpdLetterImage.create(:mpd_letter_id => letter.id)
+        mpd_letter_image = MpdLetterImage.new(:mpd_letter_id => letter.id)
+        mpd_letter_image.save(false) #No need for validation checking yet
       end
       
       MpdUser.find(current_mpd_user.id).update_attributes(:mpd_letter_id => letter.id)
@@ -68,14 +69,17 @@ class WriteController < ApplicationController
         end
       end
       
-      if @mpd_letter.valid? #&& @mpd_letter.mpd_letter_images.all?(&:valid?)
+      if @mpd_letter.valid? && @mpd_letter.mpd_letter_images.all?(&:check_valid?)
         @mpd_letter.save!
         @mpd_letter.mpd_letter_images.each do |image|
-          image.save! if image.filename
+          image.save! if !image.filename.blank?
         end
         flash['notice'] = 'Your letter was saved successfully.'
         redirect_to :controller => 'addresses'
-      else
+      else #Reset images if not valid
+        @mpd_letter.mpd_letter_images.each do |image|
+          image.reload
+        end
         render :action =>  :letter
       end
     

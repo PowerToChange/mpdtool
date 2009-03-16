@@ -91,13 +91,11 @@ module ApplicationHelper
     link_to_remote(text, options, html_options)
   end
 
-  def error_messages_for_multiple_objects(object_names, options = {})
+  def error_messages_for_multiple_objects(objects, object_name_for_error, options = {})
     options = options.symbolize_keys
-    object_name_for_error = object_names[0]
     all_errors = ""
     all_errors_count = 0
-    object_names.each do |object_name|
-      object = instance_variable_get("@#{object_name}")
+    objects.each do |object|
       if object && !object.errors.empty?
         object_errors = object.errors.full_messages.collect {
           |msg| content_tag("li", msg)
