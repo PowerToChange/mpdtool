@@ -28,15 +28,15 @@
             <% end %>
             
             <% if !@letter.update_section.nil? and !@letter.update_section.blank? -%>
-                 <%= @letter.update_section%><br/><br/>
+                 <%= @letter.update_section.gsub("\n", "<br/>") %><br/><br/>
             <% end -%>
             
             <% if !@letter.educate_section.nil? and !@letter.educate_section.blank? -%>
-                <%= @letter.educate_section %><br/><br/>
+                <%= @letter.educate_section.gsub("\n", "<br/>") %><br/><br/>
             <% end -%>
             
             <% if !@letter.needs_section.nil? and !@letter.needs_section.blank? -%>
-                <%= @letter.needs_section %>
+                <%= @letter.needs_section.gsub("\n", "<br/>") %>
             <% end -%></p>
             
         <p><% if !@letter.mpd_letter_images[1].nil? and !@letter.mpd_letter_images[1].filename.blank? %>
@@ -44,11 +44,11 @@
            <% end %>
          
             <% if !@letter.involve_section.nil? and !@letter.involve_section.blank? -%>
-                <%= @letter.involve_section %><br/><br/>
+                <%= @letter.involve_section.gsub("\n", "<br/>") %><br/><br/>
             <% end -%>
               
             <% if !@letter.acknowledge_section.nil? and !@letter.acknowledge_section.blank? -%>
-                <%= @letter.acknowledge_section %>
+                <%= @letter.acknowledge_section.gsub("\n", "<br/>") %>
             <% end -%></p>
         
         <p><%= @letter.closing %></p>
