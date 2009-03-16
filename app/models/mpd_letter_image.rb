@@ -6,16 +6,17 @@ class MpdLetterImage < ActiveRecord::Base
                                     'image/pjpeg',
                                     'image/jpg',
                                     'image/gif',
+                                    'image/png',
+                                    'image/x-png',
                                     'image/jpg',
                                     'image/jp_',
-                                    'application/jpg',
-                                    'application/x-jpg',
-                                    'image/vnd.swiftview-jpeg',
                                     'image/gi_',
                                     'image/x-citrix-pjpeg'
                                   ]
 
   belongs_to :mpd_letter
+  
+  validates_as_attachment
   
   def image_name
     str = self.image.split("/")
