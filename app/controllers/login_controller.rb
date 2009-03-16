@@ -30,8 +30,13 @@ class LoginController < ApplicationController
       # Create an mpd user if one doesn't exist
       MpdUser.create!(:user_id => user.id) unless MpdUser.find(:first, :conditions => {_(:user_id, :mpd_user) => user.id})
 
-        session[:user_id] = user.id
-        redirect_to :controller => "dashboard",
+      # Reset session (in case last user didn't log out)
+      session[:user_id] = nil
+      session[:event_id] = nil
+      session[:cas_user] = nil
+
+      session[:user_id] = user.id
+      redirect_to :controller => "dashboard",
                     :action => "index"
       # else
         # flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
