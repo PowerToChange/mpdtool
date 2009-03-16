@@ -26,7 +26,7 @@ class CallController < ApplicationController
                                      :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "mpd_contact_to_call", :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'call_made'}, :layout => false
     end
   end 
   

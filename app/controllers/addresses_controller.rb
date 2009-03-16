@@ -14,13 +14,29 @@ class AddressesController < ApplicationController
     @col_layout = "two_col"
     items_per_page = 15
     
-    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions, :joins => :mpd_contact_actions, :per_page => items_per_page  
+    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions, :per_page => items_per_page  
 
     if request.xml_http_request?
       render :partial => "shared/mini_contacts_list", :layout => false
     end
   end
 
+  def complete
+    items_per_page = 15
+
+    if request.post?
+      @mpd_contact = MpdContact.find(params[:id])
+      @mpd_contact.send_letter!(current_event.id)
+    end
+    
+    @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions,
+                                     :per_page => items_per_page  
+
+    if request.xml_http_request?
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
+    end
+  end 
+  
   # Export Ministry Partners as CSV
   def export_as_csv
     contacts = current_mpd_user.mpd_contacts
@@ -80,8 +96,8 @@ class AddressesController < ApplicationController
           raise pdf.inspect
         end
         # Mark contacts as letter having been sent
-        action_ids = @mpd_contacts.collect {|contact| contact.action(current_event.id)}.collect(&:id)
-        MpdContactAction.update_all("letter_sent = 1", "id IN (#{action_ids.join(',')})")
+#        action_ids = @mpd_contacts.collect {|contact| contact.action(current_event.id)}.collect(&:id)
+#        MpdContactAction.update_all("letter_sent = 1", "id IN (#{action_ids.join(',')})")
       else
         flash[:error] = "You don't have any contacts with valid addresses to send letters to."
         redirect_to(:action => :index)

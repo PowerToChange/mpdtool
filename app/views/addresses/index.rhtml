@@ -1,14 +1,15 @@
 <div id="content">
-    <h3 style="margin-top: 25px;" >View Ministry Partners: All <%= image_tag("loading_dots.gif",
+    <h3 style="margin-top: 25px;" >View Ministry Partners: Need to Send Letters <%= image_tag("loading_dots.gif",
                   :align => 'absmiddle',
                   :border=> 0,
                   :id => "spinner",
                   :style=>"display: none;" ) %></h3>
     
-    <p class="instructional">Click on a contact's name to view or edit their details</p>              
+    <p class="instructional">Click on a contact's name to view or edit their details.<br/>
+		Click on the checkbox to mark them as having been sent a letter.</p>              
              
     <div id="contacts_list" class="contact_list">
-        <%= render :partial => "shared/mini_contacts_list"%>
+        <%= render :partial => "shared/mpd_contact_to_complete", :locals => { :event => "letter_sent" } %>
     </div>
 
 </div>

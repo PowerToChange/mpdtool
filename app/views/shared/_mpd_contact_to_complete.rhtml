@@ -13,7 +13,7 @@
                      @mpd_contact = mpd_contact 
                      fields_for mpd_contact.action(current_event.id) do |af| %>
                 <tr class="<%= cycle("even", "odd") %>">
-                    <td valign="top" class="nopad"><span id="cb_<%= @mpd_contact.id %>"><%= af.check_box "call_made", 
+                    <td valign="top" class="nopad"><span id="cb_<%= @mpd_contact.id %>"><%= af.check_box event, 
                                       { :onclick => remote_function( :loading => "Element.replace('cb_#{@mpd_contact.id}','<img src=\"/images/loading_dots.gif\" />')",
                                                                      :url => {:params => params.merge({:id => @mpd_contact, :action => 'complete'})},
                                                                      :update => 'contacts_list' ) }, 

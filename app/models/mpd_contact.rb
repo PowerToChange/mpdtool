@@ -33,8 +33,16 @@ class MpdContact < ActiveRecord::Base
     return ret_val
   end
   
+  def send_letter!(event_id)
+    action(event_id).update_attribute(:letter_sent, true)
+  end
+  
   def make_call!(event_id)
     action(event_id).update_attribute(:call_made, true)
+  end
+  
+  def send_thankyou!(event_id)
+    action(event_id).update_attribute(:thankyou_sent, true)
   end
   
   def salutation

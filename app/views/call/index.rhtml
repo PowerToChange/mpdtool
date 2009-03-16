@@ -50,17 +50,18 @@
             <%= link_to_remote("more", :url => {:action => "toggle_show_follow_up_help"}) %> ]</p>
     </div>
     
-    <h3 style="margin-top: 25px;" >View Ministry Partners: All <%= image_tag("loading_dots.gif",
+    <h3 style="margin-top: 25px;" >View Ministry Partners: Need to Call <%= image_tag("loading_dots.gif",
                   :align => 'absmiddle',
                   :border=> 0,
                   :id => "spinner",
                   :style=>"display: none;" ) %></h3>
         
     <p class="instructional">Click on a contact's name to view or edit their 
-        details and make notes about your phone calls.</p>              
+        details and make notes about your phone calls.<br/>
+		Click on the checkbox to just mark them as having been called.</p>              
          
     <div id="contacts_list" class="contact_list">
-        <%= render :partial => 'mpd_contact_to_call' %>
+        <%= render :partial => 'shared/mpd_contact_to_complete', :locals => { :event => "call_made" } %>
     </div>
 </div>
 
