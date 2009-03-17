@@ -17,7 +17,7 @@ class AddressesController < ApplicationController
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions, :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mini_contacts_list", :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
     end
   end
 

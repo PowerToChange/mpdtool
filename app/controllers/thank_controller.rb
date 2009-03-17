@@ -9,7 +9,7 @@ class ThankController < ApplicationController
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :joins => :mpd_contact_actions, :order => process_sort(params[:sort]), :conditions => process_conditions('thankyou_sent = false'), :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mini_contacts_list", :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'thankyou_sent'}, :layout => false
     end
   end
 
