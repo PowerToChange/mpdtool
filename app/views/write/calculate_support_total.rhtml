@@ -9,8 +9,13 @@
 <%- form_tag :action => 'calculate_support_total', :id => @user do -%>
 <fieldset class="columns calculator">
     <p><label for="">Project Cost</label>
-        $ <input type="text" id="project_expenses" class="text" disabled="true" value="<%= number_with_delimiter(number_with_precision(current_event.cost, :precision =>  0)) %>" /></p>
-        
+		<% if current_event.project_id.blank? %>
+			$ <%= text_field :event, :cost, :value => number_with_delimiter(number_with_precision(@event.cost, :precision =>  0)), :class => "text" %>
+        <% else %>
+			$ <%= text_field :event, :cost, :value => number_with_delimiter(number_with_precision(@event.cost, :precision =>  0)), :class => "text", :disabled => true %>
+		<% end %>
+        <%= observe_field "event_cost", :function => "doCalc();" %></p>
+		
 <div id="calculator_fields">
  <% MpdExpenseType.find(:all).each do |expense_type| 
     @mpd_expense = current_event.mpd_expenses.detect {|me| me.mpd_expense_type == expense_type} || current_event.mpd_expenses.create(:amount => 0, :mpd_expense_type_id => expense_type.id) %>

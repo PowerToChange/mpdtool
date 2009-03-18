@@ -30,7 +30,7 @@ function doCalc() {
         total += parseFloat(fields[i].value.replace(',',''));
     }
     
-    total += parseFloat(document.getElementById('project_expenses').value.replace(',',''));
+    total += parseFloat(document.getElementById('event_cost').value.replace(',',''));
     document.getElementById('support_total').innerHTML = formatCurrency(total);
 }
 

@@ -106,15 +106,18 @@ class WriteController < ApplicationController
     @col_layout = "two_col"
     
     @user = current_mpd_user
+    @event = current_event
     
     if request.post?
-      expenses = current_event.mpd_expenses
+      @event.cost = params[:event][:cost]
+      expenses = @event.mpd_expenses
       expenses.each do |e| 
         e.amount = params[:mpd_expense][e.id.to_s][:amount].gsub(',','').to_i 
       end
       @user.show_calculator = false
       
       @user.save!
+      @event.save!
       expenses.each(&:save!)
     
       redirect_to :action => "index"
