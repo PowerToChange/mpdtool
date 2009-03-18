@@ -109,7 +109,7 @@ class WriteController < ApplicationController
     @event = current_event
     
     if request.post?
-      @event.cost = params[:event][:cost]
+      @event.cost = params[:event][:cost] if params[:event]
       expenses = @event.mpd_expenses
       expenses.each do |e| 
         e.amount = params[:mpd_expense][e.id.to_s][:amount].gsub(',','').to_i 
