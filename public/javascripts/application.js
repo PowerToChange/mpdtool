@@ -30,7 +30,10 @@ function doCalc() {
         total += parseFloat(fields[i].value.replace(',',''));
     }
     
-    total += parseFloat(document.getElementById('event_cost').value.replace(',',''));
+    var cost = parseFloat(document.getElementById('event_cost').value.replace(',',''));
+    if (!isNaN(cost)) {
+        total += cost;
+    }
     document.getElementById('support_total').innerHTML = formatCurrency(total);
 }
 
