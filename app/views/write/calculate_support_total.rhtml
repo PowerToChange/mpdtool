@@ -7,6 +7,7 @@
 <h3><span>Calculator</span></h3>
 
 <%- form_tag :action => 'calculate_support_total', :id => @user do -%>
+<%= error_messages_for :event %>
 <fieldset class="columns calculator">
     <p><label for="">Project Cost</label>
 		<% if current_event.project_id.blank? %>

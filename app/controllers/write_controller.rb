@@ -110,7 +110,7 @@ class WriteController < ApplicationController
     
     if request.post?
       if params[:event]
-        params[:event][:cost] = "0" if params[:event][:cost].blank?
+        # params[:event][:cost] = "0" if params[:event][:cost].blank?
         @event.cost = params[:event][:cost]
       end
       expenses = @event.mpd_expenses
@@ -118,12 +118,16 @@ class WriteController < ApplicationController
         e.amount = params[:mpd_expense][e.id.to_s][:amount].gsub(',','').to_i 
       end
       @user.show_calculator = false
-      
-      @user.save!
-      @event.save!
-      expenses.each(&:save!)
-    
-      redirect_to :action => "index"
+      begin
+        MpdEvent.transaction do
+          @user.save!
+          @event.save!
+          expenses.each(&:save!)
+        end
+        redirect_to :action => "index"
+      rescue ActiveRecord::RecordInvalid
+        render
+      end
     else
       # Make sure all expenses are tied to an event
       expenses = @user.mpd_expenses.find(:all, :conditions => "mpd_event_id is null")
