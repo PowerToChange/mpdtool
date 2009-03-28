@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
       if @current_event && @current_event.cost != current_person.current_application.project_cost
         @current_event.update_attribute(:cost, current_person.current_application.project_cost)
       end
+      # make sure cost isn't nil
+      if @current_event && @current_event.cost.nil?
+        @current_event.update_attribute(:cost, 0)
+      end
       unless @current_event
         # Create an event and set it to active
         @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
