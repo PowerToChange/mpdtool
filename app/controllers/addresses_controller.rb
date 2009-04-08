@@ -27,6 +27,8 @@ class AddressesController < ApplicationController
     if request.post?
       @mpd_contact = MpdContact.find(params[:id])
       @mpd_contact.send_letter!(current_event.id)
+    else
+      redirect_to :action => :index
     end
     
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions,
