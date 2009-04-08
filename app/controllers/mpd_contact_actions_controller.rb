@@ -60,17 +60,23 @@ class MpdContactActionsController < ApplicationController
   def destroy
     @mpd_contact_action = MpdContactAction.find(params[:id])
     @mpd_contact = @mpd_contact_action.mpd_contact
-    # if this contact is only on this event, delete them completely
-    if @mpd_contact.mpd_contact_actions.length == 1
-      @mpd_contact_action.destroy
-      @mpd_contact.destroy
-    else
-      @mpd_contact_action.destroy
-    end
 
-    respond_to do |format|
-      format.html { redirect_to('/') }
-      format.xml  { head :ok }
+    #Make sure this contact is for this user
+    if current_mpd_user.mpd_contacts.include?(@mpd_contact)
+      # if this contact is only on this event, delete them completely
+      if @mpd_contact.mpd_contact_actions.length == 1
+        @mpd_contact_action.destroy
+        @mpd_contact.destroy
+      else
+        @mpd_contact_action.destroy
+      end
+  
+      respond_to do |format|
+        format.html { redirect_to('/') }
+        format.xml  { head :ok }
+      end
+    else
+      redirect_to edit_contact_path(@mpd_contact_action.mpd_contact.id)
     end
   end
 end
