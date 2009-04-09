@@ -44,11 +44,11 @@ class AddressesController < ApplicationController
     contacts = current_mpd_user.mpd_contacts
     stream_csv do |csv|
       # Write Column Headers
-      csv << ["Full Name", "Address 1", "Address 2", "City", "State", "Zip", "Phone", "Email Address", "Gift Amount", "Letter Sent?", "Call Made?", "Thank-you Sent?", "Notes"]
+      csv << ["Full Name", "Salutation", "Address 1", "Address 2", "City", "State", "Zip", "Phone", "Email Address", "Gift Amount", "Letter Sent?", "Call Made?", "Thank-you Sent?", "Notes"]
       
       # Write data rows
       contacts.each do |c|
-        csv << [c.full_name, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent(current_event.id), c.call_made(current_event.id), c.thankyou_sent(current_event.id), c.notes]
+        csv << [c.full_name, c.salutation, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent(current_event.id), c.call_made(current_event.id), c.thankyou_sent(current_event.id), c.notes]
       end
     end
   end
