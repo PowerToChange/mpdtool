@@ -20,6 +20,8 @@ class CallController < ApplicationController
     if request.post?
       @mpd_contact = MpdContact.find(params[:id])
       @mpd_contact.make_call!(current_event.id)
+    else
+      redirect_to :action => :index
     end
     
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :joins => :mpd_contact_actions,
