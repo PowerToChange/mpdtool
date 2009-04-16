@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
 
   DEFAULT_SORT = "full_name"
 
-  before_filter :check_authentication, :except => [:no_access, :login, :gcx_login, :forgot_password, :send_password_email, :logout, :change_password]
-  before_filter :check_authorization, :except => [:no_access, :login, :gcx_login, :forgot_password, :send_password_email, :logout, :change_password]
+  before_filter :check_authentication, :except => [:no_access, :login, :gcx_login, :signup, :forgot_password, :send_password_email, :logout, :change_password]
+  before_filter :check_authorization, :except => [:no_access, :login, :gcx_login, :signup, :forgot_password, :send_password_email, :logout, :change_password]
   
   protected 
   

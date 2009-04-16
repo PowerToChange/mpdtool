@@ -1,0 +1,31 @@
+<div id="content">
+	<%= error_messages_for :user %>
+	<% form_for :user do |f| -%>
+		<fieldset style="width: 300px; margin: 0 auto;">
+			<h3>Signup for an Account</h3>
+
+			<p><label for="person[firstName]">First Name</label>
+			<%= text_field :person, :firstName, {"size"=>"24", "tabindex"=>"1", "class"=>"text"} %></p>
+			
+			<p><label for="person[lastName]">Last Name</label>
+			<%= text_field :person, :lastName, {"size"=>"24", "tabindex"=>"2", "class"=>"text"} %></p>
+			
+			<p><label for="username">Login (must be an email address)</label>
+			<%= f.text_field :username, {"size"=>"24", "tabindex"=>"3", "class"=>"text"} %></p>
+			
+			<p><label for="passwordQuestion">Secret Question</label>
+			<%= f.text_field :secret_question, {"size"=>"24", "tabindex"=>"4", "class"=>"text"} %></p>
+			
+			<p><label for="passwordAnswer">Secret Answer</label>
+			<%= f.text_field :secret_answer, {"size"=>"24", "tabindex"=>"5", "class"=>"text"} %></p>
+			
+			<p><label for="plain_password">Password (must be at least 8 characters, including at least one upper case letter and one lower case letter)</label>
+			<%= f.password_field :plain_password, {"size"=>"24", "tabindex"=>"6", "class"=>"text"} %></p>
+			
+			<p><label for="plain_password_confirmation">Confirm Password</label>
+			<%= f.password_field :plain_password_confirmation, {"size"=>"24", "tabindex"=>"7", "class"=>"text"} %></p>
+			
+			<p><%= image_submit_tag 'button_sm_save.gif' %></p>
+		</fieldset>
+	<% end -%>
+</div>

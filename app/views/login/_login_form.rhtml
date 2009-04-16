@@ -9,9 +9,13 @@
 	<p><label for="password">Password</label>
 	<%= password_field_tag 'password', '', {"size"=>"24", "tabindex"=>"2", "class"=>"text"} %>	</p>
 
-	<p class="buttons"><%= image_submit_tag "button_sm_login.gif" %><br/>
-      <!-- <a href="<%= @forgot_password_link %>">Forgot your password?</a><br/>
-    <%= link_to "GCX Login", :action => :gcx_login %> -->
+	<p class="buttons">
+		<%= image_submit_tag "button_sm_login.gif" %><br/>
+		<br/>
+	    <a href="<%= @forgot_password_link %>">Forgot your password?</a><br/>
+	    <%= link_to "Don't have an account?", :action => :signup %>
+	</p>
+    <!-- <%= link_to "GCX Login", :action => :gcx_login %> -->
 </fieldset>
 <% end %>
 </div>

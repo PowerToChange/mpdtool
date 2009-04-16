@@ -44,6 +44,26 @@ class LoginController < ApplicationController
     end      
   end
   
+  def signup
+    @user = User.new(params[:user])
+    @person = Person.new(params[:person])
+    return unless request.post?
+    @user.valid?
+    if @person.firstName.to_s.strip.empty? || @person.lastName.to_s.strip.empty?
+      @user.errors.add_to_base "Please enter your first and last name."
+      @person.errors.add(:firstName, "can't be blank.") if @person.firstName.to_s.empty?
+      @person.errors.add(:lastName, "can't be blank.") if @person.lastName.to_s.empty?
+    end
+    unless @user.errors.empty?
+      render :action => 'signup'
+    else
+      @user.save
+      @person = @user.create_person_and_address(params[:person])
+      redirect_back_or_default(:action => 'login')
+      flash[:notice] = "Thanks for signing up!"
+    end
+  end
+  
   def gcx_login
     user = current_mpd_user
     unless user
