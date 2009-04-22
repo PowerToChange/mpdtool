@@ -28,12 +28,17 @@
 
         <h4>Print Your Letters</h4>
         <%- form_tag('/addresses/print_letter', :id => 'print_letter_form') do -%>
-        <%= hidden_field_tag('print_all', true) %>
         <p>Export your letters as a PDF file to be printed and mailed.</p>
-        <p style="text-align: right;"><%= check_box_tag('include_address') %> Include address on letter</p>
+        <p style="text-align: left;"><%= check_box_tag('include_address') %> Include address on letter</p>
+        <p style="text-align: left;"><%= check_box_tag('print_addresses_only') %> Print Letters To Only Those People That Have Addresses</p>
+        <p style="text-align: left;"><%= check_box_tag('print_sent_marked_false') %> Print Letters To Only Those People That Haven't Been Sent Letters Yet</p>
         
-        <p style="text-align: right;"><%= link_to_function("Print all letters", "$('print_letter_form').submit()") %><br/>
-        <p style="text-align: right;"><%= link_to_function("Print letters for people with addresses", "$('print_all').value = false;$('print_letter_form').submit()") %></p>
+        <p style="text-align: right;"><%= link_to_function("Print letters", "$('print_letter_form').submit()") %></p>
+<!--        <p style="text-align: right;"><%= link_to_function("Print letters to people that haven't been marked as having been sent a letter", "$('print_sent_marked').value = false;$('print_letter_form').submit();$('print_sent_marked').value = true") %></p>
+		<h4>Print Letters To Only Those People That Have Addresses</h4>
+        <p style="text-align: right;"><%= link_to_function("Print letters to all people with addresses", "$('print_without_addresses').value = false;$('print_letter_form').submit();$('print_without_addresses').value = true") %></p>
+        <p style="text-align: right;"><%= link_to_function("Print letters to people that haven't been marked as having been sent a letter that have addresses", "$('print_without_addresses').value = false;$('print_sent_marked').value = false;$('print_letter_form').submit();$('print_without_addresses').value = true;$('print_sent_marked').value = true") %></p>
+-->
         <%- end -%>
         <h4>Print Your Labels</h4>
         
