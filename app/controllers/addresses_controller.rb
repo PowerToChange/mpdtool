@@ -68,7 +68,7 @@ class AddressesController < ApplicationController
         @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.address_1.to_s.blank?}
       end
       if params[:print_sent_marked_false]
-        @mpd_contacts = @mpd_contacts.find_all {|contact| contact.mpd_contact_actions.find_by_event_id(current_event).letter_sent == false}
+        @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.mpd_contact_actions.find_by_event_id(current_event).letter_sent if contact.mpd_contact_actions.find_by_event_id(current_event)}
       end
       unless @mpd_contacts.empty?
         letter = render_to_string(:action => "letter_pdf")
