@@ -22,6 +22,7 @@ class CallController < ApplicationController
       @mpd_contact.make_call!(current_event.id)
     else
       redirect_to :action => :index
+      return
     end
     
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('call_made = false'), :joins => :mpd_contact_actions,
@@ -29,6 +30,8 @@ class CallController < ApplicationController
 
     if request.xml_http_request?
       render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'call_made'}, :layout => false
+    else
+      redirect_to :action => :index
     end
   end 
   

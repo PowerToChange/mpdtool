@@ -29,6 +29,7 @@ class AddressesController < ApplicationController
       @mpd_contact.send_letter!(current_event.id)
     else
       redirect_to :action => :index
+      return
     end
     
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions,
@@ -36,6 +37,8 @@ class AddressesController < ApplicationController
 
     if request.xml_http_request?
       render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
+    else
+      redirect_to :action => :index
     end
   end 
   
