@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MpdExpenseTest < Test::Unit::TestCase
-  fixtures :mpd_expenses
+class MpdExpenseTest < ActiveSupport::TestCase
 
   # Replace this with your real tests.
   def test_truth

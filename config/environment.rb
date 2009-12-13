@@ -5,7 +5,7 @@
 #ENV['RAILS_ENV'] ||= 'development'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 FILTER_KEYS = %w(password)
 
@@ -36,6 +36,7 @@ Rails::Initializer.run do |config|
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
+  config.gem 'htmldoc'
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
@@ -47,5 +48,3 @@ Rails::Initializer.run do |config|
   config.action_controller.session = { :session_key => "_mpd_session", :secret => "J7ykHJ2Q3jm52tCVE7ZpUE4Bizf8C0rmr2x9htPya2KbBAoARPcSa17Gfvy6ThO" }
 end
 
-# Configure htmldoc
-require 'htmldoc'

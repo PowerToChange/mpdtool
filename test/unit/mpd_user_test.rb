@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MpdUserTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, User.table_name, Person.table_name, 
-           SpApplication.table_name, SpProject.table_name, :mpd_contact_actions, :mpd_events
+class MpdUserTest < ActiveSupport::TestCase
 
   def test_no_user_id
     mpd_user = MpdUser.new

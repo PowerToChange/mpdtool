@@ -1,16 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'contacts_controller'
 
-# Re-raise errors caught by the controller.
-class ContactsController; def rescue_action(e) raise e end; end
-
-class ContactsControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_letters, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :mpd_events, User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
+class ContactsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = ContactsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     @request.session[:event_id] = 1
   end
 

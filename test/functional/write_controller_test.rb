@@ -1,18 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'write_controller'
 
-# Re-raise errors caught by the controller.
-class WriteController; def rescue_action(e) raise e end; end
-
-class WriteControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_letters, :mpd_letter_templates, :mpd_letter_images, :mpd_contacts, :mpd_expense_types, :mpd_expenses,
-            User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name#, :cim_hrdb_access
-
-  def setup
-    @controller = WriteController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
+class WriteControllerTest < ActionController::TestCase
 
   def test_index_show_calculator
     @request.session[:user_id] = 2
@@ -41,7 +29,8 @@ class WriteControllerTest < Test::Unit::TestCase
   def test_update_letter
     @request.session[:user_id] = 1
     post :update_letter, :mpd_letter => {:id => mpd_users(:lance).mpd_letter_id, :update_section => "Update section from test."}    
-    assert_equal "Update section from test.", mpd_users(:lance).mpd_letter.update_section
+    assert mpd_letter = assigns(:mpd_letter)
+    assert_equal "Update section from test.", mpd_letter.update_section
   end
   
   def test_udpate_letter_field_too_long
@@ -53,7 +42,7 @@ class WriteControllerTest < Test::Unit::TestCase
     post :update_letter, :mpd_letter => {:id => mpd_users(:lance).mpd_letter_id, :update_section => update_section}
     assert_template "letter"
   end
-
+  
   def test_calculate_support_total
     @request.session[:user_id] = 1
     post :calculate_support_total, :mpd_expense => {"1" => {:amount => "100"}, "2" => {:amount => "200"}, "3" => {:amount => "300"}}

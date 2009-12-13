@@ -1,18 +1,5 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'call_controller'
-
-# Re-raise errors caught by the controller.
-class CallController; def rescue_action(e) raise e end; end
-
-class CallControllerTest < Test::Unit::TestCase
-  fixtures :mpd_users, :mpd_contacts, :mpd_expense_types, :mpd_expenses, :mpd_contact_actions, :mpd_events,
-            User.table_name, Person.table_name, SpApplication.table_name, SpProject.table_name
-
-  def setup
-    @controller = CallController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
+class CallControllerTest < ActionController::TestCase
 
   def test_index
     @request.session[:user_id] = 1
