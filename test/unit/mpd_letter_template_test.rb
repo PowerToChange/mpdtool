@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MpdLetterTemplateTest < Test::Unit::TestCase
-  fixtures :mpd_letter_templates
-
+class MpdLetterTemplateTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   def test_truth
     assert true

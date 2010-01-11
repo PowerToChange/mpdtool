@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class SpProjectTest < Test::Unit::TestCase
-  fixtures SpProject.table_name
+class SpProjectTest < ActiveSupport::TestCase
 
   # Replace this with your real tests.
   def test_truth

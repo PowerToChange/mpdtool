@@ -3,7 +3,6 @@
 require 'acts_as_rateable'
 class ApplicationController < ActionController::Base
   filter_parameter_logging *FILTER_KEYS
-  ActiveRecord::Base.send(:include, Acts::Rateable)
 #  include HoptoadNotifier::Catcher
   include ExceptionNotifiable #Automatically generates emails of errors
   before_filter CASClient::Frameworks::Rails::GatewayFilter unless Rails.env.test?
@@ -32,8 +31,8 @@ class ApplicationController < ActionController::Base
       end
       unless @current_event
         # Create an event and set it to active
-        @current_event = current_mpd_user.mpd_events.create(:project_id => current_person.current_application.project.id, 
-                                                            :name => current_person.current_application.project.name,
+        @current_event = current_mpd_user.mpd_events.create!(:project_id => current_person.current_application.project.id, 
+                                                            :name => current_person.current_application.project.name || 'Current Event',
                                                             :start_date => current_person.current_application.project.start_date,
                                                             :cost => current_person.current_application.project_cost)
       end
@@ -44,7 +43,7 @@ class ApplicationController < ActionController::Base
       # Get the first event on their list
       @current_event ||= current_mpd_user.mpd_events.first
       # If we still don't have an event, we need to create a default one.
-      @current_event ||= current_mpd_user.mpd_events.create(:name => 'Unnamed Event',
+      @current_event ||= current_mpd_user.mpd_events.create!(:name => 'Unnamed Event',
                                          :start_date => Date.today)
     end
     current_mpd_user.update_attribute(:current_event_id, @current_event.id) unless current_mpd_user.current_event_id == @current_event.id

@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MpdContactActionsControllerTest < ActionController::TestCase
-  fixtures :mpd_contact_actions
   def setup
     @request.session[:user_id] = 2
   end
@@ -41,6 +40,7 @@ class MpdContactActionsControllerTest < ActionController::TestCase
 #  end
 
   test "should destroy mpd_contact_action" do
+    @request.session[:user_id] = 1
     assert_difference('MpdContactAction.count', -1) do
       delete :destroy, :id => 1
     end

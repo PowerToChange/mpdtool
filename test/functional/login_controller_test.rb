@@ -1,18 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'login_controller'
 
-# Re-raise errors caught by the controller.
-class LoginController; def rescue_action(e) raise e end; end
-
-
-class LoginControllerTest < Test::Unit::TestCase
-  fixtures User.table_name
-
-  def setup
-    @controller = LoginController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
+class LoginControllerTest < ActionController::TestCase
 
   # def test_login
   #   lance = User.find(1)

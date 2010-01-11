@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MpdContactTest < Test::Unit::TestCase
-  fixtures :mpd_contacts, :mpd_users
+class MpdContactTest < ActiveSupport::TestCase
 
   def test_invalid_with_empty_attributes
     mpd_contact = MpdContact.new
