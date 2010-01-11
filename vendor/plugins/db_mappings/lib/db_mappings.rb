@@ -41,19 +41,3 @@ ActiveRecord::Base.class_eval do
   end
 end
  
-Test::Unit::TestCase.class_eval do
-  # def require_fixture_classes(classes=nil)
-  #     raise classes.inspect
-  #   (classes).each do |klass| 
-  #     file_name = klass.table_name.to_s
-  #     file_name = file_name.singularize if ActiveRecord::Base.pluralize_table_names
-  #     begin
-  #       require_dependency file_name
-  #     rescue LoadError
-  #       # Let's hope the developer has included it himself
-  #     end
-  #   end
-  # end
-  # 
-
-end
