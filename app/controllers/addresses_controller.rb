@@ -1,11 +1,9 @@
 require 'fastercsv'
 require 'fpdf'
 require "htmldoc"
-#require 'session'
 
 class AddressesController < ApplicationController
   include ActionView::Helpers::NumberHelper
-
   layout "main", :except => ["export_as_csv", "print_letter", "letter_pdf"]
   
   # Display list of ministry partners
