@@ -43,7 +43,8 @@ class AddressesController < ApplicationController
   # Export Ministry Partners as CSV
   def export_as_csv
     contacts = current_mpd_user.mpd_contacts
-    stream_csv do |csv|
+    csv_setup
+    result = FasterCSV.generate do |csv|
       # Write Column Headers
       csv << ["Full Name", "Salutation", "Address 1", "Address 2", "City", "State", "Zip", "Phone", "Email Address", "Gift Amount", "Letter Sent?", "Call Made?", "Thank-you Sent?", "Notes"]
       
@@ -52,6 +53,7 @@ class AddressesController < ApplicationController
         csv << [c.full_name, c.salutation, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent(current_event.id), c.call_made(current_event.id), c.thankyou_sent(current_event.id), c.notes]
       end
     end
+    render :text => result
   end
   
   # Render PDF of Address Labels to browser
@@ -182,7 +184,7 @@ class AddressesController < ApplicationController
   end
 
   # Write CSV to browser
-  def stream_csv
+  def csv_setup
       # Set filename
      filename = "ministry_partners.csv"    
 
@@ -196,11 +198,6 @@ class AddressesController < ApplicationController
      else
        headers["Content-Type"] ||= 'text/csv'
        headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" 
-       end
-
-      render :text => Proc.new { |response, output|
-        csv = FasterCSV.new(output, :row_sep => "\r\n") 
-      yield csv
-    }
+     end
   end
 end

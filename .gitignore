@@ -25,6 +25,7 @@ vendor/plugins/file_column
 config/amazon_s3.yml
 config/initializers/ga.rb
 .project
+mkmf.log
 public/plugin_assets/ccc_connexion_bar/
 public/stylesheets/connexion_default.css
 vendor/plugins/acts_as_versioned/
