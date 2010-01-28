@@ -198,6 +198,7 @@ class AddressesController < ApplicationController
      else
        headers["Content-Type"] ||= 'text/csv'
        headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" 
+       headers['Cache-Control'] = ''
      end
   end
 end
