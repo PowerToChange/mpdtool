@@ -14,6 +14,7 @@ class LoginController < ApplicationController
         # Try CAS
         form_params = {:username => params[:username], :password => params[:password], :service => url_for('/') }
         agent = WWW::Mechanize.new
+        agent.keep_alive = false
         page = agent.post(cas_url, form_params)
         result_query = page.uri.query
         unless result_query && result_query.include?('BadPassword')
