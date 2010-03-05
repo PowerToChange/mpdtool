@@ -97,7 +97,7 @@ class AddressesController < ApplicationController
         pdf.generate
         unless pdf.errors.length > 0
            logger.debug "Successfully generated a PDF file"
-           send_file(filename)
+           send_file(filename, :filename => 'Letter.pdf', :type => 'application/pdf')
         else 
           File.unlink(filename)
           raise pdf.errors.inspect if pdf.errors.length > 0
