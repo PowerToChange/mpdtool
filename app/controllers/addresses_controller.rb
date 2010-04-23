@@ -10,7 +10,7 @@ class AddressesController < ApplicationController
   def index
     @title = "Step 3.1: Gather Addresses"
     @col_layout = "two_col"
-    items_per_page = 15
+    items_per_page = 25
     
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions, :per_page => items_per_page  
 
@@ -20,7 +20,7 @@ class AddressesController < ApplicationController
   end
 
   def complete
-    items_per_page = 15
+    items_per_page = 25
 
     if request.post?
       @mpd_contact = MpdContact.find(params[:id])
@@ -97,7 +97,7 @@ class AddressesController < ApplicationController
         pdf.generate
         unless pdf.errors.length > 0
            logger.debug "Successfully generated a PDF file"
-           send_file(filename)
+           send_file(filename, :filename => 'Letter.pdf', :type => 'application/pdf')
         else 
           File.unlink(filename)
           raise pdf.errors.inspect if pdf.errors.length > 0
