@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
         # Create an event and set it to active
         @current_event = current_mpd_user.mpd_events.create!(:project_id => current_person.current_application.project.id, 
                                                             :name => current_person.current_application.project.name || 'Current Event',
-                                                            :start_date => current_person.current_application.project.start_date,
+                                                            :start_date => current_person.current_application.project.start_date ? current_person.current_application.project.start_date : Date.today,
                                                             :cost => current_person.current_application.project_cost)
       end
     end
