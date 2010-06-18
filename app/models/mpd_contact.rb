@@ -78,7 +78,7 @@ class MpdContact < ActiveRecord::Base
   protected
   
   def set_salutation
-    self.salutation = self.full_name
+      self.salutation = full_name.chomp(" " + full_name.split(" ")[-1])
   end
   
   def create_contact_actions
