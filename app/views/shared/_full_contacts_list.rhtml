@@ -9,6 +9,7 @@
                 <th class="<%= sort_td_class_helper 'gift_amount' %>"><%= sort_link_helper "Gift Amount", "gift_amount" %></th>
                 <th class="<%= sort_td_class_helper 'thankyou_sent' %>"><%= sort_link_helper "Thanked", "thankyou_sent" %></th>
                 <th class="<%= sort_td_class_helper 'mpd_priorities.priority' %>"><%= sort_link_helper "Priority", "mpd_priorities.priority" %></th>
+				<th class="<%= sort_td_class_helper 'selected' -%>"><%= label "Remove", "remove", nil %></th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +23,9 @@
                 <td class="<%= sort_td_class_helper 'gift_amount' -%>" style="text-align: right;"><%= number_to_currency(number_with_delimiter(mpd_contact.gift_amount(current_event.id))) %>&nbsp;</td>
                 <td class="<%= sort_td_class_helper 'thankyou_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.thankyou_sent(current_event.id) %></td>
                 <td class="<%= sort_td_class_helper 'mpd_priorities.priority' -%>"><div id="priorities-block-<%= mpd_contact.id %>">
-                    <%= render :partial => "mpd_priority/mpd_priority", :locals => { :mpd_contact => mpd_contact } %>
-                </div></td>
+                    <%= render :partial => "mpd_priority/mpd_priority", :locals => { :mpd_contact => mpd_contact } %> </div></td>
+                <td class="" style="text-align: center;"><div><%= link_to(image_tag("icon_x.png", {}) ,mpd_contact_action_path(mpd_contact.action(current_event.id)), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"") %></td>
+               
             </tr>
             <% end %>
             <% else %>

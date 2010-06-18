@@ -111,6 +111,7 @@ textarea { height: 50px; font-size: 1em; }
 .contact_list table { margin: 10px; padding: 0; width: 455px; }
 .contact_list table th { background: #a3a366; padding: 4px; white-space: nowrap; }
 .contact_list table th a { color: #fff; }
+.contact_list table th label {color: #fff; text-decoration:underline; }
 .contact_list table td { padding: 4px; font-size: .9em; border-bottom: solid 1px #e0e0cc; line-height: 1.3em; }
 .contact_list table tr.odd td { background: #f0f0e6; }
 .contact_list table tr.even td { background: #e8e8d9; }
