@@ -1,8 +1,8 @@
 class WriteController < ApplicationController
   layout 'main'
-
+  
   MAX_FIELD_LENGTH = 1000
-
+  
   def index
     if current_mpd_user.show_calculator && MpdExpenseType.count > 0
       redirect_to(:action => 'calculate_support_total')
@@ -41,25 +41,25 @@ class WriteController < ApplicationController
     step = MpdExpenseType.count > 0 ? '2.3' : '2.2'
     @title = "Step #{step}: Write Your Letter "
     @col_layout = "two_col"
-
+    
     @max_field_length = MAX_FIELD_LENGTH    
     @mpd_letter = current_mpd_user.mpd_letter
     @letter_template = @mpd_letter.mpd_letter_template
     @mpd_letter_images = @mpd_letter.mpd_letter_images
-
-   end
+    
+  end
   
   # Updates letter from form
   def update_letter
     @title = "Step 2.3: Write Your Letter "
     @col_layout = "two_col"
-
+    
     if request.post?
       @max_field_length = MAX_FIELD_LENGTH    
       @mpd_letter = MpdLetter.find(params[:mpd_letter][:id])
       @letter_template = @mpd_letter.mpd_letter_template
       @mpd_letter_images = @mpd_letter.mpd_letter_images
-
+      
       @mpd_letter.attributes = params[:mpd_letter]
       if params[:mpd_letter_image]
         @mpd_letter.mpd_letter_images.each do |i| 
@@ -75,25 +75,29 @@ class WriteController < ApplicationController
           image.save! if !image.filename.blank?
         end
         flash['notice'] = 'Your letter was saved successfully.'
-        redirect_to :controller => 'addresses'
+        if params["save.x"]
+          redirect_to :controller => 'write'
+        else
+          redirect_to :controller => 'addresses'
+        end
       else #Reset images if not valid
         @mpd_letter.mpd_letter_images.each do |image|
           image.reload
         end
         render :action =>  :letter
       end
-    
-#      # Upload images
-#      if ((!params[:mpd_letter_image].nil?) and (params[:mpd_letter_image].size > 0))
-#        @mpd_letter.mpd_letter_images.each { |i| i.update_attributes(params[:mpd_letter_image][i.id.to_s]) }
-#        @mpd_letter.mpd_letter_images.each(&:save!)
-#      end
-#          
-#      # Update letter
-#      if @mpd_letter.update_attributes(params[:mpd_letter])
-#        flash['notice'] = 'Your letter was saved successfully.'
-#        redirect_to :controller => 'addresses'
-#      end
+      
+      #      # Upload images
+      #      if ((!params[:mpd_letter_image].nil?) and (params[:mpd_letter_image].size > 0))
+      #        @mpd_letter.mpd_letter_images.each { |i| i.update_attributes(params[:mpd_letter_image][i.id.to_s]) }
+      #        @mpd_letter.mpd_letter_images.each(&:save!)
+      #      end
+      #          
+      #      # Update letter
+      #      if @mpd_letter.update_attributes(params[:mpd_letter])
+      #        flash['notice'] = 'Your letter was saved successfully.'
+      #        redirect_to :controller => 'addresses'
+      #      end
     else
       letter
       render :action => :letter

@@ -101,7 +101,9 @@
             </div>
         <% end %>
             
-        <p class="buttons"><%= image_submit_tag "button_sm_next.gif", :tabindex => 7 %></p>
+        <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 8}) %> &nbsp 
+		<%= image_submit_tag("button_sm_next.gif", {:name => "next", :tabindex => 9}) %>
+		</p>
     </fieldset>
     <%- end -%>
 </div>
