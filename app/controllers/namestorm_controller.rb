@@ -29,6 +29,9 @@ class NamestormController < ApplicationController
     end
   end
   
+  def start_letter
+    render :start
+  end
   # Display "quick form" and list
   def list
     @title = "Step 1: Namestorm"

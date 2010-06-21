@@ -154,11 +154,11 @@ class AddressesController < ApplicationController
       # Navigate to x,y for cell
       pdf.SetXY(cell_left,cell_top)
       
-      if !c.address_1.nil?
+      if !c.address_1.blank?
         # Build string for label
         text = c.full_name + "\n"
         text += c.address_1 + "\n"
-        text += c.address_2 + "\n" if !c.address_2.nil? and !c.address_2.blank?
+        text += c.address_2 + "\n" if !c.address_2.blank?
         text += c.city + ', ' + c.state + ' ' + c.zip
 
         # Write cell to PDF (this method is buggy)
