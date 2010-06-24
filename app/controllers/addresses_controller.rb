@@ -100,7 +100,7 @@ class AddressesController < ApplicationController
           
         pdf.footer "..."
 
-        pdf.generate(current_mpd_user.id.to_s)
+        pdf.generate
         unless pdf.errors.length > 0
            logger.debug "Successfully generated a PDF file"
            send_file(filename, :filename => 'Letter.pdf', :type => 'application/pdf')
