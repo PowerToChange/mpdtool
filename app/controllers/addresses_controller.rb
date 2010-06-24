@@ -75,11 +75,17 @@ class AddressesController < ApplicationController
       end
       unless @mpd_contacts.empty?
         letter = render_to_string(:action => "letter_pdf")
+        #Replaces elipsis that are in unicode
+        while letter.sub!(/(\xE2\x80\xA6)/, "...") 
+        end
+        #Replaces odd apostrophe like characters with UTF-8 apostrophe
+        while letter.sub!(/(\xE2\x80\x9B)|(\xC2\xB4)|(\xE2\x80\x98)|(\xE2\x80\x99)/, "'")
+        end
         path = File.join(RAILS_ROOT, "public", "pdfs", current_mpd_user.id.to_s)
         FileUtils.mkpath(path) unless File.exists?(path)
         filename = File.join(path, "mpd_letter.pdf")
         htmldoc_env = "HTMLDOC_NOCGI=TRUE;export HTMLDOC_NOCGI" 
-
+        
         pdf = PDF::HTMLDoc.new
         pdf.set_option :outfile, filename
         pdf.set_option :left, '2cm'
@@ -94,7 +100,7 @@ class AddressesController < ApplicationController
           
         pdf.footer "..."
 
-        pdf.generate
+        pdf.generate(current_mpd_user.id.to_s)
         unless pdf.errors.length > 0
            logger.debug "Successfully generated a PDF file"
            send_file(filename, :filename => 'Letter.pdf', :type => 'application/pdf')
