@@ -1,14 +1,18 @@
-            <% require 'enumerator' 
-               col = 1 
-               Enumerable::Enumerator.new(@contacts).each_slice(@chunk_size) { |slice|  %>
-                 <ul id="contacts_set_<%=col%>"
-                    ><% for contact in slice %><li><%= contact.full_name %></li
-                 ><% end %></ul>
-            <%   col += 1 
-               } %>
-        
-           <%= render :partial => "shared/remote_paginator", :locals => { :paginator => @pages, :replace => 'contact_list-columnified'} %>
-           <div class="clear">&nbsp;</div>
-         </div>
-
-        
+<% require 'enumerator'
+col = 1
+Enumerable::Enumerator.new(@contacts).each_slice(@chunk_size) { |slice| %>
+<ul id="contacts_set_<%=col%>">
+    <% for contact in slice %>
+    <li id="<%= contact.id %>"><%= contact.full_name %></li>
+    <script type="text/javascript">
+        new Ajax.InPlaceEditor('<%= contact.id %>', '/namestorm/edit', {okButton:false, cancelControl:false, submitOnBlur:true, clickToEditText:"Click to edit name", cols:17});
+    </script>
+    <% end %>
+</ul>
+<% col += 1
+} %>
+<%= render :partial => "shared/remote_paginator", :locals => { :paginator => @pages, :replace => 'contact_list-columnified'} %>
+<div class="clear">
+    &nbsp;
+</div>
+</div>

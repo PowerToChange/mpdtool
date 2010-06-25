@@ -63,6 +63,15 @@ class NamestormController < ApplicationController
     end
   end
   
+  def edit
+    @mpd_contact = @mpd_user.mpd_contacts.find(params[:editorId])
+    if !(@mpd_contact.full_name.eql?(params[:value]))
+      @mpd_contact.full_name = params[:value]
+      @mpd_contact.update_attributes(@mpd_contact.attributes)
+    end
+    render :text => @mpd_contact.full_name
+  end
+  
   private 
   # Split comma-delimited list of contacts into new contacts for user
   def split_and_add_contacts(csv)

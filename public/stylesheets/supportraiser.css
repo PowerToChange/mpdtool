@@ -131,8 +131,12 @@ textarea { height: 50px; font-size: 1em; }
     
 #contact_list-columnified { margin: 25px 5px; }
 #contact_list-columnified ul { width: 33%; float: left; list-style: none; margin: 0 0 10px 0; padding: 0;}
-#contact_list-columnified ul li { margin: 0; padding: 2px 4px 2px 16px; background: url(../images/bg_bullet.gif) 0 6px no-repeat; }
+#contact_list-columnified ul li { margin: 0; padding: 2px 4px 2px 16px; background: url(../images/bg_bullet.gif) 0 6px no-repeat;}
+#contact_list-columnified ul li:hover {margin: 0; padding: 2px 4px 2px 18px; background: url(../images/edit.png) 0 6px no-repeat;}
 #contact_list-columnified .pagination { margin: 10px 0; padding: 5px 0; clear: both; border-top: solid 1px #ccc; }
+
+form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/edit.png) 0 6px no-repeat;}
+
 
 /* PRIORITY RATING CONTROL */
 ul.priorities { list-style: none; width: 51px; height: 17px; position: relative; overflow: hidden; background: url(../images/bg_priorities.gif) top left repeat-x; }
