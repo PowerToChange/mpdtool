@@ -100,7 +100,7 @@ class AddressesController < ApplicationController
           
         pdf.footer "..."
 
-        pdf.generate
+        pdf.generate(current_mpd_user.id.to_s)
         unless pdf.errors.length > 0
            logger.debug "Successfully generated a PDF file"
            send_file(filename, :filename => 'Letter.pdf', :type => 'application/pdf')
@@ -131,17 +131,19 @@ class AddressesController < ApplicationController
   # Create PDF of Address Labels
   def create_address_labels_pdf(contacts)
     top_margin = 0.5                        # Distance of first label from top of page
-    side_margin = 0.125                     # Distance of first label from left side of page
+    right_margin = 0.5                      # Distance of last label from right side of page
+    left_margin = 0.1875                    # Distance of first label from left side of page
+    
     horizontal_pitch = 2.875                # Distance between left edges of adjacent columns
-    vertical_pitch = label_height = 1.035   # Distance between top edges of adjacent rows
-    label_width = 2.625                     # Width of label
+    vertical_pitch = label_height = 1.05     # Distance between top edges of adjacent rows
+    label_width = 2.5935                    # Width of label (in)
     labels_across = 3.0                     # Number of columns
     labels_down = 10.0                      # Number of rows
 
     # Initialize Page
     pdf=FPDF.new('P','in','letter')         # (orientation, units, page_size)
-    pdf.SetFont('Arial','B',9.5)            # (family, style, size)
-    pdf.SetMargins(side_margin, top_margin)
+    pdf.SetFont('Arial','B',8)              # (family, style, size)
+    pdf.SetMargins(left_margin, top_margin, right_margin) # (left margin, top margin, right margin)
     pdf.SetAutoPageBreak(false)             # We'll control the page breaks, thank you
 
     # Add first page
@@ -154,8 +156,8 @@ class AddressesController < ApplicationController
     # Write cells
     contacts.each do |c|
       # Calculate x,y coordinates for cell
-      cell_left = (current_column * horizontal_pitch) + side_margin
-      cell_top = (current_row * vertical_pitch) + top_margin
+      cell_left = (current_column * horizontal_pitch) + left_margin
+      cell_top = (current_row * vertical_pitch) + top_margin + 0.1
       
       # Navigate to x,y for cell
       pdf.SetXY(cell_left,cell_top)
