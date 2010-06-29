@@ -26,6 +26,8 @@
                 <li id="logout_link"><%= link_to 'Logout', :controller => "login", :action => "logout" %>
             </ul>
         
+			<span id="header-logo"><%= link_to image_tag("../images/bg_header_login.gif", :border => 0), :controller => "dashboard", :action => "welcome" %></span>
+		
             <ul id="nav-wizard">
                 <li id="namestorm_link" <%= "class='active'" if controller.controller_name == 'namestorm' %>><%= link_to '<span>1</span> Namestorm', :controller => "namestorm"%></li>
                 <li id="write_link" <%= "class='active'" if controller.controller_name == 'write' %>><%= link_to '<span>2</span> Write', :controller => "write"%></li>

@@ -50,6 +50,8 @@ textarea { height: 50px; font-size: 1em; }
 .calculator #support_total { margin-left: 10px; font-weight: bold; }
 .calculator b { color: #666; }
 
+form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/edit.png) 0 6px no-repeat;}
+
 /* STRUCTURAL ELEMENTS */
 #wrapper { width: 760px; margin: 0 auto; text-align: left; }
 #header { position: relative; z-index: 10; width: 782px; height: 170px; margin: 0 0 0 -22px; padding: 0 0 0 -22px; z-index: 20; background: url(../images/bg_header.gif) top right no-repeat; }
@@ -73,6 +75,8 @@ textarea { height: 50px; font-size: 1em; }
 #nav-wizard li a { font-weight: bold; line-height: 2em; color: #eee; margin: 0; padding: 0 0 10px 0; display: block; width: 75px; text-align: center; background-image: url(../images/bg_nav_main.gif); background-position: -150px 0; background-repeat: no-repeat; text-decoration: none; }
 #nav-wizard li a:hover { color: #fff; background-position: -75px 0; }
 #nav-wizard li a span { display: block; line-height: 1em; color: #fff;  }
+
+#header-logo {position: absolute; left: 5px; top: 17px;}
 
 /* PROGRESS BARS */
 #progressBars { width: 250px; margin-left: 520px; padding: 10px 0; }
@@ -135,7 +139,7 @@ textarea { height: 50px; font-size: 1em; }
 #contact_list-columnified ul li:hover {margin: 0; padding: 2px 4px 2px 18px; background: url(../images/edit.png) 0 6px no-repeat;}
 #contact_list-columnified .pagination { margin: 10px 0; padding: 5px 0; clear: both; border-top: solid 1px #ccc; }
 
-form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/edit.png) 0 6px no-repeat;}
+
 
 
 /* PRIORITY RATING CONTROL */
