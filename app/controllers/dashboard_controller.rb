@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     if current_mpd_user.show_welcome
       redirect_to :action => "welcome"
     else
-      @title = "Your Ministry Dashboard"
+      @title = "My Ministry Partner Contact Info"
       @col_layout = "two_col"
       items_per_page = 15
       
@@ -26,7 +26,7 @@ class DashboardController < ApplicationController
   
   def get_started
     MpdUser.find(current_mpd_user.id).update_attributes(:show_welcome => false)
-    redirect_to :action => "index"
+    redirect_to :controller => "namestorm", :action => "index" 
   end
   
   def change_event
