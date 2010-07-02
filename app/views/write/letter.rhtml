@@ -15,11 +15,13 @@
     <h3><span>Write</span></h3>
     
     <%- form_tag( {:action => 'update_letter'}, :multipart => true, :id => @letter  ) do -%>
-    <%= hidden_field 'mpd_letter', 'id' %>
+    <%= hidden_field 'mpd_letter', 'id'%>
     <fieldset>
         <legend>Letter Body</legend>
-        <p><label for="mpd_letter_date">Give your letter a specific date</label>
-            <%= date_select 'mpd_letter', 'date' %></p>
+        <p><label for="mpd_letter_date">Give your letter a specific date <span id="help-date" class="instructional" style="display: none;">[ Leave the date blank to always have the current date printed on your letters
+				<a href="#" onclick="Element.toggle('help-date');Element.toggle('help-date-more');return false;">hide this text</a> ]</span>
+				<span id="help-date-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-date');Element.toggle('help-date-more');return false;">?</a> ]</span></label>
+            <%= date_select('mpd_letter', 'date', :include_blank => true, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1)%></p>
         
         <p><label for="mpd_letter_salutation">Personalize your greeting
             <span id="help-salutation" class="instructional" style="display: none;">[ The tag [[SALUTATION]] or [[FULL_NAME]] will be replaced with 
