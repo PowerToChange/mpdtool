@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   layout "login"
 
   def login
-    cas_url = 'https://signin.mygcx.org/cas/login'
+    cas_url = 'https://signin.ccci.org/cas/login'
     @gcx_service_url = cas_url + '?service=' + url_for(:action => :login)
 
     @forgot_password_link = get_forgot_password_link
