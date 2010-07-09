@@ -67,9 +67,6 @@ class AddressesController < ApplicationController
     # @mpd_contacts = [current_mpd_user.mpd_contacts.first]
     @letter = current_mpd_user.mpd_letter
     if @letter
-      if params[:print_addresses_only]
-        @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.address_1.to_s.blank?}
-      end
       if params[:print_sent_marked_false]
         @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.mpd_contact_actions.find_by_event_id(current_event).letter_sent if contact.mpd_contact_actions.find_by_event_id(current_event)}
       end

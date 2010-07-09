@@ -7,9 +7,7 @@
 
 <body>
 <% @mpd_contacts.each do |mpd_contact| %>
-		<% if !@letter.date.blank?%>
-        	<p align="right"><%= @letter.date.to_s(:long) %></p>
-		<% end %>
+        	<p align="right"><%= @letter.date.blank? ? (Time.now.strftime("%B") + " " + Time.now.day.to_s + ", "+ Time.now.year.to_s) : @letter.date.to_s(:long) %></p>
 		
         <% if params[:include_address] && !mpd_contact.address_1.blank?%>
           <p><%= mpd_contact.full_name %><br/>

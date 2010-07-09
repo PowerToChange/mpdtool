@@ -30,7 +30,6 @@
         <%- form_tag('/addresses/print_letter', :id => 'print_letter_form') do -%>
         <p>Export your letters as a PDF file to be printed and mailed.</p>
         <p style="text-align: left;"><%= check_box_tag('include_address') %> Include address on letter</p>
-        <p style="text-align: left;"><%= check_box_tag('print_addresses_only') %> Print letters for only those people that have addresses</p>
         <p style="text-align: left;"><%= check_box_tag('print_sent_marked_false') %> Print letters for only those people that haven't been sent letters yet</p>
         
         <p style="text-align: right;"><%= link_to_function("Print letters", "$('print_letter_form').submit()") %></p>
