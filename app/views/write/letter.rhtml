@@ -91,6 +91,7 @@
         <p><i>Images are optional.  .jpg and .png files only, please.</i></p>
         <% count = 0 %>                                                
         <% for @mpd_letter_image in @mpd_letter_images %>
+		<% if (count < (@mpd_letter.mpd_letter_template_id)) %>
             <div style="clear: left">
                 <div style="float: left;">
                     <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc; width:50px; height:50px") if @mpd_letter_image.filename %>
@@ -101,6 +102,7 @@
                     <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
                 </span></p>
             </div>
+			<% end %>
         <% end %>
             
         <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 8}) %> &nbsp 
