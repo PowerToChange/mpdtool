@@ -83,6 +83,14 @@
             <%= text_field 'mpd_letter', 'closing', :class => "text",
                                                     :maxlength => "250",
                                                     :tabindex => 7 %></p>
+													
+		<p><label for="mpd_letter_printed_name">Print your name
+			<span id="help-printed-name" class="instructional" style="display: none;">[ If you would like your name printed under the space for your signature,
+				 enter it here. <a href="#" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">hide this text</a> ]</span>
+            <span id="help-printed-name-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">?</a> ]</span></label>
+            <%= text_field 'mpd_letter', 'printed_name', :class => "text",
+                                                    :maxlength => "250",
+                                                    :tabindex => 8 %></p>
 
     </fieldset>
     
@@ -105,8 +113,8 @@
 			<% end %>
         <% end %>
             
-        <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 8}) %> &nbsp 
-		<%= image_submit_tag("button_sm_next.gif", {:name => "next", :tabindex => 9}) %>
+        <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 9}) %> &nbsp 
+		<%= image_submit_tag("button_sm_next.gif", {:name => "next", :tabindex => 10}) %>
 		</p>
     </fieldset>
     <%- end -%>
