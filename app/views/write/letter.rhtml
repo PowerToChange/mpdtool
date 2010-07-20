@@ -72,7 +72,7 @@
         
         <p><label for="mpd_letter_acknowledge_section">Acknowledge your reader
             <span id="help-acknowledge" class="instructional" style="display: none;">[ Share an emphasis on thanks, appreciation, gratitude,
-                partnership, and commitment.  This ties your opening acknowledgement to your request. <a href="#" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">hide this text</a> ]</span>
+                partnership, and commitment.  This ties your opening acknowledgment to your request. <a href="#" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">hide this text</a> ]</span>
             <span id="help-acknowledge-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'acknowledge_section', :class => "text", 
                                                           :onkeypress => "countChars(this.id,'char-count-acknowledge', #{@max_field_length});",
@@ -84,9 +84,8 @@
                                                     :maxlength => "250",
                                                     :tabindex => 7 %></p>
 													
-		<p><label for="mpd_letter_printed_name">Print your name
-			<span id="help-printed-name" class="instructional" style="display: none;">[ If you would like your name printed under the space for your signature,
-				 enter it here. <a href="#" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">hide this text</a> ]</span>
+		<p><label for="mpd_letter_printed_name">Sign the letter
+			<span id="help-printed-name" class="instructional" style="display: none;">[ Include your first and last name here. After you print the letters, make them more personal by hand-signing your name above your printed name. We suggest using an ink color other than black, so your name stands out.  <a href="#" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">hide this text</a> ]</span>
             <span id="help-printed-name-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">?</a> ]</span></label>
             <%= text_field 'mpd_letter', 'printed_name', :class => "text",
                                                     :maxlength => "250",
