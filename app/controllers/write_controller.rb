@@ -21,13 +21,17 @@ class WriteController < ApplicationController
     
     if params[:id]
       template = MpdLetterTemplate.find(params[:id])
-      letter = MpdLetter.create(:mpd_letter_template_id => template.id)
-      template.number_of_images.times do
-        mpd_letter_image = MpdLetterImage.new(:mpd_letter_id => letter.id)
-        mpd_letter_image.save(false) #No need for validation checking yet
+      if !(current_mpd_user.mpd_letter.nil?)
+        MpdUser.find(current_mpd_user.id).mpd_letter.update_attributes(:mpd_letter_template_id => template.id)
+      else
+        letter = MpdLetter.create(:mpd_letter_template_id => template.id)
+        template.number_of_images.times do
+          mpd_letter_image = MpdLetterImage.new(:mpd_letter_id => letter.id)
+          mpd_letter_image.save(false) #No need for validation checking yet
+        end
+        
+        MpdUser.find(current_mpd_user.id).update_attributes(:mpd_letter_id => letter.id)
       end
-      
-      MpdUser.find(current_mpd_user.id).update_attributes(:mpd_letter_id => letter.id)
       current_mpd_user.reload()
       
       redirect_to(:action => 'index')
