@@ -3,6 +3,17 @@ class MpdLetter < ActiveRecord::Base
   has_one :mpd_user
   has_many :mpd_letter_images
   
-  validates_length_of :update_section, :educate_section, :needs_section, :involve_section, :acknowledge_section, :maximum => 1000, :allow_nil => true,
-                      :message => "is too long."
+  validates_presence_of :update_section, :educate_section, :needs_section, :involve_section, :acknowledge_section
+  validate :total_length
+  
+  @@max_letter_length = 3250
+  
+  def total_length
+    sum = update_section.length + educate_section.length + needs_section.length + involve_section.length + acknowledge_section.length;
+    errors.add_to_base("Letter can't be more than " + @@max_letter_length.to_s + " characters") if ( sum > @@max_letter_length)
+  end
+  
+  def self.max_letter_length
+    @@max_letter_length
+  end
 end

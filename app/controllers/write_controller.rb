@@ -1,8 +1,6 @@
 class WriteController < ApplicationController
   layout 'main'
   
-  MAX_FIELD_LENGTH = 1000
-  
   def index
     if current_mpd_user.show_calculator && MpdExpenseType.count > 0
       redirect_to(:action => 'calculate_support_total')
@@ -42,7 +40,7 @@ class WriteController < ApplicationController
     @title = "Step #{step}: Write Your Letter "
     @col_layout = "two_col"
     
-    @max_field_length = MAX_FIELD_LENGTH    
+    @max_letter_length = MpdLetter.max_letter_length
     @mpd_letter = current_mpd_user.mpd_letter
     @letter_template = @mpd_letter.mpd_letter_template
     @mpd_letter_images = @mpd_letter.mpd_letter_images
@@ -55,7 +53,7 @@ class WriteController < ApplicationController
     @col_layout = "two_col"
     
     if request.post?
-      @max_field_length = MAX_FIELD_LENGTH    
+      @max_letter_length = MpdLetter.max_letter_length    
       @mpd_letter = MpdLetter.find(params[:mpd_letter][:id])
       @letter_template = @mpd_letter.mpd_letter_template
       @mpd_letter_images = @mpd_letter.mpd_letter_images

@@ -50,6 +50,24 @@ function formatCurrency(num) {
     return (((sign)?'':'-') + '$' + num);
 }
 
-function countChars(source, update, max) {
-    $(update).innerHTML = (max - $F(source).length);
+function countChars(source, update, max){
+	var i = 0;
+	var total = 0;
+	for (i = 0; i < source.length; i++) {
+		total = (total + $F(source[i]).length);
+	}
+	if (total <= max) {
+		if ((max-total) == 1) {$(update).innerHTML = "1 character remaining";}
+		else {$(update).innerHTML = (max-total) + " characters remaining";}
+	}else {
+		if ((total-max) == 1) {$(update).innerHTML = "Your letter is 1 character <big>too long</big>.";}
+		else {$(update).innerHTML = "Your letter is " + (total-max) + " characters <big>too long</big>.";}
+	}
+}
+
+function other(){
+	var total = 0;
+	var toolong = 0;
+	
+	
 }
