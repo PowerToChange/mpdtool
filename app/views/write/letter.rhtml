@@ -57,8 +57,8 @@
                                                           :tabindex => 4 %><br/>
             
         <p><label for="mpd_letter_involve_section">Involve your reader
-            <span id="help-involve" class="instructional" style="display: none;">[ Ask him for specific action based on the needs you
-                have shared.  This can include challenging him to help cover part or all of the
+            <span id="help-involve" class="instructional" style="display: none;">[ Ask your readers for specific action based on the needs you
+                have shared.  This can include challenging them to help cover part or all of the
                 cost of your summer project, which includes training materials, lodging, meals, and
                 transportation.  State the deadline by which you need the money. <a href="#" onclick="Element.toggle('help-involve');Element.toggle('help-involve-more');return false;">hide this text</a> ]</span>
             <span id="help-involve-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-involve');Element.toggle('help-involve-more');return false;">?</a> ]</span></label>
@@ -68,7 +68,7 @@
         
         <p><label for="mpd_letter_acknowledge_section">Acknowledge your reader
             <span id="help-acknowledge" class="instructional" style="display: none;">[ Share an emphasis on thanks, appreciation, gratitude,
-                partnership, and commitment.  This ties your opening acknowledgement to your request. <a href="#" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">hide this text</a> ]</span>
+                partnership, and commitment.  This ties your opening acknowledgment to your request. <a href="#" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">hide this text</a> ]</span>
             <span id="help-acknowledge-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'acknowledge_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
@@ -101,6 +101,7 @@
         <p><i>Images are optional.  .jpg and .png files only, please.</i></p>
         <% count = 0 %>                                                
         <% for @mpd_letter_image in @mpd_letter_images %>
+		<% if (count < (@mpd_letter.mpd_letter_template.number_of_images)) %>
             <div style="clear: left">
                 <div style="float: left;">
                     <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc; width:50px; height:50px") if @mpd_letter_image.filename %>
@@ -111,6 +112,7 @@
                     <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
                 </span></p>
             </div>
+			<% end %>
         <% end %>
             
         <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 9}) %> &nbsp 
