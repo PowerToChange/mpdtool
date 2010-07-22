@@ -30,6 +30,8 @@ class NamestormController < ApplicationController
   end
   
   def start_letter
+    @title = "Step 1: Namestorm"
+    @col_layout = "two_col"
     render :start
   end
   # Display "quick form" and list
