@@ -67,7 +67,7 @@ class NamestormController < ApplicationController
   
   def edit
     @mpd_contact = @mpd_user.mpd_contacts.find(params[:editorId])
-    if !(@mpd_contact.full_name.eql?(params[:value]))
+    if !(@mpd_contact.full_name.eql?(params[:value]) || params[:value].blank?)
       @mpd_contact.full_name = params[:value]
       @mpd_contact.update_attributes(@mpd_contact.attributes)
     end
