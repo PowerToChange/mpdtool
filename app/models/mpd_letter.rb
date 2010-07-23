@@ -3,7 +3,6 @@ class MpdLetter < ActiveRecord::Base
   has_one :mpd_user
   has_many :mpd_letter_images
   
-  validates_presence_of :update_section, :educate_section, :needs_section, :involve_section, :acknowledge_section
   validate :total_length
   
   @@max_letter_length = 3250
