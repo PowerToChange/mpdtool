@@ -31,6 +31,12 @@
         <p>Export your letters as a PDF file to be printed and mailed.</p>
         <p style="text-align: left;"><%= check_box_tag('include_address') %> Include address on letter</p>
         <p style="text-align: left;"><%= check_box_tag('print_sent_marked_false') %> Print letters for only those people that haven't been sent letters yet</p>
+		<% @options = Array.new
+		MpdLetter.find(:all, :conditions => "mpd_user_id=#{current_mpd_user.id}").each { |letter| 
+			@options << letter.name }%>
+    	<p> Select which letter to print
+		<%= select_tag("letters", options_for_select(@options, if current_event.current_letter then MpdLetter.find(current_event.current_letter).name end), {:style => " width: 200px"}) -%>
+		</p>
         
         <p style="text-align: right;"><%= link_to_function("Print letters", "$('print_letter_form').submit()") %></p>
 <!--        <p style="text-align: right;"><%= link_to_function("Print letters to people that haven't been marked as having been sent a letter", "$('print_sent_marked').value = false;$('print_letter_form').submit();$('print_sent_marked').value = true") %></p>

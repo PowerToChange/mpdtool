@@ -4,38 +4,80 @@ class WriteController < ApplicationController
   def index
     if current_mpd_user.show_calculator && MpdExpenseType.count > 0
       redirect_to(:action => 'calculate_support_total')
-    elsif current_mpd_user.mpd_letter.nil?
-      redirect_to(:action => 'select_template')
+    elsif current_event.current_letter.nil?
+      create_letter()
     else
       letter
       render :action => "letter"
     end
   end
   
-  # Select template for letter
-  def select_template
+  def create_letter
     step = MpdExpenseType.count > 0 ? '2.2' : '2.1'
-    @title = "Step #{step}: Select a Letter Template"
-    @letter_templates = MpdLetterTemplate.find(:all)
+    @title = "Step #{step}: Create a New Letter"
     @col_layout = "two_col"
     
+    @letter = nil
+    
     if params[:id]
-      template = MpdLetterTemplate.find(params[:id])
-      if !(current_mpd_user.mpd_letter.nil?)
-        MpdUser.find(current_mpd_user.id).mpd_letter.update_attributes(:mpd_letter_template_id => template.id)
-      else
-        letter = MpdLetter.create(:mpd_letter_template_id => template.id)
-        template.number_of_images.times do
-          mpd_letter_image = MpdLetterImage.new(:mpd_letter_id => letter.id)
-          mpd_letter_image.save(false) #No need for validation checking yet
+      template = MpdLetterTemplate.find(:first, :conditions => "id=#{params[:id]}")
+      if template && !(params[:letter][:name].blank?)
+        begin #catch duplicate names
+          @letter = MpdLetter.create!(:mpd_letter_template_id => template.id, :mpd_user_id => current_mpd_user.id, :name => (params[:letter])[:name])
+          template.number_of_images.times do
+           mpd_letter_image = MpdLetterImage.new(:mpd_letter_id => @letter.id)
+            mpd_letter_image.save(false) #No need for validation checking yet
+          end
+          current_event.update_attribute(:current_letter, @letter.id)
+          flash[:error] = nil #clear error messages when the letter is sucessfuly created
+          redirect_to(:action => 'index')
+          return
+        rescue #from duplicate name
+          @letter = nil
+          flash[:error] = "You already have a letter with that name!"
         end
-        
-        MpdUser.find(current_mpd_user.id).update_attributes(:mpd_letter_id => letter.id)
+      else
+        flash[:error] = "You must name your letter and select a template"
       end
-      current_mpd_user.reload()
-      
-      redirect_to(:action => 'index')
     end
+    render(:action => 'select_template')
+  end
+  
+  def delete_letter
+    MpdLetter.find(current_event.current_letter).destroy()
+    @letter = MpdLetter.find(:first, :conditions => "mpd_user_id=#{current_mpd_user.id}")
+    current_event.update_attribute(:current_letter, if @letter then @letter.id else nil end)
+    redirect_to(:action => 'index')
+  end
+  
+  def update_letter_attributes
+    @title = "Edit this Letter"
+    @col_layout = "two_col"
+    
+    @letter = MpdLetter.find(current_event.current_letter)
+    
+    if params[:letter]
+      if !params[:letter][:name].blank? && MpdLetterTemplate.find(:first, :conditions => "id=#{params[:id]}")
+        begin
+          @letter.update_attributes!(:mpd_letter_template_id => params[:id], :name => (params[:letter])[:name])
+          flash[:error] = nil
+          redirect_to(:action => 'index')
+          return
+        rescue
+          flash[:error] = "You already have a letter with that name!"
+          @letter.reload()
+        end
+      else
+        flash[:error] = "Your letter must have a name!"
+      end
+    end
+    render(:action => 'select_template')
+  end
+  
+  def switch_letter
+    @selected_letter  = MpdLetter.find(:first, :conditions => "mpd_user_id=#{current_mpd_user.id} AND name='#{params[:letters]}'")
+    current_event.update_attribute(:current_letter, @selected_letter.id)
+    redirect_to(:action => 'index')
   end
   
   # Main form for writing letter
@@ -45,7 +87,7 @@ class WriteController < ApplicationController
     @col_layout = "two_col"
     
     @max_letter_length = MpdLetter.max_letter_length
-    @mpd_letter = current_mpd_user.mpd_letter
+    @mpd_letter = MpdLetter.find(current_event.current_letter) #current_mpd_user.mpd_letter
     @letter_template = @mpd_letter.mpd_letter_template
     @mpd_letter_images = @mpd_letter.mpd_letter_images
     

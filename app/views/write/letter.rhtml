@@ -140,5 +140,22 @@
     <p>Click the image to see a sample letter</p>
     
     <p style="text-align: center;"><a href="/uploads/<%= @letter_template.pdf_preview_filename %>" title="See an example" target="_blank"><%= image_tag("/uploads/" + @letter_template.thumbnail_filename) %></a></p>
-    <p><%= link_to("Click here to change your template", select_template_write_path) %></p>
+	
+	<br> <br>
+	<h4>Letter Tools</h4>
+	<p><%= link_to("Click here to edit or delete this letter", update_letter_attributes_write_path) %></p>
+	<p><%= link_to("Click here to start a new letter", create_letter_write_path) %></p>
+		
+	<% @options = Array.new
+		MpdLetter.find(:all, :conditions => "mpd_user_id=#{current_mpd_user.id}").each { |letter| 
+			@options << letter.name }%>
+	<% form_tag("/write/switch_letter", :id => 'switch') do -%>
+	<h4> Select a different letter</h4>
+    <p style="display: inline;">
+	<%= select_tag("letters", options_for_select(@options, @mpd_letter.name), {:style => "display: inline; width: 140px"}) -%>
+	<%= submit_tag("Select") -%>
+	</p>
+	<% end -%>
+	
+	
 </div>

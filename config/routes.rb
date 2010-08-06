@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :write, :collection => {:calculate_support_total => :any, 
                                         :letter => :any, 
                                         :select_template => :any,
+                                        :create_letter => :any,
+                                        :update_letter_attributes => :any,
                                         :update_letter => :any}
   map.resources :mpd_contact_actions
   map.resources :contacts
