@@ -59,7 +59,8 @@ form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/ed
     .two_col #content { float: left; width: 475px; margin: 0; padding: 0; }
     .section, #content { margin-bottom: 35px; clear: left; }
 
-#header-inner { margin: 0 0 0 26px; display: inline; padding: 0; width: 485px; height: 141px; overflow: hidden; float: left; }  
+#header-inner { margin: 0 0 0 26px; display: inline; padding: 0; width: 485px; height: 141px; float: left; }  
+	.van_image {float: left; padding: 5px 0px 4px 15px;}
   
 /* NAVIGATIONAL ELEMENTS */
 #nav-aux, #nav-wizard { list-style: none; padding: 0;}
