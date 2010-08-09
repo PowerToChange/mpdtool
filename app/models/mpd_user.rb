@@ -1,5 +1,5 @@
 class MpdUser < ActiveRecord::Base
-  has_many :mpd_letter
+  has_many :mpd_letters, :dependent => :destroy
   belongs_to :user, :class_name => "User", :foreign_key => "user_id"#, :include => {:person => :current_application}
 
   has_and_belongs_to_many :mpd_roles

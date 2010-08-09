@@ -20,7 +20,7 @@ class WriteController < ApplicationController
     @letter = nil
     
     if params[:id]
-      template = MpdLetterTemplate.find(:first, :conditions => "id=#{params[:id]}")
+      template = MpdLetterTemplate.find(:first, :conditions => ["id= ?", params[:id]])
       if template && !(params[:letter][:name].blank?)
         begin #catch duplicate names
           @letter = MpdLetter.create!(:mpd_letter_template_id => template.id, :mpd_user_id => current_mpd_user.id, :name => (params[:letter])[:name])
@@ -57,7 +57,7 @@ class WriteController < ApplicationController
     @letter = MpdLetter.find(current_event.current_letter)
     
     if params[:letter]
-      if !params[:letter][:name].blank? && MpdLetterTemplate.find(:first, :conditions => "id=#{params[:id]}")
+      if !params[:letter][:name].blank? && MpdLetterTemplate.find(:first, :conditions => ["id= ?", params[:id]])
         begin
           @letter.update_attributes!(:mpd_letter_template_id => params[:id], :name => (params[:letter])[:name])
           flash[:error] = nil
@@ -75,7 +75,7 @@ class WriteController < ApplicationController
   end
   
   def switch_letter
-    @selected_letter  = MpdLetter.find(:first, :conditions => "mpd_user_id=#{current_mpd_user.id} AND name='#{params[:letters]}'")
+    @selected_letter  = MpdLetter.find(:first, :conditions => ["mpd_user_id = ? AND name = ?", current_mpd_user.id, params[:letters]])
     current_event.update_attribute(:current_letter, @selected_letter.id)
     redirect_to(:action => 'index')
   end

@@ -2,6 +2,7 @@ class MpdLetter < ActiveRecord::Base
   belongs_to :mpd_letter_template
   belongs_to :mpd_user
   has_many :mpd_letter_images
+  has_one :mpd_event
   
   validate :total_length
   

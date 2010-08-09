@@ -65,7 +65,7 @@ class AddressesController < ApplicationController
   def print_letter
     @mpd_contacts = current_mpd_user.mpd_contacts
     # @mpd_contacts = [current_mpd_user.mpd_contacts.first]
-    @letter = MpdLetter.find(:first, :conditions => "mpd_user_id=#{current_mpd_user.id} AND name='#{params[:letters]}'") #current_mpd_user.mpd_letter
+    @letter = MpdLetter.find(:first, :conditions => ["mpd_user_id = ? AND name = ?", current_mpd_user.id, params[:letters]]) #current_mpd_user.mpd_letter
     if @letter
       if params[:print_sent_marked_false]
         @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.mpd_contact_actions.find_by_event_id(current_event).letter_sent if contact.mpd_contact_actions.find_by_event_id(current_event)}
