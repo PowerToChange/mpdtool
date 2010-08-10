@@ -107,7 +107,7 @@
                     <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc; width:50px; height:50px") if @mpd_letter_image.filename %>
                 </div>
                 <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
-                <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload" %><br/>
+                <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload", :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
                 <span class="instructional" style="display: block; margin-top: 3px;">
                     <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
                 </span></p>
@@ -143,8 +143,8 @@
 	
 	<br> <br>
 	<h4>Letter Tools</h4>
-	<p><%= link_to("Click here to edit or delete this letter", update_letter_attributes_write_path) %></p>
-	<p><%= link_to("Click here to start a new letter", create_letter_write_path) %></p>
+	<p><%= link_to("Click here to edit or delete this letter", update_letter_attributes_write_path, {:onClick => "if ($('unsaved_changes').value == 'true'){if (!confirm('This letter has unsaved changes. Do you want to continue anyway?')){return false;}}"}) %></p>
+	<p><%= link_to("Click here to start a new letter", create_letter_write_path, {:onClick => "if ($('unsaved_changes').value == 'true'){if (!confirm('This letter has unsaved changes. Do you want to continue anyway?')){return false;}}"}) %></p>
 		
 	<% @options = Array.new
 		MpdLetter.find(:all, :conditions => "mpd_user_id=#{current_mpd_user.id}").each { |letter| 
@@ -153,10 +153,9 @@
 	<h4> Select a different letter</h4>
     <p style="display: inline;">
 	<%= select_tag("letters", options_for_select(@options, @mpd_letter.name), {:style => "display: inline; width: 140px"}) -%>
-	<%= button_to_function("Select", "if ($('letters').value != '#{@mpd_letter.name}'){if (document.getElementById('unsaved_changes').value == 'true'){if (confirm('This letter has unsaved changes. Do you want to continue anyway?')){$('switch').submit()}} else {$('switch').submit()}}") -%>
+	<%= submit_tag("Select", :onClick => "if ($('letters').value != '#{@mpd_letter.name}'){if ($('unsaved_changes').value == 'true'){if (!confirm('This letter has unsaved changes. Do you want to continue anyway?')){return false;}}}else{return false;}") -%>
 	<%= hidden_field_tag("unsaved_changes") -%>
 	</p>
 	<% end -%>
-	
 	
 </div>
