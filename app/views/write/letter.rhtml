@@ -21,7 +21,7 @@
         <p><label for="mpd_letter_date">Give your letter a specific date <span id="help-date" class="instructional" style="display: none;">[ Leave the date blank to always have the current date printed on your letters
 				<a href="#" onclick="Element.toggle('help-date');Element.toggle('help-date-more');return false;">hide this text</a> ]</span>
 				<span id="help-date-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-date');Element.toggle('help-date-more');return false;">?</a> ]</span></label>
-            <%= date_select('mpd_letter', 'date', :include_blank => true, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1)%></p>
+            <%= date_select('mpd_letter', 'date', {:include_blank => true, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1}, {:onChange => "document.getElementById('unsaved_changes').value = 'true';"}) %></p>
         
         <p><label for="mpd_letter_salutation">Personalize your greeting
             <span id="help-salutation" class="instructional" style="display: none;">[ The tag [[SALUTATION]] or [[FULL_NAME]] will be replaced with 
@@ -29,7 +29,7 @@
             <span id="help-salutation-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-salutation');Element.toggle('help-salutation-more');return false;">?</a> ]</span></label>
             <%= text_field 'mpd_letter', 'salutation', :class => "text",
                                                        :maxlength => "250",
-                                                       :tabindex => 1 %></p>
+                                                       :tabindex => 1, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %></p>
                                                        
         <p><label for="mpd_letter_update_section">Bring your reader up to date
             <span id="help-update" class="instructional" style="display: none;">[ Let the
@@ -37,7 +37,7 @@
             <span id="help-update-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-update');Element.toggle('help-update-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'update_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
-                                                          :tabindex => 2 %><br/>
+                                                          :tabindex => 2, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
 
         <p><label for="mpd_letter_educate_section">Educate your reader
             <span id="help-educate" class="instructional" style="display: none;">[ Share how you became involved in <%= t(:ministry, :default => "Campus Crusade for Christ") %> and
@@ -46,7 +46,7 @@
             <span id="help-educate-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-educate');Element.toggle('help-educate-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'educate_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
-                                                          :tabindex => 3 %><br/>
+                                                          :tabindex => 3, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
         
         <p><label for="mpd_letter_needs_section">Explain your need
             <span id="help-needs" class="instructional" style="display: none;">[ The purpose of your letter is to give your reader 
@@ -54,7 +54,7 @@
             <span id="help-needs-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-needs');Element.toggle('help-needs-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'needs_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
-                                                          :tabindex => 4 %><br/>
+                                                          :tabindex => 4, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
             
         <p><label for="mpd_letter_involve_section">Involve your reader
             <span id="help-involve" class="instructional" style="display: none;">[ Ask your readers for specific action based on the needs you
@@ -64,7 +64,7 @@
             <span id="help-involve-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-involve');Element.toggle('help-involve-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'involve_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
-                                                          :tabindex => 5 %><br/>
+                                                          :tabindex => 5, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
         
         <p><label for="mpd_letter_acknowledge_section">Acknowledge your reader
             <span id="help-acknowledge" class="instructional" style="display: none;">[ Share an emphasis on thanks, appreciation, gratitude,
@@ -72,12 +72,12 @@
             <span id="help-acknowledge-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-acknowledge');Element.toggle('help-acknowledge-more');return false;">?</a> ]</span></label>
             <%= text_area 'mpd_letter', 'acknowledge_section', :class => "text", 
                                                           :oninput => "countChars(['mpd_letter_update_section','mpd_letter_educate_section','mpd_letter_needs_section','mpd_letter_involve_section','mpd_letter_acknowledge_section'],'char-count-update', #{@max_letter_length});",
-                                                          :tabindex => 6 %><br/>
+                                                          :tabindex => 6, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %><br/>
         
         <p><label for="mpd_letter_closing">Close the letter</label>
             <%= text_field 'mpd_letter', 'closing', :class => "text",
                                                     :maxlength => "250",
-                                                    :tabindex => 7 %></p>
+                                                    :tabindex => 7, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %></p>
 																		
 		<p><label for="mpd_letter_printed_name">Print your name
 			<span id="help-printed-name" class="instructional" style="display: none;">[ If you would like your name printed under the space for your signature,
@@ -85,7 +85,7 @@
             <span id="help-printed-name-more" class="instructional">[ <a href="#" style="padding: 0 2px; font-weight: bold;" onclick="Element.toggle('help-printed-name');Element.toggle('help-printed-name-more');return false;">?</a> ]</span></label>
             <%= text_field 'mpd_letter', 'printed_name', :class => "text",
                                                     :maxlength => "250",
-                                                    :tabindex => 8 %></p>
+                                                    :tabindex => 8, :onChange => "document.getElementById('unsaved_changes').value = 'true';" %></p>
 													
 		<p><span class="helpText"><span id="char-count-update"><%= @max_letter_length - ( !@mpd_letter.update_section.nil? ? @mpd_letter.update_section.length : 0) - ( !@mpd_letter.educate_section.nil? ? @mpd_letter.educate_section.length : 0) - ( !@mpd_letter.needs_section.nil? ? @mpd_letter.needs_section.length : 0) - ( !@mpd_letter.involve_section.nil? ? @mpd_letter.involve_section.length : 0) - ( !@mpd_letter.acknowledge_section.nil? ? @mpd_letter.acknowledge_section.length : 0)%> characters remaining</span>
 			<span id="help-count" class="instructional" style="display: none;">[ This total is to keep your letter length to one 
@@ -153,7 +153,8 @@
 	<h4> Select a different letter</h4>
     <p style="display: inline;">
 	<%= select_tag("letters", options_for_select(@options, @mpd_letter.name), {:style => "display: inline; width: 140px"}) -%>
-	<%= submit_tag("Select") -%>
+	<%= button_to_function("Select", "if ($('letters').value != '#{@mpd_letter.name}'){if (document.getElementById('unsaved_changes').value == 'true'){if (confirm('This letter has unsaved changes. Do you want to continue anyway?')){$('switch').submit()}} else {$('switch').submit()}}") -%>
+	<%= hidden_field_tag("unsaved_changes") -%>
 	</p>
 	<% end -%>
 	
