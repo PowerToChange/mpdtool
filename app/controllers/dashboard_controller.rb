@@ -8,11 +8,30 @@ class DashboardController < ApplicationController
     else
       @title = "My Ministry Partner Contact Info"
       @col_layout = "two_col"
-      items_per_page = 15
+      conditions =[]
+      if params[:sort].nil?
+        @show = params[:show] 
+      else 
+        @show = process_sort_for_show(params[:sort])
+      end
+
+      if params[:type].present?
+        if  params[:type] == "contact"
+          if params[:compare].present?
+            select_conditions = params[:selection] + " " + params[:compare] + " '" + params[:value] + "'"
+          else
+            select_conditions = params[:selection] + " = '" + params[:value] + "'"
+          end
+        else 
+          select_conditions = "mpd_contact_actions." + params[:selection] + " = '" + params[:value] + "'"
+        end
+          conditions = process_conditions(select_conditions)
+      else 
+        conditions = process_conditions
+      end
+      @mpd_contacts = MpdContact.find(:all, :include => "mpd_priorities", :order => process_sort(params[:sort]),
+                                       :conditions => conditions, :joins => :mpd_contact_actions)
       
-      @pages, @mpd_contacts = paginate(:mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), 
-                                       :conditions => process_conditions, :joins => :mpd_contact_actions, :per_page => items_per_page)
-  
       if request.xml_http_request?
         render :partial => "shared/full_contacts_list", :layout => false
       end

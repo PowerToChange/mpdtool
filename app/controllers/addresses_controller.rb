@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions, :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => 'letter_sent'}, :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
     end
   end
 
@@ -34,7 +34,7 @@ class AddressesController < ApplicationController
                                      :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => 'letter_sent'}, :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
     else
       redirect_to :action => :index
     end
@@ -50,7 +50,7 @@ class AddressesController < ApplicationController
       
       # Write data rows
       contacts.each do |c|
-        csv << [c.full_name, c.salutation, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent(current_event.id), c.call_made(current_event.id), c.thankyou_sent(current_event.id), c.notes]
+        csv << [c.full_name, c.salutation, c.address_1, c.address_2, c.city, c.state, c.zip, number_to_phone(c.phone, :area_code => true), c.email_address, number_to_currency(number_with_delimiter(c.gift_amount(current_event.id))), c.letter_sent(current_event.id), c.contacted(current_event.id), c.thankyou_sent(current_event.id), c.notes]
       end
     end
     render :text => result

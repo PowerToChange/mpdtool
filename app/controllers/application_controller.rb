@@ -110,19 +110,105 @@ class ApplicationController < ActionController::Base
   
   def process_sort(sort, default_sort = DEFAULT_SORT)
     ret_val = case sort
-           when "full_name_reverse" then "full_name DESC"
-           when "mpd_contacts.created_at_reverse" then "mpd_contacts.created_at DESC"
-           when "letter_sent_reverse" then "mpd_contact_actions.letter_sent DESC"
-           when "call_made_reverse" then "mpd_contact_actions.call_made DESC"
-           when "gift_amount_reverse" then "mpd_contact_actions.gift_amount DESC"
-           when "thankyou_sent_reverse" then "mpd_contact_actions.thankyou_sent DESC"
-           when "mpd_priorities.priority_reverse" then "mpd_priorities.priority DESC"
-           when "address_1_reverse" then "address_1 DESC"
-           when "phone_reverse" then "phone DESC"
-           else params['sort']
-           end
+                  #Contact Information
+                  when "full_name_reverse" then "mpd_contacts.full_name DESC"
+                  when "salutation_reverse" then "mpd_contacts.salutation DESC"
+                  when "address_1_reverse" then "mpd_contacts.address_1 DESC"
+                  when "city_reverse" then "mpd_contacts.city DESC"
+                  when "state_reverse" then "mpd_contacts.state DESC"
+                  when "zip_reverse" then "mpd_contacts.zip DESC"
+                  when "phone_reverse" then "mpd_contacts.phone DESC"
+                  when "phone_2_reverse" then "mpd_contacts.phone_2 DESC"
+                  when "email_address_reverse" then "mpd_contacts.email_address DESC"
+                  #Progress Information
+                  when "letter_sent_reverse" then "mpd_contact_actions.letter_sent DESC"
+                  when "contacted_reverse" then "mpd_contact_actions.contacted DESC"
+                  when "thankyou_sent_reverse" then "mpd_contact_actions.thankyou_sent DESC"
+                  when "postproject_sent_reverse" then "mpd_contact_actions.postproject_sent DESC"
+                  #Gift Information
+                  when "gift_pledged_reverse" then "mpd_contact_actions.gift_pledged DESC"
+                  when "gift_received_reverse" then "mpd_contact_actions.gift_received DESC"
+                  when "date_received_reverse" then "mpd_contact_actions.date_received DESC"
+                  when "gift_amount_reverse" then "mpd_contact_actions.gift_amount DESC"
+                  when "form_received_reverse" then "mpd_contact_actions.form_received DESC"
+                  #Relationship Information
+                  when "mpd_contacts.created_at_reverse" then "mpd_contacts.created_at DESC"
+                  when "partner_financial_reverse" then "mpd_contact_actions.partner_financial DESC"
+                  when "partner_prayer_reverse" then "mpd_contact_actions.partner_prayer DESC"
+                  when "relationship_reverse" then "mpd_contacts.relationship DESC"
+                  #Notes
+                  when "notes_reverse" then "mpd_contacts.notes DESC"
+                  when "mpd_priorities.priority_reverse" then "mpd_priorities.priority DESC"
+              else params['sort']
+              end
     ret_val = default_sort if ret_val.nil?
     return ret_val
+  end
+  
+  def process_sort_for_show(sort)
+    return sort if sort.nil?
+    ret_val = case sort 
+                  #Contact Information
+                  when "full_name_reverse" then "contact_address"
+                  when "salutation_reverse" then "contact_address"
+                  when "address_1_reverse" then "contact_address"
+                  when "city_reverse" then "contact_address"
+                  when "state_reverse" then "contact_address"
+                  when "zip_reverse" then "contact_address"
+                  when "phone_reverse" then "contact_phoneemail"
+                  when "phone_2_reverse" then "contact_phoneemail"
+                  when "email_address_reverse" then "contact_phoneemail"
+                  
+                  when "full_name" then "contact_address"
+                  when "salutation" then "contact_address"
+                  when "address_1" then "contact_address"
+                  when "city" then "contact_address"
+                  when "state" then "contact_address"
+                  when "zip" then "contact_address"
+                  when "phone" then "contact_phoneemail"
+                  when "phone_2" then "contact_phoneemail"
+                  when "email_address" then "contact_phoneemail"
+                  #Progress Information
+                  when "letter_sent_reverse" then "progress"
+                  when "contacted_reverse" then "progress"
+                  when "thankyou_sent_reverse" then "progress"
+                  when "postproject_sent_reverse" then "progress"
+                  
+                  when "letter_sent" then "progress"
+                  when "contacted" then "progress"
+                  when "thankyou_sent" then "progress"
+                  when "postproject_sent" then "progress"
+                  #Gift Information
+                  when "gift_pledged_reverse" then "gift"
+                  when "gift_received_reverse" then "gift"
+                  when "date_received_reverse" then "gift"
+                  when "gift_amount_reverse" then "gift"
+                  when "form_received_reverse" then "gift"
+                  
+                  when "gift_pledged" then "gift"
+                  when "gift_received" then "gift"
+                  when "date_received" then "gift"
+                  when "gift_amount" then "gift"
+                  when "form_received" then "gift"
+                  #Relationship Information
+                  when "mpd_contacts.created_at_reverse" then "relationship"
+                  when "partner_financial_reverse" then "relationship"
+                  when "partner_prayer_reverse" then "relationship"
+                  when "relationship_reverse" then "relationship"
+                  
+                  when "mpd_contacts.created_at" then "relationship"
+                  when "partner_financial" then "relationship"
+                  when "partner_prayer" then "relationship"
+                  when "relationship" then "relationship"
+                  #Notes
+                  when "notes_reverse" then "notes"
+                  when "mpd_priorities.priority_reverse" then "notes"
+                  
+                  when "notes" then "notes"
+                  when "mpd_priorities.priority" then "notes"
+                else
+            end
+     return ret_val
   end
   
   def process_conditions(conditions = nil)

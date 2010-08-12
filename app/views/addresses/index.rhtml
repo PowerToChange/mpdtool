@@ -49,7 +49,7 @@
         <h4>Print Your Labels</h4>
         <%- form_tag('/addresses/address_labels', :id => 'print_label_form') do -%>
         <p>While it's more personal to handwrite partners' addresses, if you'd prefer mailing labels, we've done the hard work for you! Simply click "Create address labels" below, open the PDF file and print using labels that match the Avery&reg 5160 layout.</p>
-        <p style="text-align: left;"><%= check_box_tag('print_selected_labels') %> Create labels for selected contacts</p>
+        <p style="text-align: left;"><%= check_box_tag('print_selected_labels') %> Create address labels for only those people I have selected </p>
         <p style="text-align: right;"><%= link_to_function("Create address labels", "$('print_label_form').submit()") %></p>
 		<%- end -%>
 		

@@ -2,10 +2,11 @@
     <table cellspacing="0">
         <thead>
             <tr>
-                <th class="nopad">&nbsp;</th>
+                <th class="mainTabLeft nopad">&nbsp;</th>
                 <th class="<%= sort_td_class_helper 'full_name' %>"><%= sort_link_helper "Name", "full_name" %></th>
                 <th class="<%= sort_td_class_helper 'address_1' %>"><%= sort_link_helper "Address", "address_1" %></th>
-                <th class="<%= sort_td_class_helper 'phone' %>"><%= sort_link_helper "Phone Number", "phone" %></th>
+                <th class="<%= sort_td_class_helper 'phone' %>"><%= sort_link_helper "Phone #1", "phone" %></th>
+				<th class="mainTabRight <%= sort_td_class_helper 'phone_2' %>"><%= sort_link_helper "Phone #2", "phone_2" %></th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +18,38 @@
                     <td valign="top" class="nopad"><%=  check_box_tag("cb_#{@mpd_contact.id}", 1, mpd_contact.is_selected(current_event.id, @page), {:onclick => remote_function(:loading => "Element.hide('cb_#{@mpd_contact.id}'); $('cb_#{@mpd_contact.id}').insert({before: '<img id=cb_#{@mpd_contact.id}_spinner src=\"/images/loading_dots.gif\" />'})", :complete => "Element.hide('cb_#{@mpd_contact.id}_spinner'); Element.show('cb_#{@mpd_contact.id}'); Element.remove('cb_#{@mpd_contact.id}_spinner')", :url => {:params => params.merge({:id => @mpd_contact, :controller => 'contacts', :action => 'toggle_selected', :context => @page})})})%></td>
                     <td class="<%= sort_td_class_helper 'full_name' -%>" valign="top"><%= link_to(mpd_contact.full_name, {:params => params.merge({:controller => "contacts", :action => "edit", :id => mpd_contact})}) %></td>
                     <td class="<%= sort_td_class_helper 'address_1' -%>" valign="top"><%= mpd_contact.display_address(true) %></td>
-                    <td class="<%= sort_td_class_helper 'phone' -%>" valign="top"><%= number_to_phone(mpd_contact.phone, :area_code => true) %></td>
+					<td class="<%= sort_td_class_helper 'phone' -%>" ><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.phone? ? mpd_contact.phone : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_phone",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_phone',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_phone', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="<%= sort_td_class_helper 'phone_2' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.phone_2? ? mpd_contact.phone_2 : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_phone_2",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_phone_2',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_phone_2', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
                 </tr>
                 <%  end
                   end %>

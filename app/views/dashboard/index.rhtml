@@ -40,7 +40,7 @@
         <dt>Letters sent</dt>
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and letter_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Calls made</dt>
-        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and call_made = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and contacted = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Gifts Received</dt>
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and gift_amount > 0", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Thank yous sent</dt>
@@ -50,13 +50,21 @@
 
 <div class="clear">&nbsp;</div>
 
-<h3 style="margin-top: 25px;" >View Ministry Partners: All <%= image_tag("loading_dots.gif",
+<h3 style="margin-top: 25px;" >View Ministry Partners: <%= select_tag( "vmp_select", "<option>All</option><option>City</option><option>Contacted</option><option>Form Received</option><option>Gift Amount</option><option>Gift Pledged</option><option>Gift Received</option><option>Letter Sent</option><option>Partner-Financial</option><option>Partner-Prayer</option><option>Post-Project Letter Sent</option><option>Relationship</option><option>State</option><option>Thank You Sent</option><option>Zip</option>",
+															:onchange => "viewMinistryPartners('vmp_select')", :selected => "All") %>
+			<%= select_tag("vmp_gle_select","<option>&gt</option><option>&lt</option><option>=</option>", :class => "vmpGiftInput", :style => "display:none;")%>			
+			<%= text_field_tag( "vmp_text", nil, :class => "vmpTextInput", :style => "display:none;")%>
+			<%= radio_button_tag("vmp", "yes", true, :class => "vmpBoolInput", :style => "display:none")%><div id="vmp_check_yes" class="vmpBoolInput" style="display:none"></div>
+			<%= radio_button_tag("vmp", "no", false, :class => "vmpBoolInput", :style => "display:none")%><div id="vmp_check_no" class="vmpBoolInput" style="display:none"></div>
+			<!-- <%= check_box_tag("vmp_check", 1, false, :class => "vmpBoolInput", :style => "display:none;")%> -->
+			<%= image_tag("button_sm_update.gif", :onclick => "updateMinistryPartners('vmp_select','contacts_list')", :style=> "cursor:pointer", :align => 'absmiddle', :border=> 0)%>
+			<%= image_tag("loading_dots.gif",
               :align => 'absmiddle',
               :border=> 0,
               :id => "spinner",
               :style=>"display: none;" ) %></h3>
               
-<p class="instructional">Click on a contact's name to view, edit, or remove their details</p>              
+<p class="instructional">Click a heading to view, edit, or remove contact details</p>              
          
 <div id="contacts_list" class="contact_list wide">
     <%= render :partial => "shared/full_contacts_list"%>

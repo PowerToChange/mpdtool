@@ -1,30 +1,328 @@
     <div class="spacer">&nbsp;</div>
+	<table cellspacing="0">
+        <thead>
+        	<tr>
+				<th class="<%= "selectedTab " if @show == 'contact_address' || @show == 'contact_phoneemail' || !@show.present? -%> mainTabLeft"  id="contact_tab" style="text-align:center;width: 20%;" colspan="2"><%= label "Contact", "Contact", nil, :style => "cursor:pointer",  :onclick => "selectTab(['contact','contact_address'],['contact_phoneemail','gift','relationship','progress','notes']);" %></th>
+        		<th class="<%= "selectedTab " if @show == 'progress' -%>" id="progress_tab" style="text-align:center;width: 20%;"><%= label "Progress", "Progress", nil, :style => "cursor:pointer", :onclick => "selectTab(['progress'],['contact','contact_address','contact_phoneemail','gift','relationship','notes']);" %></th>
+				<th class="<%= "selectedTab " if @show == 'gift' -%>" id="gift_tab" style="text-align:center;width: 20%;"><%= label "Gift", "Gift", nil, :style => "cursor:pointer", :onclick => "selectTab(['gift'],['contact','contact_address','contact_phoneemail','relationship','progress','notes']);"  %></th>
+				<th class="<%= "selectedTab " if @show == 'relationship' -%>" id="relationship_tab" style="text-align:center;width: 20%;"><%= label "Relationship", "Relationship", nil, :style => "cursor:pointer", :onclick => "selectTab(['relationship'],['contact','contact_address','contact_phoneemail','gift','progress','notes']);" %></th>
+				<th class="<%= "selectedTab " if @show == 'notes' -%> mainTabRight" id="notes_tab" style="text-align:center;width: 20%;"><%= label "Notes_1", "Notes", nil, :style => "cursor:pointer", :onclick => "selectTab(['notes'],['contact','contact_address','contact_phoneemail','gift','progress','relationship']);" %></th>
+        	</tr>
+			<tr style="height: 20px">
+				<th class="<%= "selectedTab " if @show == 'contact_address' || !@show.present? -%> subTabLeft"  id="contact_address_tab" style="text-align:right; width: 9%;"><%= label "Address", "Address", nil, :style => "text-align:right;cursor:pointer",  :onclick => "selectTab(['contact','contact_address'],['contact_phoneemail','gift','relationship','progress','notes'])"%></th>
+				<th class="<%= "selectedTab " if @show == 'contact_phoneemail' -%> subTabRight"  id="contact_phoneemail_tab" style="text-align:right;width: 11%;"><%= label "Phone/Email", "Phone/Email", nil, :style => "text-align:right;cursor:pointer",  :onclick => "selectTab(['contact','contact_phoneemail'],['contact_address','gift','relationship','progress','notes'])"%></th>
+				<th style="background: #f0f0e6;"></th>
+			</tr>
+			<tr style="height: 20px"></tr>
+		</thead>
+	</table>
     <table cellspacing="0">
         <thead>
-            <tr>
-                <th class="<%= sort_td_class_helper 'full_name' %>"><%= sort_link_helper "Name", "full_name" %></th>
-                <th class="<%= sort_td_class_helper 'mpd_contacts.created_at' %>"><%= sort_link_helper "Date Added", "mpd_contacts.created_at" %></th>
-                <th class="<%= sort_td_class_helper 'letter_sent' %>"><%= sort_link_helper "Letter Sent", "letter_sent" %></th>
-                <th class="<%= sort_td_class_helper 'call_made' %>"><%= sort_link_helper "Call Made", "call_made" %></th>
-                <th class="<%= sort_td_class_helper 'gift_amount' %>"><%= sort_link_helper "Gift Amount", "gift_amount" %></th>
-                <th class="<%= sort_td_class_helper 'thankyou_sent' %>"><%= sort_link_helper "Thanked", "thankyou_sent" %></th>
-                <th class="<%= sort_td_class_helper 'mpd_priorities.priority' %>"><%= sort_link_helper "Priority", "mpd_priorities.priority" %></th>
-				<th class="<%= sort_td_class_helper 'selected' -%>"><%= label "Remove", "remove", nil %></th>
+        	<tr>
+            	<th class="name mainTabLeft <%= sort_td_class_helper 'full_name' %>" style="width:115px;"><%= sort_link_helper "Name", "full_name" %></th>
+            	<!--Contact Information -->
+				<th class="contact_address <%= sort_td_class_helper 'salutation' %>" style="width:110px;<%= "display:none;\"" unless @show == 'contact_address' || !@show.present? -%>"><%= sort_link_helper "Salutation", "salutation" %></th>
+				<th class="contact_address <%= sort_td_class_helper 'address_1' %>" style="width:120px;<%= "display:none;\"" unless @show == 'contact_address' || !@show.present? -%>"><%= sort_link_helper "Address", "address_1" %></th>
+				<th class="contact_address <%= sort_td_class_helper 'city' %>" style="width:50px;<%= "display:none;\"" unless @show == 'contact_address' || !@show.present? -%>"><%= sort_link_helper "City", "city" %></th>
+				<th class="contact_address <%= sort_td_class_helper 'state' %>" style="width:30px;<%= "display:none;\"" unless @show == 'contact_address' || !@show.present? -%>"><%= sort_link_helper "State", "state" %></th>
+				<th class="contact_address <%= sort_td_class_helper 'zip' %>" style="width:60px;<%= "display:none;\"" unless @show == 'contact_address' || !@show.present? -%>"><%= sort_link_helper "Zip", "zip" %></th>
+				<th class="contact_phoneemail <%= sort_td_class_helper 'phone' %>" style="width:105px;<%= "display:none;\"" unless @show == 'contact_phoneemail'-%>"><%= sort_link_helper "Phone #1", "phone" %></th>
+				<th class="contact_phoneemail <%= sort_td_class_helper 'phone_2' %>" style="width:105px;<%= "display:none;\"" unless @show == 'contact_phoneemail'-%>"><%= sort_link_helper "Phone #2", "phone_2" %></th>
+				<th class="contact_phoneemail <%= sort_td_class_helper 'email_address' %>" style="width:160px;<%= "display:none;\"" unless @show == 'contact_phoneemail'-%>"><%= sort_link_helper "Email", "email_address" %></th>
+				<!--Progress Information -->
+                <th class="progress <%= sort_td_class_helper 'letter_sent' %>" style="width:70px;<%= "display:none;\"" unless @show == 'progress'-%>"><%= sort_link_helper "Letter Sent", "letter_sent" %></th>
+                <th class="progress <%= sort_td_class_helper 'contacted' %>" style="width:70px;<%= "display:none;\"" unless @show == 'progress'-%>"><%= sort_link_helper "Contacted", "contacted" %></th>
+				<th class="progress <%= sort_td_class_helper 'thankyou_sent' %>" style="width:100px;<%= "display:none;\"" unless @show == 'progress'-%>"><%= sort_link_helper "Thank You Sent", "thankyou_sent" %></th>
+				<th class="progress <%= sort_td_class_helper 'postproject_sent' %>" style="width:130px;<%= "display:none;\"" unless @show == 'progress'-%>"><%= sort_link_helper "Post-Project Letter Sent", "postproject_sent" %></th>
+				<!--Gift Information -->
+				<th class="gift <%= sort_td_class_helper 'gift_pledged' %>" style="width:55px;<%= "display:none;\"" unless @show == 'gift'-%>"><%= sort_link_helper "Pledged", "gift_pledged" %></th>
+				<th class="gift <%= sort_td_class_helper 'gift_received' %>" style="width:65px;<%= "display:none;\"" unless @show == 'gift'-%>"><%= sort_link_helper "Received", "gift_received" %></th>
+				<th class="gift <%= sort_td_class_helper 'date_received' %>" style="width:95px;<%= "display:none;\"" unless @show == 'gift'-%>"><%= sort_link_helper "Date Received", "date_received" %></th>
+                <th class="gift <%= sort_td_class_helper 'gift_amount' %>" style="width:55px;<%= "display:none;\"" unless @show == 'gift'-%>"><%= sort_link_helper "Amount", "gift_amount" %></th>
+				<th class="gift <%= sort_td_class_helper 'form_received' %>" style="width:100px;<%= "display:none;\"" unless @show == 'gift'-%>"><%= sort_link_helper "Form Received", "form_received" %></th>
+				<!--Relationship Information -->
+				<th class="relationship <%= sort_td_class_helper 'mpd_contacts.created_at' %>" style="width:100px;<%= "display:none;\"" unless @show == 'relationship'-%>"><%= sort_link_helper "Date Added", "mpd_contacts.created_at" %></th>
+				<th class="relationship <%= sort_td_class_helper 'partner_financial' %>" style="width:90px;<%= "display:none;\"" unless @show == 'relationship'-%>"><%= sort_link_helper "Financial Partner", "partner_financial" %></th>
+				<th class="relationship <%= sort_td_class_helper 'partner_prayer' %>" style="width:80px;<%= "display:none;\"" unless @show == 'relationship'-%>"><%= sort_link_helper "Prayer Partner", "partner_prayer" %></th>
+				<th class="relationship <%= sort_td_class_helper 'relationship' %>" style="width:100px;<%= "display:none;\"" unless @show == 'relationship'-%>"><%= sort_link_helper "Relationship", "relationship" %></th>
+				<!--Notes Information -->
+				<th class="notes <%= sort_td_class_helper 'notes' %>" style="width:320px;<%= "display:none;\"" unless @show == 'notes'-%>><%= sort_link_helper "Notes", "notes" %></th>
+				<th class="notes <%= sort_td_class_helper 'mpd_priorities.priority' %>" style="width: 50px;<%= "display:none;" unless @show == 'notes'-%>"><%= sort_link_helper "Priority", "mpd_priorities.priority" %></th>
+				<th class="mainTabRight <%= sort_td_class_helper 'remove' -%>" style="width: 55px"><%= label "Remove", "remove", nil %></th>
             </tr>
-        </thead>
-        <tbody>
+		</thead>
+</table>
+	<div style="height: 300px; overflow-y:scroll;overflow-x:hidden;">
+	<table>
+		<tbody>
             <% if @mpd_contacts.size > 0 %>
             <% @mpd_contacts.each do |mpd_contact| %>
-            <tr class="<%= cycle("even", "odd") %>">
-                <td class="<%= sort_td_class_helper 'full_name' -%>"><%= link_to(mpd_contact.full_name, {:params => params.merge({:controller => "contacts", :action => "edit", :id => mpd_contact})}) %></td>
-                <td class="<%= sort_td_class_helper 'mpd_contacts.created_at' -%>"><%= mpd_contact.created_at.strftime("%m/%d/%Y") %></td>
-                <td class="<%= sort_td_class_helper 'letter_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.letter_sent(current_event.id) %></td>
-                <td class="<%= sort_td_class_helper 'call_made' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.call_made(current_event.id) %></td>
-                <td class="<%= sort_td_class_helper 'gift_amount' -%>" style="text-align: right;"><%= number_to_currency(number_with_delimiter(mpd_contact.gift_amount(current_event.id))) %>&nbsp;</td>
-                <td class="<%= sort_td_class_helper 'thankyou_sent' -%>" style="text-align: center;"><%= image_tag("icon_check.gif", :alt => "Y") if mpd_contact.thankyou_sent(current_event.id) %></td>
-                <td class="<%= sort_td_class_helper 'mpd_priorities.priority' -%>"><div id="priorities-block-<%= mpd_contact.id %>">
+            <tr class="<%= cycle("even", "odd") %>" >
+            <!--Contact Information -->
+                <td class="name <%= sort_td_class_helper 'full_name' -%>"style="width:115px;" ><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.full_name,
+								   :options => {:id => "#{mpd_contact.id}_full_name",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_full_name',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_full_name', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_address <%= sort_td_class_helper 'salutation' -%>" style="width:110px;<%= "display:none;" unless @show == 'contact_address' || !@show.present? -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.salutation ? mpd_contact.salutation : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_salutation",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_salutation',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_salutation', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_address <%= sort_td_class_helper 'address_1' -%>" style="width:120px;<%= "display:none;" unless @show == 'contact_address' || !@show.present? -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.address_1? ? mpd_contact.address_1 : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_address_1",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_address',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_address', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_address <%= sort_td_class_helper 'city' -%>" style="width:50px;<%= "display:none;" unless @show == 'contact_address' || !@show.present? -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.city? ? mpd_contact.city : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_city",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_city',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_city', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_address <%= sort_td_class_helper 'state' -%>" style="width:30px;<%= "display:none;" unless @show == 'contact_address' || !@show.present? -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.state? ? mpd_contact.state : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_state",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_state',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_state', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_address <%= sort_td_class_helper 'zip' -%>" style="width:60px;<%= "display:none;" unless @show == 'contact_address' || !@show.present? -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.zip? ? mpd_contact.zip : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_zip",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_zip',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_zip', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_phoneemail <%= sort_td_class_helper 'phone' -%>"  style="width:105px;<%= "display:none;" unless @show == 'contact_phoneemail' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.phone? ? mpd_contact.phone : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_phone",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_phone',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_phone', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_phoneemail <%= sort_td_class_helper 'phone_2' -%>" style="width:105px;<%= "display:none;" unless @show == 'contact_phoneemail' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.phone_2? ? mpd_contact.phone_2 : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_phone_2",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_phone_2',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_phone_2', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="contact_phoneemail <%= sort_td_class_helper 'email' -%>" style="width:160px;<%= "display:none;" unless @show == 'contact_phoneemail' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.email_address? ? mpd_contact.email_address : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_email_address",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_email_address',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_email_address', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>					
+				<!--Progress Information -->
+                <td class="progress <%= sort_td_class_helper 'letter_sent' -%><%= " unchecked" if !mpd_contact.letter_sent(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_letter_sent" style="text-align:center;width:70px;<%= "display:none;" unless @show == 'progress' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_letter_sent_box","letter_sent", mpd_contact.letter_sent(current_event.id),
+																     	:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'letter_sent')",
+																		:title => "I have sent a support letter to them." ) %></td>
+                <td class="progress <%= sort_td_class_helper 'contacted' -%><%= " unchecked" if !mpd_contact.contacted(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_contacted" style="text-align:center;width:70px;<%= "display:none;" unless @show == 'progress' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_contacted_box","contacted", mpd_contact.contacted(current_event.id),
+ 																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'contacted')",
+																		:title => "I have either called, emailed, facebooked, saw them in person to follow-through with their response to my letter." ) %></td>
+				<td class="progress <%= sort_td_class_helper 'thankyou_sent' -%><%= " unchecked" if !mpd_contact.thankyou_sent(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_thankyou_sent" style="text-align:center;width:100px;<%= "display:none;" unless @show == 'progress' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_thankyou_sent_box","thankyou_sent", mpd_contact.thankyou_sent(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'thankyou_sent')",
+																		:title => "I have sent a thank you letter acknowledging their support of me." ) %></td>
+			    <td class="progress <%= sort_td_class_helper 'postproject_sent' -%><%= " unchecked" if !mpd_contact.postproject_sent(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_postproject_sent" style="text-align:center;width:130px;<%= "display:none;" unless @show == 'progress' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_postproject_sent_box","postproject_sent", mpd_contact.postproject_sent(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'postproject_sent')",
+																		:title => "I have sent a post-project letter to them." ) %></td>
+				<!--Gift Information -->
+			    <td class="gift <%= sort_td_class_helper 'gift_pledged' -%><%= " unchecked" if !mpd_contact.gift_pledged(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_gift_pledged" style="text-align:center;width:55px;<%= "display:none;" unless @show == 'gift' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_gift_pledged_box","gift_pledged", mpd_contact.gift_pledged(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'gift_pledged')",
+																		:title => "They have pledged that they will send me a gift." ) %></td>
+			    <td class="gift <%= sort_td_class_helper 'gift_received' -%><%= " unchecked" if !mpd_contact.gift_received(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_gift_received" style="text-align:center;width:65px;<%= "display:none;" unless @show == 'gift' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_gift_received_box","gift_received", mpd_contact.gift_received(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'gift_received')",
+																		:title => "I have received a gift from them." ) %></td>
+			    <td class="gift <%= sort_td_class_helper 'date_received' -%>" style="width:95px;<%= "display:none;" unless @show == 'gift' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.date_received(current_event.id).present? ? mpd_contact.date_received(current_event.id) : "&nbsp;",
+								   :options => {:title => "Check, cash, money order, account transfer, give.cci.org", :id => "#{mpd_contact.id}_date_received",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_date_received',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_date_received', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+                <td class="gift <%= sort_td_class_helper 'gift_amount' -%>" style="width:55px;<%= "display:none;" unless @show == 'gift' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => number_to_currency(number_with_delimiter(mpd_contact.gift_amount(current_event.id))),
+								   :options => {:id => "#{mpd_contact.id}_gift_amount",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_gift_amount',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_gift_amount', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<td class="gift <%= sort_td_class_helper 'form_received' -%>" style="width:100px;<%= "display:none;" unless @show == 'gift' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.form_received(current_event.id).present? ? mpd_contact.form_received(current_event.id) : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_form_received",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_form_received',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_form_received', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>
+				<!--Relationship Information -->
+				<td class="relationship <%= sort_td_class_helper 'mpd_contacts.created_at' -%>" style="width:100px;<%= "display:none;" unless @show == 'relationship' -%>"><%= mpd_contact.created_at.strftime("%m/%d/%Y") %></td>
+			    <td class="relationship <%= sort_td_class_helper 'partner_financial' -%><%= " unchecked" if !mpd_contact.partner_financial(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_partner_financial" style="text-align:center;width:90px;<%= "display:none;" unless @show == 'relationship' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_partner_financial_box","partner_financial", mpd_contact.partner_financial(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'partner_financial')") %></td>
+			    <td class="relationship <%= sort_td_class_helper 'partner_prayer' -%><%= " unchecked" if !mpd_contact.partner_prayer(current_event.id) -%>" id="<%= mpd_contact.id.to_s %>_partner_prayer" style="text-align:center;width:80px;<%= "display:none;" unless @show == 'relationship' -%>">
+													<%= check_box_tag(mpd_contact.id.to_s + "_partner_prayer_box","partner_prayer", mpd_contact.partner_prayer(current_event.id),
+																		:onchange => "updateContact('" + mpd_contact.id.to_s + "', 'partner_prayer')") %></td>
+				<td class="relationship <%= sort_td_class_helper 'relationship' -%>" style="width:100px;<%= "display:none;" unless @show == 'relationship' -%>" title="How you know this person (ie. Relative, Friend, Church, Co-worker, Teacher, Neighbor)"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.relationship? ? mpd_contact.relationship : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_relationship",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_relationship',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_relationship', :id => mpd_contact.id }'"
+				       }
+				    ) %></td>   																																																						             
+
+                <!--Notes Information -->
+				<td class="notes <%= sort_td_class_helper 'notes' -%>"  style="width:340px;<%= "display:none;" unless @show == 'notes' -%>"><%= editable_content(
+				      :content => {:element => 'div', :text => mpd_contact.notes? ? mpd_contact.notes : "&nbsp;",
+								   :options => {:id => "#{mpd_contact.id}_notes",:class => 'editable-content'},
+				       },
+				      :url => {
+				        :controller => 'contacts',
+				        :action => 'update_contact_notes',
+				        :id => mpd_contact.id
+				       },
+				      :ajax => {
+						:okControl => "'false'",
+						:cancelControl => "'false'",
+						:submitOnBlur => "'true'",
+				        :loadTextURL => "'#{ url_for :controller => 'contacts', :action => 'get_contact_notes', :id => mpd_contact.id }'"
+				       }
+				    ) %></td> 
+				<td class="notes <%= sort_td_class_helper 'mpd_priorities.priority' -%>" style=" <%= "display:none;" unless @show == 'notes' -%>;width: 30px"><div id="priorities-block-<%= mpd_contact.id %>">
                     <%= render :partial => "mpd_priority/mpd_priority", :locals => { :mpd_contact => mpd_contact } %> </div></td>
-                <td class="" style="text-align: center;"><div><%= link_to(image_tag("icon_x.png", {}) ,mpd_contact_action_path(mpd_contact.action(current_event.id)), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"") %></td>
+					
+				<td class="" style="text-align:center;width:55px;"><%= link_to(image_tag("icon_x.png", {}) ,mpd_contact_action_path(mpd_contact.action(current_event.id)), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"") %></td>
                
             </tr>
             <% end %>
@@ -33,20 +331,6 @@
                 <td colspan="7" class="blank_row">There are no contacts to view.  <%= link_to "Start namestorming", :controller => "namestorm" %></td>
             </tr>
             <% end %>
-
         </tbody>
     </table>
-    
-     <div class="pagination" style="overflow: auto;">
-    	<div  style="float: left;">
-    		Displaying <%= @pages.current.first_item %>
-    		- <%= @pages.current.last_item %>
-       		of <%= @pages.item_count %>
-       	</div>
-    
-       <div style="text-align: right;">
-            <%= link_to_remote(h('< Previous'), {:url => {:action => 'index', :page => @pages.current.previous }, :update => 'contacts_list' }) + ' | ' if @pages.current.previous %>
-            <%= pagination_links_remote @pages %>
-            <%= " | " + link_to_remote(h('Next >'), {:url => {:action => 'index', :page => @pages.current.next }, :update => 'contacts_list' }) if @pages.current.next %>
-       </div>
-    </div>
+</div>

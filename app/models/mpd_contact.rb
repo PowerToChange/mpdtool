@@ -9,6 +9,8 @@ class MpdContact < ActiveRecord::Base
   validates_presence_of :salutation, :on => :update, :message => "can't be blank"
   validates_format_of :phone, :with => /^(\(?[0-9]{3}[\)-\.]?\ ?)?[0-9]{3}[-\.]?[0-9]{4}$/,
                               :if => Proc.new { |c| !c.phone.blank? }
+  validates_format_of :phone_2, :with => /^(\(?[0-9]{3}[\)-\.]?\ ?)?[0-9]{3}[-\.]?[0-9]{4}$/,
+                              :if => Proc.new { |c| !c.phone_2.blank? }
   validates_format_of :email_address, :with => /^[a-z0-9!$'*+\-_]+(\.[a-z0-9!$'*+\-_]+)*@([a-z0-9]+(-+[a-z0-9]+)*\.)+([a-z]{2}|aero|arpa|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|travel)$/,
                                       :if => Proc.new { |c| !c.email_address.blank? }
   validates_format_of :zip, :with => /^([0-9]{5}([\s-]{1}[0-9]{4})?)|([a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}(\-| |){1}[0-9]{1}[a-zA-Z]{1}[0-9]{1})$/,
@@ -22,7 +24,7 @@ class MpdContact < ActiveRecord::Base
     if !self.address_1.nil? and !self.address_1.empty?
       ret_val += address_1
       if lb 
-        ret_val += "<br/>"
+        ret_val += "<br/>" 
       else 
         ret_val += ", "
       end 
@@ -31,18 +33,6 @@ class MpdContact < ActiveRecord::Base
       ret_val = nil
     end
     return ret_val
-  end
-  
-  def send_letter!(event_id)
-    action(event_id).update_attribute(:letter_sent, true)
-  end
-  
-  def make_call!(event_id)
-    action(event_id).update_attribute(:call_made, true)
-  end
-  
-  def send_thankyou!(event_id)
-    action(event_id).update_attribute(:thankyou_sent, true)
   end
   
   def selected!(event_id, context)
@@ -54,6 +44,30 @@ class MpdContact < ActiveRecord::Base
       when "thank you" then @current_action.update_attribute(:is_selected_thankyou, !@current_action.is_selected_thankyou?)
     else false
     end
+  end
+  
+  def is_selected(event_id, context)
+    case context
+      when "letter" then action(event_id).is_selected_letter?
+      when "call" then action(event_id).is_selected_call?
+      when "thank you" then action(event_id).is_selected_thankyou?
+    else false
+    end
+  end
+    def send_letter!(event_id)
+    action(event_id).update_attribute(:letter_sent, true)
+  end
+  
+  def make_call!(event_id)
+    action(event_id).update_attribute(:contacted, true)
+  end
+  
+  def send_thankyou!(event_id)
+    action(event_id).update_attribute(:thankyou_sent, true)
+  end
+  
+  def send_postproject!(event_id)
+    action(event_id).update_attribute(:postproject_sent, true)
   end
   
   def salutation
@@ -68,21 +82,40 @@ class MpdContact < ActiveRecord::Base
     action(event_id).letter_sent?
   end
   
-  def call_made(event_id)
-    action(event_id).call_made?
+  def contacted(event_id)
+    action(event_id).contacted?
   end
   
   def thankyou_sent(event_id)
     action(event_id).thankyou_sent?
   end
+ 
+  def postproject_sent(event_id)
+    action(event_id).postproject_sent?
+  end
   
-  def is_selected(event_id, context)
-    case context
-      when "letter" then action(event_id).is_selected_letter?
-      when "call" then action(event_id).is_selected_call?
-      when "thank you" then action(event_id).is_selected_thankyou?
-    else false
-    end
+  def partner_financial(event_id)
+    action(event_id).partner_financial?
+  end
+  
+  def partner_prayer(event_id)
+    action(event_id).partner_prayer?
+  end
+  
+  def gift_pledged(event_id)
+    action(event_id).gift_pledged?
+  end
+  
+  def gift_received(event_id)
+    action(event_id).gift_received?
+  end
+  
+  def date_received(event_id)
+    action(event_id).date_received
+  end
+  
+  def form_received(event_id)
+    action(event_id).form_received
   end
   
   def action(event_id)

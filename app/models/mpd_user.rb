@@ -15,7 +15,7 @@ class MpdUser < ActiveRecord::Base
   validates_uniqueness_of :user_id
   
   def mpd_contacts_to_call(event_id)
-    MpdContact.find(:all, :conditions => ["mpd_user_id = ? AND event_id = ? and call_made = 0", self.id, event_id], :order => "full_name ASC", :joins => :mpd_contact_actions)
+    MpdContact.find(:all, :conditions => ["mpd_user_id = ? AND event_id = ? and contacted = 0", self.id, event_id], :order => "full_name ASC", :joins => :mpd_contact_actions)
   end
   
   def mpd_contacts_to_thank(event_id)
