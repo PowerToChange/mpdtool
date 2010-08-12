@@ -58,10 +58,10 @@
         
     <p class="instructional">Click on a contact's name to view or edit their 
         details and make notes about your phone calls.<br/>
-		Click on the checkbox to just mark them as having been called.</p>              
+		Use the checkboxes to select contacts to <%= link_to("mark them as having been called", {:action => "complete"}, {:method => :post}) %></p>              
          
     <div id="contacts_list" class="contact_list">
-        <%= render :partial => 'shared/mpd_contact_to_complete', :locals => { :event => "call_made" } %>
+        <%= render :partial => 'shared/mpd_contact_to_complete', :locals => { :page => "call", :event => "call_made" } %>
     </div>
 </div>
 

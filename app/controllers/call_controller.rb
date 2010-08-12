@@ -18,8 +18,8 @@ class CallController < ApplicationController
     items_per_page = 15
 
     if request.post?
-      @mpd_contact = MpdContact.find(params[:id])
-      @mpd_contact.make_call!(current_event.id)
+      @mpd_contacts = current_mpd_user.mpd_contacts.find_all{|contact| contact.mpd_contact_actions.find_by_event_id(current_event).is_selected_call if contact.mpd_contact_actions.find_by_event_id(current_event)}
+      @mpd_contacts.each{|contact| contact.make_call!(current_event.id); contact.selected!(current_event.id, 'call') }
     else
       redirect_to :action => :index
       return

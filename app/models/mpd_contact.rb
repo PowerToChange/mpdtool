@@ -45,6 +45,17 @@ class MpdContact < ActiveRecord::Base
     action(event_id).update_attribute(:thankyou_sent, true)
   end
   
+  def selected!(event_id, context)
+    @current_action = action(event_id)
+    
+    case context
+      when "letter" then @current_action.update_attribute(:is_selected_letter, !@current_action.is_selected_letter?)
+      when "call" then @current_action.update_attribute(:is_selected_call, !@current_action.is_selected_call?)
+      when "thank you" then @current_action.update_attribute(:is_selected_thankyou, !@current_action.is_selected_thankyou?)
+    else false
+    end
+  end
+  
   def salutation
     self[:salutation] || self.full_name
   end
@@ -63,6 +74,15 @@ class MpdContact < ActiveRecord::Base
   
   def thankyou_sent(event_id)
     action(event_id).thankyou_sent?
+  end
+  
+  def is_selected(event_id, context)
+    case context
+      when "letter" then action(event_id).is_selected_letter?
+      when "call" then action(event_id).is_selected_call?
+      when "thank you" then action(event_id).is_selected_thankyou?
+    else false
+    end
   end
   
   def action(event_id)

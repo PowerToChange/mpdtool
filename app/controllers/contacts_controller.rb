@@ -28,6 +28,18 @@ class ContactsController < ApplicationController
     end
   end
   
+  def toggle_selected
+    
+    @mpd_contact = MpdContact.find(params[:id])
+    if current_mpd_user.mpd_contacts.include?(@mpd_contact)
+      
+      @mpd_contact.selected!(current_event.id, params[:context])
+    else
+      redirect_to :controller => :dashboard
+    end
+    render :text => ''
+  end
+  
   def update
     @title = PAGE_TITLE
     @col_layout = COL_LAYOUT

@@ -6,10 +6,10 @@
                   :style=>"display: none;" ) %></h3>
     
     <p class="instructional">Click on a contact's name to view or edit their details.<br/>
-		Click on the checkbox to mark them as having been sent a letter.</p>              
+		You can use the checkboxes to select your contacts in order to use the mailing tools for a selection of them, or to <%= link_to("mark them as having been sent a letter", {:action => "complete"}, {:method => :post}) %></p>              
              
     <div id="contacts_list" class="contact_list">
-        <%= render :partial => "shared/mpd_contact_to_complete", :locals => { :event => "letter_sent" } %>
+        <%= render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => "letter_sent" } %>
     </div>
 
 </div>
@@ -31,6 +31,7 @@
         <p>Export your letters as a PDF file to be printed and mailed.</p>
         <p style="text-align: left;"><%= check_box_tag('include_address') %> Include address on letter</p>
         <p style="text-align: left;"><%= check_box_tag('print_sent_marked_false') %> Print letters for only those people that haven't been sent letters yet</p>
+		<p style="text-align: left;"><%= check_box_tag('print_selected_contacts') %> Print letters for only those people I've selected</p>
 		<% @options = Array.new
 		MpdLetter.find(:all, :conditions => "mpd_user_id=#{current_mpd_user.id}").each { |letter| 
 			@options << letter.name }%>
@@ -46,11 +47,12 @@
 -->
         <%- end -%>
         <h4>Print Your Labels</h4>
-        
+        <%- form_tag('/addresses/address_labels', :id => 'print_label_form') do -%>
         <p>While it's more personal to handwrite partners' addresses, if you'd prefer mailing labels, we've done the hard work for you! Simply click "Create address labels" below, open the PDF file and print using labels that match the Avery&reg 5160 layout.</p>
-        
-        <p style="text-align: right;"><%= link_to "Create address labels", :action => "address_labels" %></p>
-
+        <p style="text-align: left;"><%= check_box_tag('print_selected_labels') %> Create labels for selected contacts</p>
+        <p style="text-align: right;"><%= link_to_function("Create address labels", "$('print_label_form').submit()") %></p>
+		<%- end -%>
+		
         <h4>Print Response Cards</h4>
         
         <p>These are stock response cards that you can print and include with your

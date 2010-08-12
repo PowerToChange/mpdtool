@@ -15,7 +15,7 @@ class AddressesController < ApplicationController
     @pages, @mpd_contacts = paginate :mpd_contacts, :include => "mpd_priorities", :order => process_sort(params[:sort]), :conditions => process_conditions('letter_sent = false'), :joins => :mpd_contact_actions, :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => 'letter_sent'}, :layout => false
     end
   end
 
@@ -23,8 +23,8 @@ class AddressesController < ApplicationController
     items_per_page = 25
 
     if request.post?
-      @mpd_contact = MpdContact.find(params[:id])
-      @mpd_contact.send_letter!(current_event.id)
+      @mpd_contacts = current_mpd_user.mpd_contacts.find_all{|contact| contact.mpd_contact_actions.find_by_event_id(current_event).is_selected_letter if contact.mpd_contact_actions.find_by_event_id(current_event)}
+      @mpd_contacts.each{|contact| contact.send_letter!(current_event.id); contact.selected!(current_event.id, 'letter') }
     else
       redirect_to :action => :index
       return
@@ -34,7 +34,7 @@ class AddressesController < ApplicationController
                                      :per_page => items_per_page  
 
     if request.xml_http_request?
-      render :partial => "shared/mpd_contact_to_complete", :locals => {:event => 'letter_sent'}, :layout => false
+      render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => 'letter_sent'}, :layout => false
     else
       redirect_to :action => :index
     end
@@ -59,7 +59,11 @@ class AddressesController < ApplicationController
   # Render PDF of Address Labels to browser
   def address_labels
     # Send PDF data to browser
-    send_data create_address_labels_pdf(current_mpd_user.mpd_contacts), :filename => "address_labels.pdf", :type => "application/pdf" 
+    @mpd_contacts = current_mpd_user.mpd_contacts
+    if params[:print_selected_labels]
+      @mpd_contacts = @mpd_contacts.find_all{|contact| contact.mpd_contact_actions.find_by_event_id(current_event).is_selected_letter if contact.mpd_contact_actions.find_by_event_id(current_event)}
+    end
+    send_data create_address_labels_pdf(@mpd_contacts), :filename => "address_labels.pdf", :type => "application/pdf" 
   end
 
   def print_letter
@@ -69,6 +73,9 @@ class AddressesController < ApplicationController
     if @letter
       if params[:print_sent_marked_false]
         @mpd_contacts = @mpd_contacts.find_all {|contact| !contact.mpd_contact_actions.find_by_event_id(current_event).letter_sent if contact.mpd_contact_actions.find_by_event_id(current_event)}
+      end
+      if params[:print_selected_contacts]
+        @mpd_contacts = @mpd_contacts.find_all{|contact| contact.mpd_contact_actions.find_by_event_id(current_event).is_selected_letter if contact.mpd_contact_actions.find_by_event_id(current_event)}
       end
       unless @mpd_contacts.empty?
         letter = render_to_string(:action => "letter_pdf")
@@ -119,7 +126,7 @@ class AddressesController < ApplicationController
     end
   end
   
-  def letter_pdf #does this method even get called?
+  def letter_pdf #does this method ever get called?
     @mpd_contacts = current_mpd_user.mpd_contacts
     @letter = MpdLetter.find(:first, :conditions => "mpd_user_id=#{current_mpd_user.id}") #current_mpd_user.mpd_letter
   end

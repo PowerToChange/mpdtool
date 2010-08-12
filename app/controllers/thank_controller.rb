@@ -17,8 +17,8 @@ class ThankController < ApplicationController
     items_per_page = 15
 
     if request.post?
-      @mpd_contact = MpdContact.find(params[:id])
-      @mpd_contact.send_thankyou!(current_event.id)
+      @mpd_contacts = current_mpd_user.mpd_contacts.find_all{|contact| contact.mpd_contact_actions.find_by_event_id(current_event).is_selected_thankyou if contact.mpd_contact_actions.find_by_event_id(current_event)}
+      @mpd_contacts.each{|contact| contact.send_thankyou!(current_event.id); contact.selected!(current_event.id, 'thank you') }
     else
       redirect_to :action => :index
       return
