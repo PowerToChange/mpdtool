@@ -3,11 +3,7 @@
 	<% if @letter.nil? then @current_template_id = 0; @action = 'create_letter' else @current_template_id = @letter.mpd_letter_template_id; @action = 'update_letter_attributes' end %>
 	
 	<%- form_tag("/write/#{@action}", :id => 'letter_template') do -%>
-	<p>
-		<h3>Name this letter</h3>
-		<%= text_field(:letter, :name)%>
-		<br> <br>
-	</p>
+	
 	<p style="overflow: hidden;">
     <h3>Select a template</h3>
 	
@@ -23,9 +19,16 @@
         <p class="select"><a href="/uploads/<%= template.pdf_preview_filename %>" title="Preview this template" target="_blank">Preview the template</a></p>
     </div>
     <% end %>
-	</p>
-	<p>
-	<%= image_submit_tag("button_sm_save.gif", {:style => "display: block; float:left; clear:left;"}) %>
+	
+	<div style="display: block; float:left; clear:left;">
+		<h3>Name this letter</h3>
+		<%= text_field(:letter, :name)%>
+		<br> <br>
+	</div>
+	
+	<div style="display: block; float:left; clear:left;">
+	<%= image_submit_tag("button_sm_save.gif") %>
+	</div>
 	</p>
 	<%- end -%>
 	<%= if @action == 'update_letter_attributes'
