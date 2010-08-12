@@ -10,24 +10,6 @@
             the process ahead of time to learn what lies ahead.</p>
     </div>
     <% end %>
-	
-	<h3><%= link_to "Welcome letter from the National Director", :controller => "dashboard", :action => "welcome" %></h3>
-	<p>A welcome letter from U.S. Campus Ministry National Director, Mark Gauthier.</p>
-	
-    <h3><%= link_to "Collect Names", :controller => "namestorm" %></h3>
-    <p>We call this process "Namestorming" as you try to think of as many people as possible to contact about your summer project.</p>
-    
-    <h3><%= link_to "Write your letter", :controller => "write" %></h3>
-    <p>Your support letter will be the primary way you communicate to potential ministry partners about your summer project and financial need.</p>
-
-    <h3><%= link_to "Collect addresses and send letter", :controller => "addresses" %></h3>
-    <p>Once you have namestormed and written your letter you will mail merge, print your letter and envelopes and send.</p>
-
-    <h3><%= link_to "Call back for decisions", :controller => "call" %></h3>
-    <p>Calling back potential partners is a critical part of the process.</p>
-
-    <h3><%= link_to "Record your gifts and send Thank-you notes", :controller => "thank" %></h3>
-    <p>To complete the process you must record their gift and send a thank-you.  Do not be guilty of ingratitude.  "Thank before you bank".</p>
 
 </div>
 
@@ -41,10 +23,12 @@
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and letter_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Calls made</dt>
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and contacted = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
-        <dt>Gifts Received</dt>
+        <dt>Gifts received</dt>
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and gift_amount > 0", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
         <dt>Thank yous sent</dt>
         <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and thankyou_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
+		<dt>Post-project letters sent</dt>
+        <dd><%= MpdContactAction.count(:conditions => ["mpd_user_id = ? and event_id = ? and postproject_sent = 1", current_mpd_user.id, current_event.id], :joins => :mpd_contact) if current_event %></dd>
     </dl>
 </div>
 

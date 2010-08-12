@@ -133,8 +133,8 @@ class MpdContact < ActiveRecord::Base
   def set_salutation
   # Check for more than one first name
     self.salutation =  
-    if self.full_name[/\w+(\s+([&]|(and))\s+\w+)+/] #Catches any number of 'ands' ie. ("Bob and Sue & Bill and ... Johnson")
-      self.full_name[/\w+(\s+([&]|(and))\s+\w+)+/]
+    if self.full_name[/\w+(\s+([&+]|(and))\s+\w+)+/] #Catches any number of 'ands' ie. ("Bob and Sue & Bill and ... Johnson")
+      self.full_name[/\w+(\s+([&+]|(and))\s+\w+)+/]
     else
       self.full_name.chomp(" " + self.full_name.split(" ")[-1])
     end

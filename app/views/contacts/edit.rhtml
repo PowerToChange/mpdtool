@@ -25,7 +25,7 @@
 		<div class="field"><label for="mpd_contact_date_received">Date Received:</label>
         <%= af.text_field "date_received", :class => "text", :class => "text", :value => @mpd_contact.date_received(current_event.id), :style => "width: 100px;" %></div>
 		<div class="field"><label for="mpd_contact_form_received">Form Received:</label>
-        <%= af.text_field "form_received", :class => "text", :class => "text", :value => @mpd_contact.form_received(current_event.id), :style => "width: 100px;" %></div>
+        <%= af.select "form_received", options_for_select(["Check","Cash","Money Order","Account Transfer","give.ccci.org","Other","Not Received"],@mpd_contact.form_received(current_event.id)) %></div>
     <%- end -%>
 </fieldset>
 <fieldset class="columns">
@@ -35,6 +35,7 @@
     <div class="field"><%= af.check_box "partner_prayer", :class => "checkbox" %> <label for="mpd_contact_partner_prayer" class="for_checkbox">Prayer Partner</label></div>
     <div class="field"><label for="mpd_contact_relationship">Relationship:</label>
         <%= text_field "mpd_contact", "relationship", :class => "text", :style => "width: 100px;" %></div>
+		<span class="instructional">(ie. Relative, Friend, Church, Co-worker, Teacher, Neighbor)</span>
     <%- end -%>
 </fieldset>
 <fieldset class="columns">
