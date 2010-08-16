@@ -145,5 +145,10 @@ module ApplicationHelper
      options[:content][:text],
      options[:content][:options]
    ) + javascript_tag( script.join("") )
- end
+  end
+  
+  def random_header_image
+    num = (Time.now.sec % 5) + 1
+    "header_van_#{num}.jpg"
+  end
 end

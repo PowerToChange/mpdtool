@@ -34,8 +34,7 @@
                 <li id="call_link" <%= "class='active'" if controller.controller_name == 'call' %>><%= link_to '<span>4</span> Call', :controller => "call"%></li>
                 <li id="thank_link" <%= "class='active'" if controller.controller_name == 'thank' %>><%= link_to '<span>5</span> Thank', :controller => "thank"%></li>
             </ul>
-			<% @num = (Time.now.sec % 5) + 1 -%>
-			<%= image_tag("header_van_#{@num}.jpg", {:class => "van_image"}) -%>
+			<%= image_tag(random_header_image, {:class => "van_image"}) -%>
         </div>
         <%- if current_event -%>
         <div id="progressBars">
