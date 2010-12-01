@@ -56,8 +56,25 @@ class ApplicationController < ActionController::Base
     @current_person ||= current_user.person
   end
   
+  # def current_user
+  #   @current_user ||= User.find(session[:user_id])
+  # end
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    unless @current_user
+      if session[:user_id]
+        @current_user = User.find_by_id(session[:user_id])
+        # developer method to override user in session for testing
+        if params[:user_id] && params[:su] && (@current_user.developer? || (session[:old_user_id] && old_user = User.find(session[:old_user_id]).developer?))
+          session[:old_user_id] = @current_user.id if @current_user.developer?
+          session[:user_id] = params[:user_id] 
+          @current_user = User.find_by_id(session[:user_id])
+        end
+      end
+      if session['cas_extra_attributes']
+        @current_user ||= User.find_by_globallyUniqueID(session['cas_extra_attributes']['ssoGuid'])
+      end
+    end
+    @current_user
   end
   
   # Return current user for use in controllers

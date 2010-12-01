@@ -67,7 +67,7 @@ class MpdUser < ActiveRecord::Base
   def get_event(event_id)
     unless @event
       if event_id
-        @event = mpd_events.find(event_id)
+        @event = mpd_events.find_by_id(event_id)
       end
       # If no id was passed in, or no event was found with that id, get the first event
       @event ||= mpd_events.first

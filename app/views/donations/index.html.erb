@@ -1,0 +1,22 @@
+<div style="float:left">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Donor Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address</th>
+    </tr>
+    <% @donations.each do |donation| %>
+    <tr>
+      <td><%= donation.donation_date.to_s %></td>
+      <td><%= number_to_currency(donation.amount) %></td>
+      <td><%= donation.donor_name %></td>
+      <td><%= donation.phone %></td>
+      <td><%= donation.email_address %></td>
+      <td><%= donation.address %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
