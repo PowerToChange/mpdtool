@@ -31,4 +31,4 @@ public/stylesheets/connexion_default.css
 vendor/plugins/acts_as_versioned/
 config/initializers/exception.rb
 .rvmrc
-
+*.swp

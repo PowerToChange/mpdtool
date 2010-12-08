@@ -11,13 +11,23 @@
     </tr>
     <% @donations.each do |donation| %>
     <tr>
-      <td><%= donation.donation_date.to_s(:long) %></td>
-      <td><%= number_to_currency(donation.amount) %></td>
-      <td><%= donation.donor_name %></td>
-      <td><%= donation.phone %></td>
-      <td><%= donation.email_address %></td>
-      <td><%= donation.address %></td>
+      <td valign="top"><%= donation.donation_date.to_s(:short) %></td>
+      <td valign="top">
+        <%= number_to_currency(donation.amount) %>
+        <br />
+        <%= donation.medium %>
+      </td>
+      <td valign="top"><%= donation.donor_name %></td>
+      <td valign="top"><%= donation.phone %></td>
+      <td valign="top"><%= donation.email_address %></td>
+      <td valign="top"><%= donation.address %></td>
     </tr>
     <% end %>
   </table>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+      //$('tr:odd').addClass('odd');
+  });
+</script>
