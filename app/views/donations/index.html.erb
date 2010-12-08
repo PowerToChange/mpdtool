@@ -1,6 +1,6 @@
 <div style="float:left">
   <h3>Total Donations: <%= number_to_currency(@donations.sum(&:amount), :precision => 0) %></h3>
-  <table>
+  <table class="donations">
     <tr>
       <th>Date</th>
       <th>Amount</th>
