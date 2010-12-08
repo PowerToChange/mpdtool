@@ -96,8 +96,22 @@ form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/ed
 
 
 /* SIDEBAR */
-#sidebar { padding: 0 0 10px; margin-top: 0; width: 225px; float: right; background: #f0f0e6 url(../images/bg_sidebar.gif) bottom left no-repeat; font-size: .9em; line-height: 1.4em; }
-#sidebar h3 { font-size: 1.25em; color: #535300; height: auto; margin: 0 0 10px; padding: 10px 10px 0; background: url(../images/bg_sidebar_h3.gif) top left no-repeat; }
+#sidebar { 
+  -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px; 
+  border-radius: 10px;
+  background: #F0F0E6;
+  float: right;
+  font-size: 0.9em;
+  line-height: 1.4em;
+  margin-left: -252px;
+  margin-top: -161px;
+  padding: 0 0 10px;
+  position: fixed;
+  width: 225px;
+  z-index: 1000;
+}
+#sidebar h3 { font-size: 1.25em; color: #535300; height: auto; margin: 0 0 10px; padding: 10px 10px 0; background: none; }
 #sidebar h4 { font-size: 1em; margin: 10px 10px 0;}
 #sidebar p, dl { margin: 10px; }
 #sidebar ul, ol { margin: 5px 10px 10px 35px; }
@@ -210,3 +224,56 @@ fieldset .instructional { margin: 0; }
 
 #footer { background: url(../images/bg_footer.gif) bottom left no-repeat; height: 16px; }
 #contact { text-align: center; color: gray; padding-top: 5px; font-style: italic; }
+
+
+/* DONATIONS TABLE */
+table.donations {
+  margin: 15px 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+table.donations th {
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+table.donations th {
+  padding: 4px;
+  overflow: hidden;
+}
+table.donations td {
+  padding: 4px;
+  overflow: hidden;
+}
+table.donations td { border-bottom: 1px solid #efefef; }
+table.donations td a { color: #0b486b; }
+table.donations .name { width: 23%; }
+table.donations .evaluate img { vertical-align: bottom; }
+table.donations td {
+  border: 1px solid #cccccc;
+  padding: 2px 6px;
+}
+table.donations tr.odd { background: #f0f0f0; }
+table.donations tr.even { background: #ffffff; }
+table.donations th {
+  background: #c0e2f6;
+  text-align: left;
+  border: 1px solid #cccccc;
+  padding: 2px 6px;
+}
+table.donations tr.totals {
+  font-size: 14px;
+  font-weight: bold;
+  background: #ffffff;
+}
+table.donations tr.totals td {
+  padding: 8px 6px;
+  border: none;
+}
+table.donations td.amount { background: #e0f2fd; }
+table.donations tr:hover { background: #e0f2fd; }
+.donationsub { font-size: 18px; }
+.floatleft {
+  float: none;
+  text-align: left !important;
+}

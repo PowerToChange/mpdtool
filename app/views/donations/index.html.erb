@@ -10,9 +10,9 @@
       <th>Address</th>
     </tr>
     <% @donations.each do |donation| %>
-      <tr class="<%= cycle('odd', '') %>">
+      <tr class="<%= cycle('odd', 'even') %>">
         <td valign="top"><%= donation.donation_date.to_s(:short) %></td>
-        <td valign="top">
+        <td valign="top" class="amount">
           <%= number_to_currency(donation.amount) %>
           <br />
           <%= donation.medium %>
@@ -25,3 +25,4 @@
     <% end %>
   </table>
 </div>
+
