@@ -12,4 +12,4 @@ CASClient::Frameworks::Rails::Filter.configure(
   :logger => cas_logger
 )
 
-CAS_LOGIN_SCREEN = false
+CAS_LOGIN_SCREEN = true

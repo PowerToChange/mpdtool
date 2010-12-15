@@ -107,7 +107,7 @@ form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/ed
   margin-left: -252px;
   margin-top: -63px;
   padding: 0 0 10px;
-  position: fixed;
+  /*position: fixed;*/
   width: 225px;
   z-index: 1000;
 }

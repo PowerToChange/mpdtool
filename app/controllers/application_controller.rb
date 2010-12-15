@@ -94,20 +94,16 @@ class ApplicationController < ActionController::Base
   end
   
   def get_user_from_cas
-    if session[:cas_user] && session[:cas_extra_attributes]
-      @user ||= User.find(:first, :conditions => {_(:guid, :user) => session[:cas_extra_attributes]['ssoGuid']})
-      # allow User implementations to make a new user at this point
-      if @user.nil? && User.respond_to?(:create_new_user_from_cas)
-        @user = User.create_new_user_from_cas(session[:cas_user], session[:cas_extra_attributes])
-      end
-      session[:user_id] = @user.id if @user
+    if session[:cas_user]
+      @user ||= User.find_or_create_from_cas(session[:cas_last_valid_ticket])
+      session[:user_id] = @user.try(:id)
     end
     return @user
   end
   
   def check_authorization
     unless current_mpd_user
-      flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
+      #flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
       redirect_to :controller => "login", :action => "login"
       return false
     end

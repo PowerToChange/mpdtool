@@ -32,3 +32,4 @@ vendor/plugins/acts_as_versioned/
 config/initializers/exception.rb
 .rvmrc
 *.swp
+*DS_Store*

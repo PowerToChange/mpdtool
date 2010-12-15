@@ -71,7 +71,7 @@ class LoginController < ApplicationController
       redirect_to :controller => "dashboard",
                       :action => "index"
     else
-      flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
+      #flash[:error] = "Your login information was correct, but it appears that you do not have access to use the Ministry Partner Development tool"
       render :action => "login"
     end
   end
