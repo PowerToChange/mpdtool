@@ -96,21 +96,22 @@ form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/ed
 
 
 /* SIDEBAR */
-#sidebar { 
-  -moz-border-radius: 10px; 
-  -webkit-border-radius: 10px; 
-  border-radius: 10px;
-  background: #F0F0E6;
-  float: right;
+#sidebar {
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: none repeat scroll 0 0 #F0F0E6;
+  float: left;
   font-size: 0.9em;
   line-height: 1.4em;
-  margin-left: -252px;
-  margin-top: -63px;
+  margin-left: -730px;
+  margin-top: -105px;
   padding: 0 0 10px;
-  /*position: fixed;*/
+  position: relative;
   width: 225px;
   z-index: 1000;
 }
+
 #sidebar h3 { font-size: 1.25em; color: #535300; height: auto; margin: 0 0 10px; padding: 10px 10px 0; background: none; }
 #sidebar h4 { font-size: 1em; margin: 10px 10px 0;}
 #sidebar p, dl { margin: 10px; }
