@@ -34,7 +34,7 @@
 
 <div class="clear">&nbsp;</div>
 
-<h3 style="margin-top: 25px;" >View Ministry Partners: <%= select_tag( "vmp_select", "<option>All</option><option>City</option><option>Contacted</option><option>Form Received</option><option>Gift Amount</option><option>Gift Pledged</option><option>Gift Received</option><option>Letter Sent</option><option>Partner-Financial</option><option>Partner-Prayer</option><option>Post-Project Letter Sent</option><option>Relationship</option><option>State</option><option>Thank You Sent</option><option>Zip</option>",
+<h3 style="margin-top: 25px;" >View Ministry Partners: <%= select_tag( "vmp_select", "<option>All</option><option>City</option><option>Contacted</option><option>Form Received</option><option>Gift Amount</option><option>Gift Pledged</option><option>Gift Received</option><option>Letter Sent</option><option>Partner-Financial</option><option>Partner-Prayer</option><option>Post-Project Letter Sent</option><option>Relationship</option><option>#{I18n.t(:state, :default => "State")}</option><option>Thank You Sent</option><option>#{t(:zip, :default => "Zip")}</option>",
 															:onchange => "viewMinistryPartners('vmp_select')", :selected => "All") %>
 			<%= select_tag("vmp_gle_select","<option>&gt</option><option>&lt</option><option>=</option>", :class => "vmpGiftInput", :style => "display:none;")%>			
 			<%= text_field_tag( "vmp_text", nil, :class => "vmpTextInput", :style => "display:none;")%>
