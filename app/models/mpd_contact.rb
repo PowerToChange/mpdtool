@@ -28,7 +28,7 @@ class MpdContact < ActiveRecord::Base
       else 
         ret_val += ", "
       end 
-      ret_val += city + ", " + state + " " + zip
+      ret_val += city.to_s + ", " + state.to_s + " " + zip.to_s
     else 
       ret_val = nil
     end
