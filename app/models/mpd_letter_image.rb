@@ -1,5 +1,5 @@
 class MpdLetterImage < ActiveRecord::Base
-  has_attachment :storage => :s3,
+  has_attachment :storage => :file_system,
                  :size => 1..3.megabytes,
                  :thumbnails => { :thumb => '50x50!', :print => '400>' },
                  :content_type => [
