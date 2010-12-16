@@ -4,7 +4,7 @@ class LoginController < ApplicationController
 
   def login
     cas_url = 'https://signin.mygcx.org/cas/login.htm?template=https://d15ip9v2bx8xzx.cloudfront.net/media/sso/c4ctemplate.css'
-    @gcx_service_url = cas_url + '?service=' + url_for(:action => :login)
+    @gcx_service_url = cas_url + '&service=' + url_for(:action => :login)
 
     @forgot_password_link = get_forgot_password_link
     if request.post? and !params[:username].empty?
