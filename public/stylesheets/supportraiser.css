@@ -66,7 +66,7 @@ form.inplaceeditor-form {padding: 2px 4px 2px 18px; background: url(../images/ed
 #nav-aux, #nav-wizard { list-style: none; padding: 0;}
 #nav-aux { text-align: right; margin: 8px 0 0 0; font-size: .9em; }
 #nav-aux li { display: inline; padding: 0 5px; border-left: solid 1px #fe7212; }
-    #nav-aux li#dashboard_link { border: none; }
+    #nav-aux li#partners_link { border: none; }
 #nav-aux li a { color: #fff; }
 
 #nav-wizard { margin: 55px 0 0 0;}
