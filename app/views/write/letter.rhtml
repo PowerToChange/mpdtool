@@ -101,18 +101,18 @@
         <p><i>Images are optional.  .jpg and .png files only, please.</i></p>
         <% count = 0 %>                                                
         <% for @mpd_letter_image in @mpd_letter_images %>
-		<% if (count < (@mpd_letter.mpd_letter_template.number_of_images)) %>
+          <% if (count < (@mpd_letter.mpd_letter_template.number_of_images)) %>
             <div style="clear: left">
-                <div style="float: left;">
-                    <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc; width:50px; height:50px") if @mpd_letter_image.filename %>
-                </div>
-                <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
-                <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload", :onChange => "$('unsaved_changes').value = 'true';" %><br/>
-                <span class="instructional" style="display: block; margin-top: 3px;">
-                    <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
-                </span></p>
+              <div style="float: left;">
+                <%= image_tag(@mpd_letter_image.public_filename(:thumb), :style => "margin: 0 10px 10px 0; padding: 1px; border: solid 1px #ccc; width:50px; height:50px") if @mpd_letter_image.filename %>
+              </div>
+              <p><label for="mpd_letter_images">Image <%= count += 1 %></label>
+              <%= file_field "mpd_letter_image[]", "uploaded_data", :class => "upload", :onChange => "$('unsaved_changes').value = 'true';" %><br/>
+              <span class="instructional" style="display: block; margin-top: 3px;">
+                <b>Current Image:</b> <%= @mpd_letter_image.filename ? @mpd_letter_image.public_filename.gsub(/^.*(\\|\/)/, '') : '<i>No Image</i>' %>
+              </span></p>
             </div>
-			<% end %>
+          <% end %>
         <% end %>
             
         <p class="buttons"><%= image_submit_tag("button_sm_save.gif", {:name => "save", :tabindex => 9}) %> &nbsp 

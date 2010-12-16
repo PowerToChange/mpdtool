@@ -89,6 +89,7 @@ class WriteController < ApplicationController
     @max_letter_length = MpdLetter.max_letter_length
     @mpd_letter = MpdLetter.find(current_event.current_letter) #current_mpd_user.mpd_letter
     @letter_template = @mpd_letter.mpd_letter_template
+    @mpd_letter.create_any_blank_images!
     @mpd_letter_images = @mpd_letter.mpd_letter_images
     
   end

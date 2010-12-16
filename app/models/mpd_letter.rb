@@ -22,4 +22,12 @@ class MpdLetter < ActiveRecord::Base
   def self.max_letter_length
     @@max_letter_length
   end
+
+  def create_any_blank_images!
+    if mpd_letter_template
+      (mpd_letter_template.number_of_images - mpd_letter_images.count).times do |i|
+        mpd_letter_images.new.save(false)
+      end
+    end
+  end
 end
