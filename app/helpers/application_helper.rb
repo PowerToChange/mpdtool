@@ -25,12 +25,12 @@ module ApplicationHelper
   
   # Calculates gifts given to user
   def calc_support_received
-    MpdContactAction.sum(:gift_amount, :conditions => ["mpd_user_id = ? AND event_id = ?", current_mpd_user.id, current_event.id], :joins => :mpd_contact)
+    current_event.try(:profile).try(:donations_total)
   end
   
   # Calculates percentage of goal has been received by user
   def calc_goal_progress_percentage
-    total = current_mpd_user.support_total(current_event.id)
+    total = current_event.try(:cost)
     if !total.nil? and total > 0
       percentage = calc_support_received.to_f / total.to_f
     else 

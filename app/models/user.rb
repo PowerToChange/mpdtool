@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   include Common::Core::Ca::User
 
   def current_application
-    profiles.find(:first, :conditions => "type = 'Acceptance' OR type = 'StaffProfile'", :order => 'project_id desc')
+    profiles.find(:last, :conditions => "type = 'Acceptance' OR type = 'StaffProfile'", :order => 'project_id desc')
   end
 
   def self.find_by_id(id)
