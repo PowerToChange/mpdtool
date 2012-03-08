@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   layout "login"
 
   def login
-    cas_url = 'https://thekey.me/cas/login.htm?service=https%3A%2F%2Fpat.powertochange.org%2Fsecurity%2Flogin&template=https://d15ip9v2bx8xzx.cloudfront.net/media/sso/p2c_style.css'
+    cas_url = 'https://thekey.me/cas/login.htm?template=https://d15ip9v2bx8xzx.cloudfront.net/media/sso/p2c_style.css'
     @gcx_service_url = cas_url + '&service=' + url_for(:action => :login)
 
     @forgot_password_link = get_forgot_password_link
