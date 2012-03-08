@@ -139,7 +139,7 @@
     
     <p>Click the image to see a sample letter</p>
     
-    <p style="text-align: center;"><a width="111" href="/uploads/<%= @letter_template.pdf_preview_filename %>" title="See an example" target="_blank"><%= image_tag("/uploads/" + @letter_template.thumbnail_filename) %></a></p>
+    <p style="text-align: center;"><a href="/uploads/<%= @letter_template.pdf_preview_filename %>" title="See an example" target="_blank"><%= image_tag("/uploads/" + @letter_template.thumbnail_filename, :width => '111') %></a></p>
 	
 	<br> <br>
 	<h4>Letter Tools</h4>
