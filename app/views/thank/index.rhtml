@@ -1,0 +1,94 @@
+<div id="content">
+    <h3>Why send thank you notes?</h3>
+    
+    <div id="thank-help-expanded"<% if !current_mpd_user.show_thank_help %>style="display: none;"<% end %>>
+        <p>When I think about sending thank you notes, I think about how much 
+            God has provided for me.</p>
+
+        <p>"Let the peace of Christ rule in your hearts, since as members of one 
+            body you were called to peace. And be thankful.  Let the word of 
+            Christ dwell in you richly as you teach and admonish one another 
+            with all wisdom, and as you sing psalms, hymns and spiritual songs 
+            with gratitude in your hearts to God.  And whatever you do, whether 
+            in word or deed, do it all in the name of the Lord Jesus, giving 
+            thanks to God the Father through him. (Col 3:15-17)</p>
+
+        <p>As we see in this passage, that thankfulness starts in your heart!  
+            It is really hard to think about thanking people when we feel we 
+            deserve something, but when we understand thankfulness in our hearts 
+            and give Christ control of our hearts then thankfulness will 
+            overflow from us.  </p>
+
+        <p>Not only is this crucial, but being thankful and expressing that to 
+            God and others is God's will (I Thes. 5:18).  Thanking others helps 
+            us become more thankful for what God is doing in our lives and how 
+            much He has given to us.  It also is a great way to minister to the 
+            giving party.  When someone gives something to us, they are probably 
+            not looking for thanks, but when they receive thanks it brings great 
+            joy to their heart.</p>
+
+        <p>Think about it from God's view.  When we thank God for all he has 
+            done, it brings great joy to His heart, so why wouldn't we pass that 
+            one to our friends and family.</p>
+
+        <p>Remember God who calls is faithful (I Thes. 5:24).  He will provide 
+            in His way and in His timing for His glory.  We want to pause to 
+            give thanks to His people as they become His means of provision for 
+            us to go on summer projects around the world. [ 
+            <%= link_to_remote("hide this text", :url => {:action => "toggle_show_thank_help"}) %> ]</p>
+    </div>
+
+    <div id="thank-help-collapsed" <% if current_mpd_user.show_thank_help %>style="display: none;"<% end %>>
+        <p>When I think about sending thank you notes, I think about&hellip; [ 
+            <%= link_to_remote("more", :url => {:action => "toggle_show_thank_help"}) %> ]</p>
+    </div>
+
+    <div class="section">
+
+    </div>
+    
+    <h3 style="margin-top: 25px;" >View Ministry Partners: Need to Send Thank You <%= image_tag("loading_dots.gif",
+                  :align => 'absmiddle',
+                  :border=> 0,
+                  :id => "spinner",
+                  :style=>"display: none;" ) %></h3>
+    
+    <p class="instructional">Click on a contact's name to view or edit their details.<br/>
+		Use the checkboxes to select contacts to <%= link_to("mark them as having been sent a thank-you letter", {:action => "complete"}, {:method => :post}) %></p>              
+             
+    <div id="contacts_list" class="contact_list">
+        <%= render :partial => 'shared/mpd_contact_to_complete', :locals => { :page => "thankyou", :event => "thankyou_sent" } %>
+    </div>
+</div>
+
+<div id="sidebar">
+    <h3>A few helpful hints</h3>
+
+    <h4>What to Include in Your Thank You Note</h4>
+    
+    <ul>
+        <li>Hand-write the note on personal or nice stationery &mdash; if 
+            someone takes the time to hand write a check, then we should take 
+            the time to hand write the thanks</li>
+        <li>Write the exact date in the upper right-hand corner</li>
+        <li>Express appreciation for the gift, including the exact amount of 
+            the gift.  This lets them know that you received the amount they 
+            intended to give and that it's significant to you because you 
+            noticed the amount.</li>
+        <li>Describe what the gift will help achieve</li>
+        <li>Include something personal in the note</li>
+    </ul>
+
+    <h4>Sample Thank You Note</h4>
+    
+    <p style="text-align: right">May 10, <%= Time.now.year %></p>
+    
+    <p>Dear Dr. and Mrs. Smith,</p>
+    <p>Thank you for your gift of $100 to support my ministry this summer.  Your
+        prayers and finances are greatly appreciated.  Your investment will have 
+        far-reaching results as I help reach people for Christ!</p>
+    <p>Please join me in praying that God would continually deepen my commitment
+        to the cause of Christ.  Your prayers are very important.  Thanks again
+        for your help.</p>
+    <p style="text-align: right">In Christ,</p>
+</div>

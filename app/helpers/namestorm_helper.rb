@@ -1,0 +1,2 @@
+module NamestormHelper
+end

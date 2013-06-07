@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ApplicationHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ApplicationHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/helpers/application_helper_rb.html">
+                app/helpers/application_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Methods added to this helper will be available to all templates in the
+application.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000102">calc_goal_progress_offset</a>&nbsp;&nbsp;
+      <a href="#M000101">calc_goal_progress_percentage</a>&nbsp;&nbsp;
+      <a href="#M000100">calc_support_received</a>&nbsp;&nbsp;
+      <a href="#M000099">calc_time_remaining_bar_offset</a>&nbsp;&nbsp;
+      <a href="#M000107">count_field</a>&nbsp;&nbsp;
+      <a href="#M000108">count_field_tag</a>&nbsp;&nbsp;
+      <a href="#M000106">countdown_field</a>&nbsp;&nbsp;
+      <a href="#M000098">current_mpd_user</a>&nbsp;&nbsp;
+      <a href="#M000103">pagination_links_remote</a>&nbsp;&nbsp;
+      <a href="#M000105">sort_link_helper</a>&nbsp;&nbsp;
+      <a href="#M000104">sort_td_class_helper</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">CommonEngine</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">DEFAULT_SORT</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;full_name&quot;</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="#M000102" class="method-signature">
+          <span class="method-name">calc_goal_progress_offset</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Performs calculation to determine offset for goal progress bar
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000102-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 43</span>
+43:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calc_goal_progress_offset</span>
+44:     <span class="ruby-identifier">bar_width</span> = <span class="ruby-value">230</span>;
+45:         
+46:     <span class="ruby-identifier">bar_offset</span> = <span class="ruby-identifier">bar_width</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">calc_goal_progress_percentage</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">bar_width</span>)
+47:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="#M000101" class="method-signature">
+          <span class="method-name">calc_goal_progress_percentage</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calculates percentage of goal has been received by user
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000101-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 34</span>
+34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calc_goal_progress_percentage</span>
+35:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">support_total</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">support_total</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+36:       <span class="ruby-identifier">percentage</span> = <span class="ruby-identifier">calc_support_received</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">support_total</span>.<span class="ruby-identifier">to_f</span>
+37:     <span class="ruby-keyword kw">else</span> 
+38:       <span class="ruby-identifier">percentage</span> = <span class="ruby-value">0</span>
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="#M000100" class="method-signature">
+          <span class="method-name">calc_support_received</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calculates gifts given to user
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000100-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000100-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 29</span>
+29:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calc_support_received</span>
+30:     <span class="ruby-constant">MpdContact</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-identifier">:gift_amount</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;mpd_user_id = ?&quot;</span>, <span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">id</span>])
+31:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="#M000099" class="method-signature">
+          <span class="method-name">calc_time_remaining_bar_offset</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Performs calculation to determine offset for time remaining progress bar
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000099-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calc_time_remaining_bar_offset</span>
+14:     <span class="ruby-identifier">bar_width</span> = <span class="ruby-value">230</span>;
+15:     
+16:     <span class="ruby-identifier">start_date</span> = <span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">app_accepted_date</span>
+17:     <span class="ruby-identifier">project_date</span> = <span class="ruby-identifier">current_mpd_user</span>.<span class="ruby-identifier">event_start_date</span>
+18:     <span class="ruby-identifier">todays_date</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+19:     
+20:     <span class="ruby-identifier">time_left</span> = <span class="ruby-identifier">project_date</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">todays_date</span>
+21:     <span class="ruby-identifier">total_diff</span> = <span class="ruby-identifier">project_date</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_date</span>
+22:     
+23:     <span class="ruby-identifier">percentage</span> = (<span class="ruby-identifier">time_left</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total_diff</span>.<span class="ruby-identifier">to_f</span>)
+24: 
+25:     <span class="ruby-identifier">bar_offset</span> = <span class="ruby-identifier">bar_width</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">percentage</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">bar_width</span>)
+26:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="#M000107" class="method-signature">
+          <span class="method-name">count_field</span><span class="method-args">(field_id,update_id,options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000107-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 100</span>
+100:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">count_field</span>(<span class="ruby-identifier">field_id</span>,<span class="ruby-identifier">update_id</span>,<span class="ruby-identifier">options</span> = {})
+101:     <span class="ruby-identifier">function</span> = <span class="ruby-node">&quot;$('#{update_id}').innerHTML = $F('#{field_id}').length;&quot;</span>
+102:     <span class="ruby-identifier">count_field_tag</span>(<span class="ruby-identifier">field_id</span>,<span class="ruby-identifier">function</span>,<span class="ruby-identifier">options</span>)
+103:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="#M000108" class="method-signature">
+          <span class="method-name">count_field_tag</span><span class="method-args">(field_id,function,options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000108-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 105</span>
+105:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">count_field_tag</span>(<span class="ruby-identifier">field_id</span>,<span class="ruby-identifier">function</span>,<span class="ruby-identifier">options</span> = {})  
+106:     <span class="ruby-identifier">out</span> = <span class="ruby-identifier">javascript_tag</span> <span class="ruby-identifier">function</span>
+107:     <span class="ruby-identifier">out</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">observe_field</span>(<span class="ruby-identifier">field_id</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:function</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">function</span>))
+108:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">out</span>
+109:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="#M000106" class="method-signature">
+          <span class="method-name">countdown_field</span><span class="method-args">(field_id,update_id,max,options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000106-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 95</span>
+95:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">countdown_field</span>(<span class="ruby-identifier">field_id</span>,<span class="ruby-identifier">update_id</span>,<span class="ruby-identifier">max</span>,<span class="ruby-identifier">options</span> = {})
+96:     <span class="ruby-identifier">function</span> = <span class="ruby-node">&quot;$('#{update_id}').innerHTML = (#{max} - $F('#{field_id}').length);&quot;</span>
+97:     <span class="ruby-identifier">count_field_tag</span>(<span class="ruby-identifier">field_id</span>,<span class="ruby-identifier">function</span>,<span class="ruby-identifier">options</span>)
+98:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
+
+        <div class="method-heading">
+          <a href="#M000098" class="method-signature">
+          <span class="method-name">current_mpd_user</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Finds current user to be used throughout application
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000098-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 8</span>
+ 8:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_mpd_user</span>
+ 9:     <span class="ruby-constant">MpdUser</span>.<span class="ruby-identifier">find_by_user_id</span>(<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:user</span>])
+10:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="#M000103" class="method-signature">
+          <span class="method-name">pagination_links_remote</span><span class="method-args">(paginator)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds pagination links for ajax-driven contact lists
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000103-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 50</span>
+50:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pagination_links_remote</span>(<span class="ruby-identifier">paginator</span>)
+51:     <span class="ruby-identifier">page_options</span> = {<span class="ruby-identifier">:window_size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>}
+52:     <span class="ruby-identifier">pagination_links_each</span>(<span class="ruby-identifier">paginator</span>, <span class="ruby-identifier">page_options</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+53:       <span class="ruby-identifier">options</span> = {
+54:         <span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>, <span class="ruby-identifier">:params</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@params</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">n</span>})},
+55:         <span class="ruby-identifier">:update</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'contacts_list'</span>,
+56:         <span class="ruby-identifier">:before</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Element.show('spinner')&quot;</span>,
+57:         <span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Element.hide('spinner')&quot;</span>
+58:       }
+59:       <span class="ruby-identifier">html_options</span> = {<span class="ruby-identifier">:href</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>, <span class="ruby-identifier">:params</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@params</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">n</span>}))}
+60:       <span class="ruby-identifier">link_to_remote</span>(<span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>)
+61:     <span class="ruby-keyword kw">end</span>
+62:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="#M000105" class="method-signature">
+          <span class="method-name">sort_link_helper</span><span class="method-args">(text, param)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds remote link for column headings in ajax-driven contact lists
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000105-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000105-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 73</span>
+73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sort_link_helper</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">param</span>)
+74:     <span class="ruby-identifier">key</span> = <span class="ruby-identifier">param</span>
+75: 
+76:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sort</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">param</span> <span class="ruby-operator">==</span> <span class="ruby-constant">DEFAULT_SORT</span>
+77:       <span class="ruby-identifier">key</span> = <span class="ruby-constant">DEFAULT_SORT</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_reverse&quot;</span>
+78:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sort</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">param</span>
+79:       <span class="ruby-identifier">key</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;_reverse&quot;</span> 
+80:     <span class="ruby-keyword kw">end</span>
+81:     
+82:     <span class="ruby-identifier">options</span> = {
+83:         <span class="ruby-identifier">:url</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>, <span class="ruby-identifier">:params</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@params</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:sort</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>})},
+84:         <span class="ruby-identifier">:update</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'contacts_list'</span>,
+85:         <span class="ruby-identifier">:before</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Element.show('spinner')&quot;</span>,
+86:         <span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Element.hide('spinner')&quot;</span>
+87:     }
+88:     <span class="ruby-identifier">html_options</span> = {
+89:       <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Sort by this field&quot;</span>,
+90:       <span class="ruby-identifier">:href</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'list'</span>, <span class="ruby-identifier">:params</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@params</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:sort</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">:page</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>}))
+91:     }
+92:     <span class="ruby-identifier">link_to_remote</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>)
+93:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="#M000104" class="method-signature">
+          <span class="method-name">sort_td_class_helper</span><span class="method-args">(param)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determines class to be used for column heading in ajax-driven contact lists
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000104-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 65</span>
+65:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sort_td_class_helper</span>(<span class="ruby-identifier">param</span>)
+66:     <span class="ruby-identifier">result</span> = <span class="ruby-value str">'sortup'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sort</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">param</span>
+67:     <span class="ruby-identifier">result</span> = <span class="ruby-value str">'sortdown'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sort</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">param</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;_reverse&quot;</span>
+68:     <span class="ruby-identifier">result</span> = <span class="ruby-value str">'sortup'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sort</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-constant">DEFAULT_SORT</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">param</span>    
+69:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+70:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

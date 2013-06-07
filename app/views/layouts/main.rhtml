@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title><%= @title %> &raquo; <%= t(:ministry, :default => "Campus Crusade for Christ") %> Ministry Partner Development</title>
+	
+	<%= stylesheet_link_tag :all, :media => "all" %>
+	
+<!--[if lte IE 6]>
+<style type="text/css">
+    legend { margin: -10px 0 15px -17px; padding: 5px 10px 5px 0; }
+</style>
+<![endif]-->
+
+	<%= javascript_include_tag :defaults %>
+	<script type="text/javascript" language="javascript"><%= @content_for_page_scripts %></script>
+</head>
+
+<body class="<%= controller.controller_name %>">
+<div id="wrapper" class="<%= @col_layout %>">
+    <div id="header">
+        <div id="header-inner">
+            <ul id="nav-aux">
+                <!--<li id="dashboard_link"><%= link_to 'Donations', donations_path %>-->
+                <li id="partners_link"><%= link_to 'My Ministry Partners', :controller => "dashboard" %>
+                <li id="logout_link"><%= link_to 'Logout', :controller => "login", :action => "logout" %>
+            </ul>
+        
+			<span id="header-logo"><%= link_to image_tag("../images/bg_header_login.gif", :border => 0), :controller => "dashboard", :action => "welcome" %></span>
+		
+            <ul id="nav-wizard">
+                <li id="namestorm_link" <%= "class='active'" if controller.controller_name == 'namestorm' %>><%= link_to '<span>1</span> Namestorm', :controller => "namestorm"%></li>
+                <li id="write_link" <%= "class='active'" if controller.controller_name == 'write' %>><%= link_to '<span>2</span> Write', :controller => "write"%></li>
+                <li id="mail_link" <%= "class='active'" if controller.controller_name == 'addresses' %>><%= link_to '<span>3</span> Mail', :controller => "addresses"%></li>
+                <li id="call_link" <%= "class='active'" if controller.controller_name == 'call' %>><%= link_to '<span>4</span> Call', :controller => "call"%></li>
+                <li id="thank_link" <%= "class='active'" if controller.controller_name == 'thank' %>><%= link_to '<span>5</span> Thank', :controller => "thank"%></li>
+            </ul>
+			<%= image_tag(random_header_image, {:class => "van_image"}) -%>
+        </div>
+        <%- if current_event -%>
+        <div id="progressBars">
+          <%- if Time.now < current_event.start_date -%>
+            <h3>Time Remaining Before Event</h3>
+          <%- else -%>
+            <h3>Time Since Event Started</h3>
+          <%- end -%>
+            <div id="progressBar-timeRemaining" class="progressBar" style="background-position: <%= calc_time_remaining_bar_offset %>px 0;"><%= distance_of_time_in_words(Time.now, current_event.start_date) if (!current_mpd_user.event_start_date(current_event.id).nil?)  %></div>
+            <div id="current_event">
+              <p class="left">
+                <strong><%= current_event.name %></strong> 
+                <%= link_to("[ Edit ]", edit_event_path(current_event)) unless current_event.project_id %>
+                <%= link_to("[ New Event ]", new_event_path) %>
+              </p>
+              <p class="left">
+                 <span class="date">Start Date: <br/><%= current_event.start_date.to_date.to_s(:long) if current_event.start_date  %></span><%- if current_mpd_user.mpd_events.length > 1 -%><span>&nbsp;&nbsp;<%= link_to_function('change active event', "Element.hide('current_event');Element.show('project_dropdown')") %></span>
+                <%- end -%>
+              </p>
+            </div>
+            <%- if current_mpd_user.mpd_events.length > 1 -%>
+            <p style="display:none" id="project_dropdown"><span>
+              <%= select_tag(:event_id, options_for_select(current_mpd_user.mpd_events.collect {|p| [p.name, p.id]}, current_event.id)) %>
+              <%#= link_to_function('cancel', "Element.show('current_event');Element.hide('project_dropdown')") %>
+            </span></p>
+            <%= observe_field(:event_id, :url => {:controller => :dashboard, :action => :change_event},
+                              :with => 'event_id') %>
+            <%- end -%>
+                        
+            <h3>Your Ministry Goal <span style="font-size: .8em;"><%= link_to("[ Edit ]", {:controller => "write", :action => "calculate_support_total"}) if MpdExpense.count > 0 %></span></h3>
+            <div id="progressBar-ministryGoal" class="progressBar" style="background-position: -<%= calc_goal_progress_offset %>px 0;"><%= number_with_precision(calc_goal_progress_percentage * 100, :precision => 0) %>%</div>
+            <p class="right">You have received <span class="received"><%= number_to_currency(number_with_delimiter(calc_support_received.to_i || 0), :precision => 0) %></span> of 
+                <span class="goal"><%= number_to_currency(number_with_delimiter(current_mpd_user.support_total(current_event.id).to_i || 0), :precision => 0) %></span></p>
+        </div>
+        <%- end -%>
+    </div>
+
+    <div id="main">
+        <h2><%= @title %></h2>
+          
+        <% if flash[:notice] -%>
+            <div class="notice"><%= flash[:notice] %></div>
+        <% end -%>
+        <% if flash[:error] -%>
+            <div class="error"><%= flash[:error] %></div>
+        <% end -%>
+        <% if flash[:success] -%>
+            <div class="success"><%= flash[:success] %></div>
+        <% end -%>
+        
+        <%= yield %>   
+        
+        <div class="clear">&nbsp;</div>
+        <div id="contact"><%= t(:help_email, :default => "For technical questions: help@campuscrusadeforchrist.com. Other questions: gosummerproject@uscm.org") %></div>
+    </div>
+    
+    <div id="footer">
+        &nbsp;
+    </div>
+</div>
+<% if defined?(GOOGLE_ANALYTICS_ID) -%>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker('<%= GOOGLE_ANALYTICS_ID %>');
+pageTracker._initData();
+pageTracker._trackPageview();
+  </script>
+<% end %>
+</body>
+</html>

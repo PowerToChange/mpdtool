@@ -1,0 +1,87 @@
+
+<div id="content">
+
+    <h3>Follow Up</h3>
+    
+    <div id="follow-up-help-expanded"<% if !current_mpd_user.show_follow_up_help %>style="display: none;"<% end %>>
+        <p>The degree of your success in the letter-writing strategy depdends on your follow-up
+            phone call.  The follow-up phone call is critical for three reasons:</p>
+        
+        <ol>
+            <li><span class="reason">Most people suffer from information overload.</span> 
+                Consequently, mail is easy to ignore or forget.</li>
+            <li><span class="reason">Your time frame.</span>
+                You have a lot of money to raise in a short period of time.  A follow-up
+                phone call will help you get decisions as quickly as possible.  The best
+                suggestion is to call one week after you've dropped the letter in the mail.</li>
+            <li><span class="reason">Courtesy to your ministry partners.</span>
+                Many people will want to help you but won't unless you call to answer
+                any questions and to get their decision.  Your phone call takes the burden of 
+                response off them and puts it on you.</li>
+        </ol>
+        
+        <p>Be sure to establish a specific time in the letter to get their decision.</p>
+        
+        <p>When you ask for a response, do so directly.  Then remain quiet until the
+            person responds, even though this may feel uncomfortable.  Talking more at
+            this point will distract the person from making a decision.</p>
+        
+        <p>If when you call your potential ministry partner has not made a decision, set
+            another time to call within a day or two.</p>
+            
+        <p>If an individual decides to support you, if at all possible arrange a
+            time to stop by and pick up the <%= t(:check, :default => 'check') %>.  If the person lives out of town, 
+            ask to have the <%= t(:check, :default => 'check') %> mailed in the self-addressed stamped envelope you 
+            enclosed with your letter.</p>
+            
+        <p>If you arrange to have him send you a <%= t(:check, :default => 'check') %> and it doesn't come, you will need
+            to follow up with a phone call to see if it was lost in the mail.</p>
+        
+        <p>Your ministry partner's <%= t(:check, :default => 'check') %> must be made payable to <span class="callout">
+            <%= t(:cheques_payable_to, :default => "Campus Crusade for Christ") %></span>.</p>
+        
+        <p>After getting a person's decision, always ask him or her to refer you to 
+            other people who might like to invest in your ministry. [ 
+            <%= link_to_remote("hide this text", :url => {:action => "toggle_show_follow_up_help"}) %> ]</p>
+    </div>
+
+    <div id="follow-up-help-collapsed" <% if current_mpd_user.show_follow_up_help %>style="display: none;"<% end %>>
+        <p>The degree of your success in the letter-writing strategy depends... [ 
+            <%= link_to_remote("more", :url => {:action => "toggle_show_follow_up_help"}) %> ]</p>
+    </div>
+    
+    <h3 style="margin-top: 25px;" >View Ministry Partners: Need to Call <%= image_tag("loading_dots.gif",
+                  :align => 'absmiddle',
+                  :border=> 0,
+                  :id => "spinner",
+                  :style=>"display: none;" ) %></h3>
+        
+    <p class="instructional">Click on a contact's name to view or edit their 
+        details and make notes about your phone calls.<br/>
+		Use the checkboxes to select contacts to <%= link_to("mark them as having been called", {:action => "complete"}, {:method => :post}) %></p>              
+         
+    <div id="contacts_list" class="contact_list">
+        <%= render :partial => 'shared/mpd_contact_to_complete', :locals => { :page => "call", :event => "call_made" } %>
+    </div>
+</div>
+
+<div id="sidebar">
+    <h3>A Script</h3>
+    
+    <ol>
+        <li>Introduce yourself<br/>
+            "Hello, Mr. ______. This is _______ calling.  How are you?" Let him respond.
+                Take a few moments to establish rapport, but be brief.</li>
+
+        <li>Refer to your letter and explain your summer plans. "As I mentioned in
+            my letter, I am planning to go on a summer mission project sponsored
+            by <%= t(:ministry, :default => "Campus Crusade for Christ") %>."</li>
+
+        <li>Share what you hope to see God do as a result of your time this summer.</li>
+        
+        <li>Be very specific to ask for a definite response.<br/>
+            "In my letter I asked if you would be in a position to support me 
+                financially for the summer project.  Have you had a chance to think about that?" (wait)</li>
+    </ol>
+    
+</div>

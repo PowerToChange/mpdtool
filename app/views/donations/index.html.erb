@@ -1,0 +1,28 @@
+<div style="float:left">
+  <h3>Total Donations: <%= number_to_currency(@donations.sum(&:amount), :precision => 0) %></h3>
+  <table class="donations">
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Donor Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address</th>
+    </tr>
+    <% @donations.each do |donation| %>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td valign="top"><%= donation.donation_date.to_s(:short) %></td>
+        <td valign="top" class="amount">
+          <%= number_to_currency(donation.amount) %>
+          <br />
+          <%= donation.medium %>
+        </td>
+        <td valign="top"><%= donation.donor_name %></td>
+        <td valign="top"><%= donation.phone %></td>
+        <td valign="top"><%= donation.email_address %></td>
+        <td valign="top"><%= donation.address %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+

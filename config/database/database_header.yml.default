@@ -1,0 +1,6 @@
+# if database_header.yml is not found, these settings are used
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password:
+  host: localhost

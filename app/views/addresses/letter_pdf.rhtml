@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+<% @mpd_contacts.each do |mpd_contact| %>
+        	<p align="right"><%= @letter.date.blank? ? (Time.now.strftime("%B") + " " + Time.now.day.to_s + ", "+ Time.now.year.to_s) : @letter.date.to_s(:long) %></p>
+		
+        <% if params[:include_address] && !mpd_contact.address_1.blank?%>
+          <p><%= mpd_contact.full_name %><br/>
+          <%= mpd_contact.address_1 %><br/>
+          <% if !mpd_contact.address_2.nil? and !mpd_contact.address_2.blank? %>
+              <%= mpd_contact.address_2 %><br/>
+          <% end %>
+          <%= mpd_contact.city %>, <%= mpd_contact.state %> <%= mpd_contact.zip %></p>
+        <% end %>
+        <% if !@letter.salutation.nil? and !@letter.salutation.blank? -%>
+            <p><%= @letter.salutation.gsub("[[FULL_NAME]]",mpd_contact.full_name).gsub("[[SALUTATION]]",mpd_contact.salutation) %></p>
+        <% end -%> 
+        
+        <p><% if !@letter.mpd_letter_images[0].nil? && !@letter.mpd_letter_images[0].filename.blank? %>
+				<img src="<%=  @letter.mpd_letter_images[0].public_filename(:print) %>" align="right" width="200" hspace="10" />
+            <% end %>
+            
+            <% if !@letter.update_section.nil? and !@letter.update_section.blank? -%>
+                 <%= @letter.update_section.gsub("\n", "<br/>") %><br/><br/>
+            <% end -%>
+            
+            <% if !@letter.educate_section.nil? and !@letter.educate_section.blank? -%>
+                <%= @letter.educate_section.gsub("\n", "<br/>") %><br/><br/>
+            <% end -%>
+            
+            <% if !@letter.needs_section.nil? and !@letter.needs_section.blank? -%>
+                <%= @letter.needs_section.gsub("\n", "<br/>") %>
+            <% end -%></p>
+            
+        <p><% if @letter.mpd_letter_template.number_of_images > 1 and !@letter.mpd_letter_images[1].nil? and !@letter.mpd_letter_images[1].filename.blank? %>
+               <img src="<%= @letter.mpd_letter_images[1].public_filename(:print) %>" align="left" width="200" hspace="10" />
+           <% end %>
+         
+            <% if !@letter.involve_section.nil? and !@letter.involve_section.blank? -%>
+                <%= @letter.involve_section.gsub("\n", "<br/>") %><br/><br/>
+            <% end -%>
+              
+            <% if !@letter.acknowledge_section.nil? and !@letter.acknowledge_section.blank? -%>
+                <%= @letter.acknowledge_section.gsub("\n", "<br/>") %>
+            <% end -%></p>
+        
+        <p><%= @letter.closing %></p>
+		<% if !@letter.printed_name.nil? and !@letter.printed_name.blank? -%>
+			<p><br/><br/><%= @letter.printed_name %></p>
+        <% end -%>
+    
+        <!-- NEW PAGE -->
+<% end %>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+---
+new_single_image_letter_image_1:
+  id: 1
+  filename: image_1.jpg
+  mpd_letter_id: 1
+complete_single_image_letter_image_1:
+  id: 2
+  filename: image_1.jpg
+  mpd_letter_id: 2
+new_multiple_image_letter_image_1:
+  id: 3
+  filename: 
+  mpd_letter_id: 3
+new_multiple_image_letter_image_2:
+  id: 4
+  filename: 
+  mpd_letter_id: 3
+complete_multiple_image_letter_image_1:
+  id: 5
+  filename: image_1.jpg
+  mpd_letter_id: 4
+complete_multiple_image_letter_image_2:
+  id: 6
+  filename: image_2.jpg
+  mpd_letter_id: 4
+

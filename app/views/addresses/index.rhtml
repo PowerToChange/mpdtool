@@ -1,0 +1,62 @@
+<div id="content">
+    <h3 style="margin-top: 25px;" >View Ministry Partners: Need to Send Letters <%= image_tag("loading_dots.gif",
+                  :align => 'absmiddle',
+                  :border=> 0,
+                  :id => "spinner",
+                  :style=>"display: none;" ) %></h3>
+    
+    <p class="instructional">Click on a contact's name to view or edit their details.<br/>
+		You can use the checkboxes to select your contacts in order to use the mailing tools for a selection of them, or to <%= link_to("mark them as having been sent a letter", {:action => "complete"}, {:method => :post}) %></p>              
+             
+    <div id="contacts_list" class="contact_list">
+        <%= render :partial => "shared/mpd_contact_to_complete", :locals => {:page => "letter", :event => "letter_sent" } %>
+    </div>
+
+</div>
+<style>#sidebar {margin-top: -63px;}</style>
+<div id="sidebar">
+    <h3>Mailing Tools</h3>
+    
+    <div id="sidebar-content">
+        <h4>Export Partner List</h4>
+        
+        <p>Export your list as a comma-separated list to be used in 
+            Microsoft Excel or other spreadsheet program.  This list could
+            also be used to create your own letters &amp; labels.</p>
+        
+        <p style="text-align: right;"><%= link_to "Export to CSV", :action => "export_as_csv" %></p>
+
+        <h4>Print Your Letters</h4>
+        <%- form_tag('/addresses/print_letter', :id => 'print_letter_form') do -%>
+        <p>Export your letters as a PDF file to be printed and mailed.</p>
+        <p style="text-align: left;"><%= check_box_tag('include_address') %> Include address on letter</p>
+        <p style="text-align: left;"><%= check_box_tag('print_sent_marked_false') %> Print letters for only those people that haven't been sent letters yet</p>
+		<p style="text-align: left;"><%= check_box_tag('print_selected_contacts') %> Print letters for only those people I've selected</p>
+		<% @options = Array.new
+		MpdLetter.find(:all, :conditions => "mpd_user_id=#{current_mpd_user.id}").each { |letter| 
+			@options << letter.name }%>
+    	<p> Select which letter to print
+		<%= select_tag("letters", options_for_select(@options, if current_event.current_letter then MpdLetter.find(current_event.current_letter).name end), {:style => " width: 200px"}) -%>
+		</p>
+        
+        <p style="text-align: right;"><%= link_to_function("Print letters", "$('print_letter_form').submit()") %></p>
+<!--        <p style="text-align: right;"><%= link_to_function("Print letters to people that haven't been marked as having been sent a letter", "$('print_sent_marked').value = false;$('print_letter_form').submit();$('print_sent_marked').value = true") %></p>
+		<h4>Print Letters To Only Those People That Have Addresses</h4>
+        <p style="text-align: right;"><%= link_to_function("Print letters to all people with addresses", "$('print_without_addresses').value = false;$('print_letter_form').submit();$('print_without_addresses').value = true") %></p>
+        <p style="text-align: right;"><%= link_to_function("Print letters to people that haven't been marked as having been sent a letter that have addresses", "$('print_without_addresses').value = false;$('print_sent_marked').value = false;$('print_letter_form').submit();$('print_without_addresses').value = true;$('print_sent_marked').value = true") %></p>
+-->
+        <%- end -%>
+        <h4>Print Your Labels</h4>
+        <%- form_tag('/addresses/address_labels', :id => 'print_label_form') do -%>
+        <p>While it's more personal to handwrite partners' addresses, if you'd prefer mailing labels, we've done the hard work for you! Simply click "Create address labels" below, open the PDF file and print using labels that match the Avery&reg 5160 layout.</p>
+        <p style="text-align: left;"><%= check_box_tag('print_selected_labels') %> Create address labels for only those people I have selected </p>
+        <p style="text-align: right;"><%= link_to_function("Create address labels", "$('print_label_form').submit()") %></p>
+		<%- end -%>
+		
+        <h4>Print Response Cards</h4>
+        
+        <p>These are stock response cards that you can print and include with your
+            letter.</p>
+        
+        <p style="text-align: right;"><%= link_to "Print response cards", "uploads/response_cards.pdf" %></p>    </div>
+</div>

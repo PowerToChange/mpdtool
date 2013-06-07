@@ -1,0 +1,45 @@
+---
+new_single_picture_letter:
+  id: 1
+  mpd_letter_template_id: 1
+  date: 2007-02-27
+  salutation: Dear [[FULL_NAME]]
+  update_section:
+  educate_section:
+  needs_section:
+  involve_section:
+  acknowledge_section:
+  closing: Thank you,
+complete_single_picture_letter:
+  id: 2
+  mpd_letter_template_id: 1
+  date: 2007-02-27
+  salutation: Dear [[FULL_NAME]]
+  update_section: I want to bring you up to date on what is happening in my life.  I am in my sophomore year at Purdue University.  Besides the pressure here to make good grades, there is also the challenge of deciding what activities to be involved in on campus.  Many provide a ready escape from the realities of a needy world, while others provide opportunities to make a difference in the world.  Through my desire for the latter, I have been involved with a Christian ministry called Campus Crusade for Christ.
+  educate_section: Campus Crusade for Christ is an interdenominational ministry here at Purdue and on another 3500 campuses in the U.S. and overseas.  The Lord has used this ministry to help me grow in my faith and to give me a burden to reach people for Christ.
+  needs_section: There will be great opportunities to share my faith as vacationers and college students flood the area this summer.   Our group will be involved with evangelistic outreaches on the beach, on area campuses and in the community.  At the same time I will be in a small group Bible study and discipleship ministry.  My heart’s desire it to increase my understanding of God’s Word, deepen my relationship with Him, and be more burdened for reaching people with the Gospel.  I know my faith will be stretched as I do things I have never done before!
+  involve_section: In order to make all this possible, I need to develop a team of ministry     partners… a group of people like you who would give to make my trip possible.  I need a total of $2,000 by May 31 which covers room and board for the summer as well as transportation.  Mr. and Mrs. Jones, will you prayerfully consider joining my team by giving a gift of $100, $200, $300 or more?  Of course whatever amount the Lord leads you to do is the right amount.  All gifts are tax-deductible and checks should be made out to Campus Crusade for Christ. In order to know how close I am to reaching my goal, I will call you next week to see what you have decided and to answer any questions you might have.
+  acknowledge_section: More than anything I need your prayers as I seek to follow the Lord by participating in this summer missions trip. Thank you for considering joining my team to help reach people for Christ at Lake Tahoe this summer.
+  closing: Thank you,
+new_multiple_picture_letter:
+  id: 3
+  mpd_letter_template_id: 2
+  date: 2007-02-27
+  salutation: Dear [[FULL_NAME]]
+  update_section:
+  educate_section:
+  needs_section:
+  involve_section: 
+  acknowledge_section:
+  closing: Thank you,
+complete_multiple_picture_letter:
+  id: 4
+  mpd_letter_template_id: 2
+  date: 2007-02-27
+  salutation: Dear [[FULL_NAME]]
+  update_section: I want to bring you up to date on what is happening in my life.  I am in my sophomore year at Purdue University.  Besides the pressure here to make good grades, there is also the challenge of deciding what activities to be involved in on campus.  Many provide a ready escape from the realities of a needy world, while others provide opportunities to make a difference in the world.  Through my desire for the latter, I have been involved with a Christian ministry called Campus Crusade for Christ.
+  educate_section: Campus Crusade for Christ is an interdenominational ministry here at Purdue and on another 3500 campuses in the U.S. and overseas.  The Lord has used this ministry to help me grow in my faith and to give me a burden to reach people for Christ.
+  needs_section: There will be great opportunities to share my faith as vacationers and college students flood the area this summer.   Our group will be involved with evangelistic outreaches on the beach, on area campuses and in the community.  At the same time I will be in a small group Bible study and discipleship ministry.  My heart’s desire it to increase my understanding of God’s Word, deepen my relationship with Him, and be more burdened for reaching people with the Gospel.  I know my faith will be stretched as I do things I have never done before!
+  involve_section: In order to make all this possible, I need to develop a team of ministry     partners… a group of people like you who would give to make my trip possible.  I need a total of $2,000 by May 31 which covers room and board for the summer as well as transportation.  Mr. and Mrs. Jones, will you prayerfully consider joining my team by giving a gift of $100, $200, $300 or more?  Of course whatever amount the Lord leads you to do is the right amount.  All gifts are tax-deductible and checks should be made out to Campus Crusade for Christ. In order to know how close I am to reaching my goal, I will call you next week to see what you have decided and to answer any questions you might have.
+  acknowledge_section: More than anything I need your prayers as I seek to follow the Lord by participating in this summer missions trip. Thank you for considering joining my team to help reach people for Christ at Lake Tahoe this summer.
+  closing: Thank you,

@@ -1,0 +1,57 @@
+<div id="content">
+<%= error_messages_for "mpd_contact" %>
+
+<%- form_tag contact_path(@mpd_contact), :method => :put do -%>
+  <%= hidden_field_tag :page, params[:page] %>
+
+<%= render(:partial => "shared/mpd_contact_contact_info", :object => @mpd_contact) %>
+
+<fieldset class="columns">
+    <legend>Progress Information</legend>
+    <%- fields_for @mpd_contact.action(current_event.id) do |af| -%>
+    <div class="field"><%= af.check_box "letter_sent", :class => "checkbox" %> <label for="mpd_contact_letter_sent" class="for_checkbox">A letter has been sent</label></div>
+    <div class="field"><%= af.check_box "contacted", :class => "checkbox" %> <label for="mpd_contact_call_made" class="for_checkbox">A follow up call has been made</label></div>
+    <div class="field"><%= af.check_box "thankyou_sent", :class => "checkbox" %> <label for="mpd_contact_thankyou_sent" class="for_checkbox">A thank you note has been sent</label></div>
+	<div class="field"><%= af.check_box "postproject_sent", :class => "checkbox" %> <label for="mpd_contact_postproject_sent" class="for_checkbox">A post-project letter has been sent</label></div>
+    <%- end -%>
+</fieldset>
+<fieldset class="columns">
+	<legend>Gift Information</legend>
+    <%- fields_for @mpd_contact.action(current_event.id) do |af| -%>
+    <div class="field"><%= af.check_box "gift_pledged", :class => "checkbox" %> <label for="mpd_contact_gift_pledged" class="for_checkbox">Gift Pledged</label></div>
+    <div class="field"><%= af.check_box "gift_received", :class => "checkbox" %> <label for="mpd_contact_gift_received" class="for_checkbox">Gift Received</label></div>
+	<div class="field"><label for="mpd_contact_gift_amount">Gift Amount:</label>
+        $ <%= af.text_field "gift_amount", :class => "text", :class => "text", :value => number_with_delimiter(number_with_precision(@mpd_contact.gift_amount(current_event.id), :precision => 0)), :style => "width: 50px;" %></div>
+		<div class="field"><label for="mpd_contact_date_received">Date Received:</label>
+        <%= af.text_field "date_received", :class => "text", :class => "text", :value => @mpd_contact.date_received(current_event.id), :style => "width: 100px;" %></div>
+		<div class="field"><label for="mpd_contact_form_received">Form Received:</label>
+        <%= af.select "form_received", options_for_select(["Check","Cash","Money Order","Account Transfer","give.ccci.org","Other","Not Received"],@mpd_contact.form_received(current_event.id)) %></div>
+    <%- end -%>
+</fieldset>
+<fieldset class="columns">
+	<legend>Relationship Information</legend>
+	<%- fields_for @mpd_contact.action(current_event.id) do |af| -%>
+    <div class="field"><%= af.check_box "partner_financial", :class => "checkbox" %> <label for="mpd_contact_partner_financial" class="for_checkbox">Financial Partner</label></div>
+    <div class="field"><%= af.check_box "partner_prayer", :class => "checkbox" %> <label for="mpd_contact_partner_prayer" class="for_checkbox">Prayer Partner</label></div>
+    <div class="field"><label for="mpd_contact_relationship">Relationship:</label>
+        <%= text_field "mpd_contact", "relationship", :class => "text", :style => "width: 100px;" %></div>
+		<span class="instructional">(ie. Relative, Friend, Church, Co-worker, Teacher, Neighbor)</span>
+    <%- end -%>
+</fieldset>
+<fieldset class="columns">
+	<legend>Notes</legend>
+    <div class="field"><%= text_area "mpd_contact", "notes", :class => "text" %></div>
+
+    <p class="buttons"><%= link_to('Remove this contact from your list', mpd_contact_action_path(@mpd_contact.action(current_event.id)), :method => :delete, :confirm => "Are you sure you want to do that? There's no \"Undo\"") %>&nbsp;&nbsp;&nbsp;
+    <%= image_submit_tag "button_sm_save.gif", :name => "commit", :value => "save" %></p>
+</fieldset>    
+<%- end -%>
+</div>
+
+<!--
+<div id="sidebar">
+    <h3>Sample Thank You Note</h3>
+    
+    <p>Lorem impsum...</p>
+</div>
+-->

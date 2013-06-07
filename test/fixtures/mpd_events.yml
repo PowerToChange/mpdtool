@@ -1,0 +1,8 @@
+---
+one:
+  id: 1
+  name: "Test Event"
+  start_date: "2007-06-01"
+  mpd_user_id: 4
+  cost: 2000
+  project_id: 370

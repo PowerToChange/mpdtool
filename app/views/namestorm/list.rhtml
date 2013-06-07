@@ -1,0 +1,163 @@
+<div id="content">
+<% if @show_teaser %>
+<div id="teaser" class="notice">
+    <p><b>That's a good start!</b> Keep it up.  Use the simple form below to rapidly add names.
+        Just type a name and hit 'Enter'!</p>
+
+    <p>After taking an hour or so for free wheeling namestorming,
+        go back to <%= link_to "My Ministry Partner Contact Info", :controller => "dashboard" %> and prioritize your contacts using
+        the dots in the right column (three dots for the top priority). These designations refer to
+        your evaluation of how likely they are to give. Start by contacting
+        your top priority people first and then work through your
+        medium and then your low priority people.</p>
+</div>
+<% end %>
+
+<h3><span>Your Ministry Partners</span></h3>
+  
+<fieldset class="quickForm" >  
+<%- form_remote_tag(:url => { :action => "add" },
+                    :update => "contact_list-columnified",
+                    :loading => "name_loading()",
+                    :complete => "name_added()") do -%>
+    <p><label for="contact_full_name">Enter a name</label>
+        <%= text_field_tag( "full_name", "", :id => "contact_full_name", :maxlength => "250", :class=> "text" ) %></p>
+    <p id="submit-controls"><%= image_submit_tag("button_sm_add_name.gif", { :class => 'image-submit', :id => "form-submit-button"}) %>
+        or <%= link_to "Go write your letter", :controller => "write" %></p>
+    <p id="busy" style="display: none; padding: 6px 0 6px 15px;"><%= image_tag("loading_squares.gif") %></p>
+	<h5><%= link_to "Having trouble getting started?", "start_letter" %></h5>
+<%- end -%>
+</fieldset>
+
+<div id="contact_list-columnified">
+    <%= render(:partial => "contacts_list")  %>
+</div>
+    
+<% content_for("page_scripts") do -%>
+
+function name_added() {
+    if ($('contact_full_name').value != '') {
+        var item = $('contacts_set_1').firstChild;
+        <!-- new Effect.Highlight(item); -->
+        $('contact_full_name').value = '';
+        Field.focus('contact_full_name');
+    }
+    if ($('teaser')) new Effect.BlindUp('teaser');
+    Element.hide('busy');
+    Element.show('submit-controls');
+}
+
+function name_loading() {
+  Element.hide('submit-controls');
+  Element.show('busy');
+}
+<% end -%>
+</div>
+
+<div id="sidebar">
+    <h3>Thought Provokers</h3>
+
+    <ol class="thought-provokers">
+        <li>Parents</li>
+        <li>Brothers</li>
+        <li>Sisters</li>
+        <li>Former employers</li>
+        <li>Former customers</li>
+        <li>Relatives</li>
+        <li>Friends of parents</li>
+        <li>Parents of friends</li>
+        <li>Parents' employers</li>
+        <li>Parents' associates</li>
+        <li>High School teachers</li>
+        <li>College professors</li>
+        <li>Sorority sisters</li>
+        <li>Fraternity brothers</li>
+        <li>High school friends</li>
+        <li>Community Leaders</li>
+        <li>Christian business groups</li>
+        <li>Church friends</li>
+        <li>Wedding lists</li>
+        <li>Neighbors</li>
+        <li>Church missions board</li>
+        <li>Sunday school class</li>
+        <li>Church directory</li>
+        <li>Christmas card list</li>
+        <li><%= t(:ministry, :default => "Campus Crusade for Christ") %> staff</li>
+    </ol>
+    
+    <p><a href="#" onclick="Element.toggle('extended_list'); return false;" >Show/hide more thought provokers</a></p>
+   
+    <ol id="extended_list" class="thought-provokers" start="26" style="display: none;">
+        <li>Accountants</li>
+        <li>Architects</li>
+        <li>Avon Lady</li>
+        <li>Florist</li>
+        <li>Mailman</li>
+        <li>Missonary Societies</li>
+        <li>Banker</li>
+        <li>Dentist</li>
+        <li>Hygenist</li>
+        <li>Doctor</li>
+        <li>Nurse</li>
+        <li>Dermatologist</li>
+        <li>Service Station manager</li>
+        <li>Kiwanis Club</li>
+        <li>Hospital personnel</li>
+        <li>Rotary club</li>
+        <li>Family attorney</li>
+        <li>Beautician</li>
+        <li>Barber</li>
+        <li>Policemen</li>
+        <li>Foundations</li>
+        <li>Garbage collector</li>
+        <li>Former neighbors</li>
+        <li>Shoe salesman</li>
+        <li>Editor of local paper</li>
+        <li>Butcher</li>
+        <li>Baker</li>
+        <li>Advertising agencies</li>
+        <li>Insurance agent</li>
+        <li>TV/radio stations</li>
+        <li>Car salesman</li>
+        <li>Printers</li>
+        <li>Plumber</li>
+        <li>Servicemen</li>
+        <li>Tax men</li>
+        <li>Retired people</li>
+        <li>Bible bookstore</li>
+        <li>Morticians</li>
+        <li>Bank presidents</li>
+        <li>Coach</li>
+        <li>Teammates</li>
+        <li>Realtors</li>
+        <li>Veterinarian</li>
+        <li>Apartment manager</li>
+        <li>Dog groomer</li>
+        <li>Civic clubs</li>
+        <li>Mayor or other civic leaders</li>
+        <li>Pastors</li>
+        <li>Downtown businesses</li>
+        <li>Church related newspaper ads</li>
+        <li>Military personnel</li>
+        <li>Bible Studies and prayer groups</li>
+        <li>Chamber of Commerce directories</li>
+        <li>People you have led to Christ</li>
+        <li>Referrals</li>
+        <li>Telephone directory</li>
+        <li>Engineers</li>
+        <li>Farmers</li>
+        <li>Eye doctor</li>
+        <li>Fellow students</li>
+        <li>Spiritual mentors</li>
+    </ol>
+    
+</div>
+
+<div class="clear">&nbsp;</div>
+
+<script type="text/javascript" lanugage="javascript">
+    addEvent(window, 'load', init);
+    function init() {
+        $('contact_full_name').focus();
+    }
+</script>

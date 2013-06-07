@@ -1,0 +1,132 @@
+--- 
+sp_applications_001: 
+  accepted_at: 2007-01-01 00:00:00
+  completed_at: 
+  status: 
+  old_id: 
+  updated_at: 
+  project_id: "1"
+  updated_by_id: 
+  preference3_id: 
+  account_balance: 
+  su_code: 
+  current_project_queue_id: 
+  preference2_id: 
+  preference5_id: 
+  preference1_id: 
+  apply_for_leadership: 
+  created_by_id: 
+  submitted_at: 
+  preference4_id: 
+  id: "1"
+  withdrawn_at: 
+  year: "<%= SpApplication::YEAR %>"
+  person_id: "1"
+  applicant_notified: 
+  created_at: 
+  designation_number:
+sp_applications_002: 
+  accepted_at: 2007-01-01 00:00:00
+  completed_at: 
+  status: 
+  old_id: 
+  updated_at: 
+  project_id: "1"
+  updated_by_id: 
+  preference3_id: 
+  account_balance: 
+  su_code: 
+  current_project_queue_id: 
+  preference2_id: 
+  preference5_id: 
+  preference1_id: 
+  apply_for_leadership: 
+  created_by_id: 
+  submitted_at: 
+  preference4_id: 
+  id: "2"
+  withdrawn_at: 
+  year: "2007"
+  person_id: "2"
+  applicant_notified: 
+  created_at: 
+  designation_number: 
+sp_applications_003: 
+  accepted_at: 2007-01-01 00:00:00
+  completed_at: 
+  status: 
+  old_id: 
+  updated_at: 
+  project_id: "1"
+  updated_by_id: 
+  preference3_id: 
+  account_balance: 
+  su_code: 
+  current_project_queue_id: 
+  preference2_id: 
+  preference5_id: 
+  preference1_id: 
+  apply_for_leadership: 
+  created_by_id: 
+  submitted_at: 
+  preference4_id: 
+  id: "3"
+  withdrawn_at: 
+  year: "2007"
+  person_id: "3"
+  applicant_notified: 
+  created_at: 
+  designation_number: 
+4sp_applications_004: 
+  accepted_at: 2007-01-01 00:00:00
+  completed_at: 
+  status: 
+  old_id: 
+  updated_at: 
+  project_id: "1"
+  updated_by_id: 
+  preference3_id: 
+  account_balance: 
+  su_code: 
+  current_project_queue_id: 
+  preference2_id: 
+  preference5_id: 
+  preference1_id: 
+  apply_for_leadership: 
+  created_by_id: 
+  submitted_at: 
+  preference4_id: 
+  id: "4"
+  withdrawn_at: 
+  year: "2007"
+  person_id: "4"
+  applicant_notified: 
+  created_at: 
+  designation_number: 
+sp_applications_005: 
+  accepted_at: 2007-01-01 00:00:00
+  completed_at: 
+  status: 
+  old_id: 
+  updated_at: 
+  project_id: "1"
+  updated_by_id: 
+  preference3_id: 
+  account_balance: 
+  su_code: 
+  current_project_queue_id: 
+  preference2_id: 
+  preference5_id: 
+  preference1_id: 
+  apply_for_leadership: 
+  created_by_id: 
+  submitted_at: 
+  preference4_id: 
+  id: "5"
+  withdrawn_at: 
+  year: "2007"
+  person_id: "5"
+  applicant_notified: 
+  created_at: 
+  designation_number: 
+  

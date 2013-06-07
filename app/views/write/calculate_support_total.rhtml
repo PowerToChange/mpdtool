@@ -1,0 +1,37 @@
+<div id="content">
+
+<div class="section">
+    <p>Before writing your letter, we need to gather some important information.</p>
+</div>
+
+<h3><span>Calculator</span></h3>
+
+<%- form_tag :action => 'calculate_support_total', :id => @user do -%>
+<%= error_messages_for :event %>
+<fieldset class="columns calculator">
+    <p><label for="">Project Cost</label>
+		<% if current_event.project_id.blank? %>
+			$ <%= text_field :event, :cost, :value => number_with_delimiter(number_with_precision(@event.cost, :precision =>  0)), :class => "text" %>
+        <% else %>
+			$ <%= text_field :event, :cost, :value => number_with_delimiter(number_with_precision(@event.cost, :precision =>  0)), :class => "text", :disabled => true %>
+		<% end %>
+        <%= observe_field "event_cost", :function => "doCalc();" %></p>
+		
+<div id="calculator_fields">
+ <% MpdExpenseType.find(:all).each do |expense_type| 
+    @mpd_expense = current_event.mpd_expenses.detect {|me| me.mpd_expense_type == expense_type} || current_event.mpd_expenses.create(:amount => 0, :mpd_expense_type_id => expense_type.id) %>
+   <p style="clear: left;"><label for=""><%= expense_type.name %></label>
+        $ <%= text_field "mpd_expense[]", "amount", :value => number_with_delimiter(number_with_precision(@mpd_expense.amount, :precision =>  0)), :class => "text" %>
+        <%= observe_field "mpd_expense_#{@mpd_expense.id}_amount", :function => "doCalc();" %></p>
+ <% end %>
+</div>
+        
+<hr style="clear: left;" />
+
+    <p class="total"><b>Your Support Total</b> <span id="support_total"><%= number_to_currency(@user.support_total(current_event), :precision => 0) %></span></p>
+
+    <p class="buttons"><%= image_submit_tag "button_sm_next.gif" %></p>
+</fieldset>
+<%- end -%>
+
+</div>

@@ -1,0 +1,13 @@
+ <div class="pagination">
+	<div  style="float: left;">
+		Displaying <%= @first_object %> - <%= @last_object %> of <%= @total_object_count %>
+   	</div>
+
+   <div style="text-align: right;">
+   	 <%=(link_to h('< Previous'), {:page => @object_paginator.current.previous}) + " | " if @object_paginator.current.previous %>
+     <%= pagination_links @object_paginator, @action, params %>
+     <%= " | " + link_to(h('Next >'), {:page => @object_paginator.current.next}) if @object_paginator.current.next %>
+   </div>
+   
+   <div class="clear">&nbsp;</div>
+ </div>
