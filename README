@@ -1,10 +1,13 @@
 Helpful tool for managing your support raising proccess.
 
-Gems required: htmldoc, hpricot, mechanize, fastercsv
+Uses REE
+
+    in ~/.gemrc make sure this line exists: "gem: --no-ri --no-rdoc"
 
     rvm install ree-1.8.7-2012.02
     rvm --rvmrc --create ree-1.8.7@mpdtool --create
 
+    gem install rake --version 0.8.7
     gem install htmldoc --version 0.2.3
     gem install rails --version 2.3.18
     gem install hpricot --version 0.8.3

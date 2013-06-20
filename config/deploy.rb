@@ -5,7 +5,7 @@ set :scm, 'git'
 set :repository, "git://github.com/PowerToChange/mpdtool.git"
 set :deploy_via, :checkout
 set :git_enable_submodules, false
-#set :git_shallow_clone, true
+set :git_shallow_clone, 1
 
 after "deploy", "deploy:cleanup"
 
@@ -37,8 +37,7 @@ deploy.task :before_symlink do
   link_shared 'log', :overwrite => true
   link_shared 'config/database.yml', :overwrite => true
   link_shared 'config/initializers/analytics.rb', :overwrite => true
-  link_shared 'config/initializers/cas.rb', :overwrite => true
-  link_shared 'config/initializers/email.rb', :overwrite => true
+  #link_shared 'config/initializers/email.rb', :overwrite => true
   link_shared 'config/initializers/hoptoad.rb', :overwrite => true
   link_shared 'config/initializers/i18n.rb', :overwrite => true
 
