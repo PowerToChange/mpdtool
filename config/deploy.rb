@@ -1,73 +1,13 @@
-require 'find'
-require 'etc'
-
-#if fetch(:stage) =~ /staging|dev/ then ENV['target'] = 'dev' end
-#if fetch(:stage) =~ /prod/ then ENV['target'] = 'prod' end
-
-ENV['target'] ||= 'dev'
-ENV['system'] ||= 'p2c'
-
-ENV['user'] = 'deploy'
-
-set :application, "Mpdtool"
-set :scm, "git"
-set :repository,  "git://github.com/twinge/mpd_tool.git"
-
-if %w(ma mh).include? ENV['system']
-  ENV['host'] ||= 'ministryapp.com'
-  ENV['domain'] ||= 'mpdtool.ministryapp.com'
-  ENV['port'] ||= '40022'
-elsif %w(p2c pc).include? ENV['system']
-  ENV['host'] ||= 'mpdtool.powertochange.org'
-  ENV['domain'] ||= 'mpdtool.powertochange.org'
-  ENV['port'] ||= '22'
-end
-
-ENV['deploy_to'] ||= "/var/www/#{if ENV['target'] == 'prod' then 
-                       ENV['domain'] else "#{ENV['target']}.#{ENV['domain']}" end}"
-
-if ENV['target'] == 'dev'
-  set :branch, "p2c.dev"
-elsif ENV['target'] == 'prod'
-  set :branch, "p2c.prod"
-end
-
-if ENV['env']
-  RAILS_ENV = ENV['env']
-elsif ENV['target'] == 'dev'
-  RAILS_ENV = 'development'
-elsif ENV['target'] == 'demo'
-  RAILS_ENV = 'production'
-elsif ENV['target'] == 'prod'
-  RAILS_ENV = 'production'
-
-end
-
-puts
-puts "host = #{ENV['host']}:#{ENV['port']}"
-puts "user = #{ENV['user']}"
-puts "env = #{RAILS_ENV}"
-puts "deploy_to = #{ENV['deploy_to']}"
-puts
-
-role :app, ENV['host']
-role :web, ENV['host']
-role :db,  ENV['host'], :primary => true
-
-ssh_options[:port] = ENV['port']
-set :user, ENV['user']
-
-set :deploy_to, ENV['deploy_to']
-
-# remove old deploys after each new deploy
+set :keep_releases, '20'
+set :user, 'deploy'
 set :use_sudo, false
-after "deploy", "deploy:cleanup"
+set :scm, 'git'
+set :repository, "git://github.com/PowerToChange/mpdtool.git"
+set :deploy_via, :checkout
+set :git_enable_submodules, false
+#set :git_shallow_clone, true
 
-desc "Restart the web server"
-deploy.task :restart, :roles => :app do
-  # sudo "/opt/lsws/bin/lswsctrl restart"
-  run "touch #{current_path}/tmp/restart.txt"
-end
+after "deploy", "deploy:cleanup"
 
 def link_shared(p, o = {})
   if o[:overwrite]
@@ -77,24 +17,42 @@ def link_shared(p, o = {})
   run "ln -s #{shared_path}/#{p} #{release_path}/#{p}"
 end
 
-unless ENV['target'] == 'demo'
-  deploy.task :after_symlink do
-    # set up tmp dir
-    run "mkdir -p -m 770 #{shared_path}/tmp/{cache,sessions,sockets,pids}"
-    run "rm -Rf #{release_path}/tmp"
-    link_shared 'tmp'
+task :production do
+  role :app, 'pat.powertochange.org'
+  set :rails_env, 'production'
+  set :application, 'mpdtool'
+  set :title, 'mpdtool'
+  set :branch, 'master'
+  set :deploy_to, "/var/www/mpdtool.powertochange.org"
+end
 
-    # other shared files / folders
-    link_shared 'log', :overwrite => true
-    link_shared 'config/database.yml'
-    link_shared 'config/amazon_s3.yml'
-    link_shared 'public/mpd_letter_images'
-    if RAILS_ENV == 'development'
-      link_shared 'config/environments/development.rb', :overwrite => true
-    end
-    # TODO: test ln's for mpdtool2. www.mpdtool and www.mpdtool2
-    run "rm -Rf #{release_path}/tmp/cache/*"
-    run "mkdir -p #{release_path}/tmp/cache/views/mpdtool.powertochange.org"
-    run "ln -s #{release_path}/tmp/cache/views/mpdtool.powertochange.org #{release_path}/tmp/cache/views/mpdtool2.powertochange.org"
+before :"deploy:create_symlink", :"deploy:before_symlink"
+deploy.task :before_symlink do
+  # set up tmp dir
+  run "mkdir -p -m 770 #{shared_path}/tmp/{cache,sessions,sockets,pids}"
+  run "rm -Rf #{release_path}/tmp"
+  link_shared 'tmp'
+
+  # other shared files / folders
+  link_shared 'log', :overwrite => true
+  link_shared 'config/database.yml', :overwrite => true
+  link_shared 'config/initializers/analytics.rb', :overwrite => true
+  link_shared 'config/initializers/cas.rb', :overwrite => true
+  link_shared 'config/initializers/email.rb', :overwrite => true
+  link_shared 'config/initializers/hoptoad.rb', :overwrite => true
+  link_shared 'config/initializers/i18n.rb', :overwrite => true
+
+  run "cd #{release_path} && git submodule init"
+  run "cd #{release_path} && git submodule update"
+end
+
+namespace :deploy do
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+
+  [:reload, :start, :stop].each do |t|
+    desc "#{t} task is not applicable to Passenger"
+    task t, :roles => :app do ; end
   end
 end
